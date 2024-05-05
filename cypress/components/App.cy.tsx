@@ -1,4 +1,4 @@
-import { App } from '../../src/scenes/App'
+import { App } from '../../src/modules/App'
 
 describe('<App />', () => {
   it('renders', () => {

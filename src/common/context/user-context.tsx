@@ -29,7 +29,12 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       }
 
       try {
-        const response = await axios.post(`${import.meta.env.VITE_PROXY}/auth/context`, null, { params: { token } })
+        const response = await axios.post(`${import.meta.env.VITE_PROXY}/auth/context`, null, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true
+        })
         setUserID(response.data.userID)
         setAuthenticated(response.data.authenticated)
       } catch (error) {

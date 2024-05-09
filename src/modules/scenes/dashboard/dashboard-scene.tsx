@@ -1,21 +1,25 @@
 import React, { useContext } from 'react'
-import { Test } from './test'
 import { Helmet } from 'react-helmet'
 import { UserContext } from '../../../common/context'
-import { destroyToken } from '../../../common/api/endpoints/login'
+import { Test } from './test'
 
 
 export const DashboardScene: React.FC = () => {
 
   const { userID } = useContext(UserContext)
-  
+
   return (
     <>
       <Helmet><title>{'StudentSpace - Dashboard'}</title></Helmet>
 
-      <div>Dashboard</div>
-      <Test id={userID}/>
-      <button onClick={destroyToken}>Destroy token</button>
+
+      <div className='dashboard-scene-container'>
+        <div className='container'>
+          <div>
+            <Test id={userID} />
+          </div>
+        </div>
+      </div>
 
     </>
   )

@@ -3,7 +3,7 @@ import axios from 'axios'
 export const loginQuery  = async (username:string, password:string) => {
 
   await axios
-    .post('http://localhost:8080/auth/login', { username, password })
+    .post('http://localhost:8080/auth/login', { username, password }, { withCredentials: true })
     .then((res) => {
       if (res.data) localStorage.setItem('token',res.data)
     })

@@ -1,5 +1,5 @@
 import { redirect } from 'react-router'
-import { isAuthenticated } from '../api/endpoints/authContext'
+import { isAuthenticated } from '../api/endpoints/auth-context'
 
 export async function loginLoader() {
 

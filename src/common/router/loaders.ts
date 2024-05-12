@@ -2,7 +2,6 @@ import { redirect } from 'react-router'
 import { isAuthenticated } from '../api/endpoints/auth-context'
 
 export async function loginLoader() {
-
   const authenticated = await isAuthenticated()
 
   if (authenticated) {
@@ -13,7 +12,6 @@ export async function loginLoader() {
 }
 
 export async function authLoader() {
-
   const authenticated = await isAuthenticated()
 
   if (!authenticated) {

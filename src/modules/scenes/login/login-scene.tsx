@@ -14,31 +14,20 @@ export const LoginScene: React.FC = () => {
     const authenticated = await isAuthenticated()
 
     if (authenticated) window.location.reload()
-
   }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Username:</label>
-          <Input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+          <label htmlFor='username'>Username:</label>
+          <Input type='text' id='username' value={username} onChange={e => setUsername(e.target.value)} />
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
-          <Input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <label htmlFor='password'>Password:</label>
+          <Input type='password' id='password' value={password} onChange={e => setPassword(e.target.value)} />
         </div>
-        <Button type='submit' >Login</Button>
+        <Button type='submit'>Login</Button>
       </form>
     </div>
   )

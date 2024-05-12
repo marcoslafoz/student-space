@@ -1,11 +1,10 @@
 import axios from 'axios'
 
-export const loginQuery  = async (username:string, password:string) => {
-
+export const loginQuery = async (username: string, password: string) => {
   await axios
     .post(`${import.meta.env.VITE_PROXY}/auth/login`, { username, password }, { withCredentials: true })
-    .then((res) => {
-      if (res.data) localStorage.setItem('token',res.data)
+    .then(res => {
+      if (res.data) localStorage.setItem('token', res.data)
     })
     .catch(() => {
       localStorage.removeItem('token')
@@ -13,15 +12,12 @@ export const loginQuery  = async (username:string, password:string) => {
     })
 }
 
-
 export const destroyToken = () => {
-  
-  try{
+  try {
     localStorage.removeItem('token')
-  }catch{
+  } catch {
     console.log('Error al eliminar el token')
   }
-  
-  window.location.reload()
 
+  window.location.reload()
 }

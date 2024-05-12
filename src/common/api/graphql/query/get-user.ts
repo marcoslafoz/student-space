@@ -1,4 +1,3 @@
-
 import { gql, LazyQueryHookOptions, QueryHookOptions, useLazyQuery, useQuery } from '@apollo/client'
 import { USER_FIELDS } from '../fragments'
 import { User } from '../../../types'

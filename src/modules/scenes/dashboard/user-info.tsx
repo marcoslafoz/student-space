@@ -6,14 +6,13 @@ interface UserInfoProps {
 }
 
 export const UserInfo: React.FC<UserInfoProps> = props => {
-
   const { id } = props
 
-  const { data, loading, error } = useGetUserQuery({variables: {userId : id }})
+  const { data, loading, error } = useGetUserQuery({ variables: { userId: id } })
 
-  const userData : User | undefined = data?.getUserById
+  const userData: User | undefined = data?.getUserById
 
-  if(!data || loading || error) return <></>
+  if (!data || loading || error) return <></>
 
   return (
     <div>

@@ -2,9 +2,9 @@ import React, { createContext, useState, useEffect, ReactNode } from 'react'
 import axios from 'axios'
 
 interface UserContextType {
-  userID: number | null;
+  userID: number | null
   authenticated: boolean
-  loading: boolean;
+  loading: boolean
 }
 
 export const UserContext = createContext<UserContextType>({
@@ -20,7 +20,6 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   useEffect(() => {
     const getUserData = async () => {
-
       const token = localStorage.getItem('token')?.toString()
 
       if (!token) {
@@ -33,7 +32,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           headers: {
             Authorization: `Bearer ${token}`,
           },
-          withCredentials: true
+          withCredentials: true,
         })
         setUserID(response.data.userID)
         setAuthenticated(response.data.authenticated)
@@ -51,9 +50,5 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return <div>Loading...</div>
   }
 
-  return (
-    <UserContext.Provider value={{ userID, loading, authenticated }}>
-      {children}
-    </UserContext.Provider>
-  )
+  return <UserContext.Provider value={{ userID, loading, authenticated }}>{children}</UserContext.Provider>
 }

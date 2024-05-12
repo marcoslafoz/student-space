@@ -2,7 +2,6 @@
 // import { Skeleton } from '../../modules/components'
 // import 'bootstrap/dist/css/bootstrap.min.css'
 
-
 // export default {
 //   title: 'Components/Skeleton',
 //   component: Skeleton,

@@ -11,7 +11,13 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "pretty:all": "prettier --check \"{config,src,stories}/**/*{.js,.jsx,.ts,.tsx}\" || prettier --write \"{config,src,stories}/**/*{.js,.jsx,.ts,.tsx}\"",
+    "pretty:staged": "pretty-quick --staged --pattern \"{config,src,stories}/**/*{.js,.jsx,.ts,.tsx}\"",
+    "pretty:quick": "pretty-quick --pattern \"{config,src,stories}/**/*{.js,.jsx,.ts,.tsx}\"",
+    "types:check": "tsc --pretty --noEmit --declaration",
+    "types:check:watch": "npm run types:check -- --watch",
+    "types:declaration": "tspc --project tsconfig.prod.json"
   },
   "dependencies": {
     "@apollo/client": "^3.10.1",

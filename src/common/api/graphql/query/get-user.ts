@@ -2,7 +2,7 @@ import { gql, LazyQueryHookOptions, QueryHookOptions, useLazyQuery, useQuery } f
 import { USER_FIELDS } from '../fragments'
 import { User } from '../../../types'
 
-export const GET_USER = gql`
+const GET_USER = gql`
   ${USER_FIELDS}
   query getUserById($userId: ID!) {
     getUserById(id: $userId) {
@@ -11,11 +11,11 @@ export const GET_USER = gql`
   }
 `
 
-export interface GetUserData {
+interface GetUserData {
   getUserById: User
 }
 
-export interface GetUserVars {
+interface GetUserVars {
   userId: number
 }
 

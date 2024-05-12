@@ -1,4 +1,4 @@
-import { useGetAcademicCourseListQuery, useGetUserQuery } from '../../../common/api/graphql/query'
+import { useGetUserQuery } from '../../../common/api/graphql/query'
 import { User } from '../../../common/types'
 
 interface UserInfoProps {
@@ -9,9 +9,6 @@ export const UserInfo: React.FC<UserInfoProps> = props => {
   const { id } = props
 
   const { data, loading, error } = useGetUserQuery({ variables: { userId: id } })
-  const {data: academicCourseData} = useGetAcademicCourseListQuery({variables: {userId: id}})
-
-  console.log('AQUI',academicCourseData?.getAcademicCourseListByUserId)
 
   const userData: User | undefined = data?.getUserById
 

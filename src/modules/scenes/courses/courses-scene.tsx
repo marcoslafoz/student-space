@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { CourseInfo } from './course-info'
 import { useGetAcademicCourseListQuery } from '../../../common/api/graphql/query'
 import { UserContext } from '../../../common/context'
+import { Layout } from '../../layout'
 
 export const CoursesScene: React.FC = () => {
   
@@ -11,5 +12,5 @@ export const CoursesScene: React.FC = () => {
 
   if (!data || loading || error) return <></>
 
-  return <CourseInfo data={data.getAcademicCourseListByUserId || []}/>
+  return <Layout ><CourseInfo data={data.getAcademicCourseListByUserId || []}/></Layout>
 }

@@ -1,34 +1,17 @@
-import React, { useContext } from 'react'
-import { Helmet } from 'react-helmet'
-import { UserContext } from '../../../common/context'
+import React from 'react'
+import { Layout } from '../../layout'
 import { UserInfo } from './user-info'
-import { destroyToken } from '../../../common/api/endpoints/login'
-import { Button } from '@nextui-org/react'
-import { useNavigate } from 'react-router'
+import { UserContext } from '../../../common/context'
 
 export const DashboardScene: React.FC = () => {
-  const { userID } = useContext(UserContext)
+  const { userID } = React.useContext(UserContext)
 
-  const navigate = useNavigate()
+  if(!userID) return<></>
 
-  if (userID)
-    return (
-      <>
-        <Helmet>
-          <title>{'StudentSpace - Dashboard'}</title>
-        </Helmet>
+  return (
+    <Layout>
+      <div><UserInfo id={userID}/></div>
+    </Layout>
+  )
 
-        <div className='dashboard-scene-container'>
-          <div className='container'>
-            <div>
-              <UserInfo id={userID} />
-              <Button onClick={() => destroyToken()}>Cerrar sesión</Button>
-              <Button onClick={() => navigate('/courses')} >Cursos académicos</Button>
-            </div>
-          </div>
-        </div>
-      </>
-    )
-
-  return <></>
 }

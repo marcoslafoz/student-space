@@ -1,5 +1,6 @@
-@import url("/src/assets/scss/variables.scss");
-@import url("/src/assets/scss/fonts.scss");
+@import url("./variables.scss");
+@import url("./fonts.scss");
+@import url("./fix.scss");
 
 @tailwind base;
 @tailwind components;
@@ -9,13 +10,14 @@
 
 * {
   margin: 0;
-}
-
-body {
-  background-color: #e8e8e8;
   color: var(--color-primary);
   font-family: var(--font-regular);
   font-size: var(--font-size-regular);
+}
+
+body {
+  background-color: #f9fafb;
+  font-family: 'Samsung Sharp Sans Regular';
 }
 
 .container-fluid {
@@ -60,42 +62,3 @@ body {
   color: var(--color-secondary);
 }
 
-/*========================== Main container ==========================*/
-
-.main-container {
-  border-radius: 30px;
-  border: 2px solid #323232;
-  background: #e0e0e0;
-  box-shadow: 15px 15px 30px #bebebe,
-    -15px -15px 30px #ffffff;
-}
-
-hr {
-  border-color: #858585;
-}
-
-/*========================== Small button ==========================*/
-
-.small-button {
-  --main-focus: #2d8cf0;
-  --font-color: #323232;
-  --bg-color-sub: #dedede;
-  --bg-color: #eee;
-  --main-color: #323232;
-
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid var(--main-color);
-  box-shadow: 4px 4px var(--main-color);
-  border-radius: 10px;
-  background-color: var(--bg-color-sub);
-}
-
-.small-button-img {
-  width: 20px;
-  margin: 5px;
-}

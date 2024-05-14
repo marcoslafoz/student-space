@@ -1,12 +1,16 @@
 import React from 'react'
-import { DashboardIcon, StudentSpaceIcon } from '../../common/utils/icons'
+import { StudentSpaceIcon } from '../../common/utils/icons'
 import './layout.scss'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
+import { clsx } from 'clsx'
+import { SidebarRoute, sidebarRoutes } from './layout.vm'
 
 export const Sidebar: React.FC = () => {
+
+  const location = useLocation()
+
   return (
     <>
-
       <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
         <span className="sr-only">Open sidebar</span>
         <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -21,35 +25,38 @@ export const Sidebar: React.FC = () => {
             <span className="text-bold font-size-3">StudentSpace</span>
           </span>
           <span className="space-y-3">
-            <SidebarItem title={'Dashboard'} icon={DashboardIcon} path='dashboard'/>
-            <SidebarItem title={'Cursos'} icon={DashboardIcon} path='courses' />
+            {sidebarRoutes.map((s) => (
+              <SidebarItem key={s.path} data={s} isActive={location.pathname === s.path} />
+            ))}
           </span>
         </div>
       </aside>
-
     </>
   )
 }
 
 interface SidebarItemProps {
-  title: string
-  icon: string
-  path: string
+  isActive?: boolean
+  data: SidebarRoute
 }
 
 const SidebarItem: React.FC<SidebarItemProps> = props => {
 
-  const { title, icon, path } = props
-  
+  const { isActive = false, data } = props
+
   const navigate = useNavigate()
 
   return (
 
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <span className="sidebar-item flex items-c p-3 text-gray-900 rounded-lg hover:bg-gray-100 group"  onClick={() => navigate(`/${path}`)}>
-      <img src={icon} alt='' />
-      <span className="flex-1 ms-4 whitespace-nowrap text-medium font-color-secondary">{title}</span>
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+    <span
+      role='button'
+      tabIndex={data.index}
+      aria-label={data.title}
+      className={clsx('sidebar-item flex items-c p-3 text-gray-900 rounded-lg hover:bg-gray-100 group', isActive && 'bg-gray-100')}
+      onClick={() => navigate(data.path)}>
+      <img src={data.icon} alt='' />
+      <span className="flex-1 ms-4 whitespace-nowrap text-medium font-color-secondary">{data.title}</span>
     </span>
-
   )
 }

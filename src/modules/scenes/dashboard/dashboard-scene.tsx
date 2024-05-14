@@ -6,12 +6,13 @@ import { UserContext } from '../../../common/context'
 export const DashboardScene: React.FC = () => {
   const { userID } = React.useContext(UserContext)
 
-  if(!userID) return<></>
+  if (!userID) return <></>
 
   return (
     <Layout>
-      <div><UserInfo id={userID}/></div>
+      <div>
+        <UserInfo id={userID} />
+      </div>
     </Layout>
   )
-
 }

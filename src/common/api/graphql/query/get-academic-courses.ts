@@ -19,13 +19,17 @@ interface GetAcademicCourseListVars {
   userId: number
 }
 
-export const useGetAcademicCourseListLazyQuery = (options?: LazyQueryHookOptions<GetAcademicCourseListData, GetAcademicCourseListVars>) => {
+export const useGetAcademicCourseListLazyQuery = (
+  options?: LazyQueryHookOptions<GetAcademicCourseListData, GetAcademicCourseListVars>
+) => {
   return useLazyQuery<GetAcademicCourseListData, GetAcademicCourseListVars>(GET_ACADEMIC_COURSE_LIST, {
     errorPolicy: 'all',
     ...options,
   })
 }
-export const useGetAcademicCourseListQuery = (options?: QueryHookOptions<GetAcademicCourseListData, GetAcademicCourseListVars>) => {
+export const useGetAcademicCourseListQuery = (
+  options?: QueryHookOptions<GetAcademicCourseListData, GetAcademicCourseListVars>
+) => {
   return useQuery<GetAcademicCourseListData, GetAcademicCourseListVars>(GET_ACADEMIC_COURSE_LIST, {
     errorPolicy: 'all',
     ...options,

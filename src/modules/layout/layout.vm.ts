@@ -1,4 +1,3 @@
-
 import { DashboardIcon } from '../../common/utils/icons'
 
 export interface SidebarRoute {
@@ -10,5 +9,5 @@ export interface SidebarRoute {
 
 export const sidebarRoutes: SidebarRoute[] = [
   { title: 'Dashboard', icon: DashboardIcon, path: '/dashboard', index: 0 },
-  { title: 'Courses', icon: DashboardIcon, path: '/courses', index: 1 }
+  { title: 'Courses', icon: DashboardIcon, path: '/courses', index: 1 },
 ]

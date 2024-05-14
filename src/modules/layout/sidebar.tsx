@@ -45,7 +45,7 @@ export const Sidebar: React.FC = () => {
           </span>
           <span className='space-y-3'>
             {sidebarRoutes.map(s => (
-              <SidebarItem key={s.path} data={s} isActive={location.pathname === s.path} />
+              <SidebarItem key={s.index} data={s} isActive={location.pathname === s.path} />
             ))}
           </span>
         </div>
@@ -76,7 +76,7 @@ const SidebarItem: React.FC<SidebarItemProps> = props => {
       )}
       onClick={() => navigate(data.path)}
     >
-      <img src={data.icon} alt='' />
+      <img src={data.icon} alt={data.title} />
       <span className='flex-1 ms-4 whitespace-nowrap text-medium font-color-secondary'>{data.title}</span>
     </span>
   )

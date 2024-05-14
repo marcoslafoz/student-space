@@ -1,4 +1,14 @@
-import DashboardIcon from '/src/assets/images/svg/dashboard.svg'
+//Logo
 import StudentSpaceIcon from '/src/assets/images/svg/studentspace.svg'
+export { StudentSpaceIcon }
 
-export { DashboardIcon, StudentSpaceIcon }
+// Sidebar
+import DashboardIcon from '/src/assets/images/svg/dashboard.svg'
+import AcademicCourseIcon from '/src/assets/images/svg/teacher.svg'
+import SubjectIcon from '/src/assets/images/svg/book.svg'
+import TaskIcon from '/src/assets/images/svg/task-square.svg'
+import DocumentsIcon from '/src/assets/images/svg/folder-open.svg'
+import EventsIcon from '/src/assets/images/svg/calendar.svg'
+import SettingsIcon from '/src/assets/images/svg/settings.svg'
+
+export { DashboardIcon, AcademicCourseIcon, SubjectIcon, TaskIcon, DocumentsIcon, EventsIcon, SettingsIcon }

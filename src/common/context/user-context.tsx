@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react'
 import axios from 'axios'
+import { Spinner } from '../../modules/components/base'
 
 interface UserContextType {
   userID: number | null
@@ -47,7 +48,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, [])
 
   if (loading) {
-    return <div>Loading...</div>
+    return <></>
   }
 
   return <UserContext.Provider value={{ userID, loading, authenticated }}>{children}</UserContext.Provider>

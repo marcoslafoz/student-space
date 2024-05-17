@@ -1,0 +1,28 @@
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(900deg);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
+
+.ss-loader {
+  display: inline-block;
+  animation: rotate 2.7s infinite;
+  width: 4rem;
+}
+
+.full-screen {
+  height: 100vh; /* 100% de la altura de la ventana */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centered-element {
+  position: absolute;
+}

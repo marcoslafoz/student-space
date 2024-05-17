@@ -38,7 +38,7 @@ export const Sidebar: React.FC = () => {
         className='fixed top-0 left-0 z-40 w-80 h-screen transition-transform -translate-x-full sm:translate-x-0'
         aria-label='Sidebar'
       >
-        <div className='h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800'>
+        <div className='h-full px-3 py-4 overflow-y-auto dark:bg-gray-800'>
           <span className='flex items-center ps-2.5 sidebar-logo'>
             <img src={StudentSpaceIcon} className='h-6 me-3 sm:h-7' alt='Flowbite Logo' />
             <span className='text-bold font-size-3'>StudentSpace</span>

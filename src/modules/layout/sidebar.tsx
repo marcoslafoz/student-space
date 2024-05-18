@@ -1,5 +1,5 @@
 import React from 'react'
-import { MoonIcon, StudentSpaceIcon } from '../../common/utils/icons'
+import { MoonIcon } from '../../common/utils/icons'
 import './layout.scss'
 import { useLocation, useNavigate } from 'react-router'
 import { clsx } from 'clsx'
@@ -41,8 +41,8 @@ export const Sidebar: React.FC = () => {
       >
         <div className='h-full px-3 py-4 overflow-y-auto bg-white dark:bg-gray-800'>
           <span className='inline-flex gap-3 items-center sidebar-logo pl-3'>
-            <span className='w-8 h-8' >
-              <Logo/>
+            <span className='w-8 h-8'>
+              <Logo />
             </span>
             <span className='text-bold font-size-2'>StudentSpace</span>
           </span>
@@ -50,7 +50,7 @@ export const Sidebar: React.FC = () => {
             {sidebarRoutes.map(s => (
               <SidebarItem key={s.index} data={s} isActive={location.pathname === s.path} />
             ))}
-            <DarkMode/>
+            <DarkMode />
           </span>
         </div>
       </aside>
@@ -87,7 +87,6 @@ const SidebarItem: React.FC<SidebarItemProps> = props => {
 }
 
 const DarkMode: React.FC = () => {
-
   const [dark, setDark] = React.useState(false)
 
   const darkModeHandler = () => {

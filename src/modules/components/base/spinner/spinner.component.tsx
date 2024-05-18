@@ -8,7 +8,6 @@ interface SpinnerProps {
 }
 
 export const Spinner: React.FC<SpinnerProps> = props => {
-
   const { isCentered } = props
 
   return (
@@ -16,5 +15,6 @@ export const Spinner: React.FC<SpinnerProps> = props => {
       <div className={clsx(isCentered && 'full-screen position-relative')}>
         <img className={clsx('ss-loader', isCentered && 'centered-element')} src={StudentSpaceIcon} alt='Loading' />
       </div>
-    </>)
+    </>
+  )
 }

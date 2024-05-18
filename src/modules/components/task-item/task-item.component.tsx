@@ -5,12 +5,7 @@ export interface TaskItemComponentProps {
 }
 
 export const TaskItemComponent: React.FC<TaskItemComponentProps> = props => {
-  
-  const {data} = props
-  
-  return (
-    <div className="container">
-      {data.title}
-    </div>
-  )
+  const { data } = props
+
+  return <div className='container'>{data.title}</div>
 }

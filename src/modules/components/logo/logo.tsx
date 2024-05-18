@@ -1,8 +1,10 @@
 import React from 'react'
 
 export const Logo: React.FC = () => {
-  return <svg className="dark:fill-slate-300 fill-gray-800" viewBox="0.00 0.00 1000.00 1000.00" >
-    <path d="
+  return (
+    <svg className='dark:fill-slate-300 fill-gray-800' viewBox='0.00 0.00 1000.00 1000.00'>
+      <path
+        d='
   M 342.19 357.31
   Q 377.78 318.43 424.97 300.75
   Q 472.35 283.00 523.18 288.39
@@ -45,9 +47,10 @@ export const Logo: React.FC = () => {
   Q 479.87 427.29 471.50 426.28
   C 420.88 420.14 377.02 395.63 342.20 358.71
   Q 341.55 358.01 342.19 357.31
-  Z"
-    />
-    <path d="
+  Z'
+      />
+      <path
+        d='
   M 150.98 571.58
   Q 150.99 573.54 151.48 575.38
   C 154.08 585.13 156.44 595.03 159.48 604.64
@@ -89,8 +92,8 @@ export const Logo: React.FC = () => {
   Q 228.09 571.09 162.32 571.02
   C 158.75 571.01 155.12 570.68 151.65 570.87
   A 0.71 0.71 0.0 0 0 150.98 571.58
-  Z"
-    />
-  </svg>
-
+  Z'
+      />
+    </svg>
+  )
 }

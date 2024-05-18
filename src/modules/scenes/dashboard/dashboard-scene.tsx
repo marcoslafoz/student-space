@@ -13,4 +13,3 @@ export const DashboardScene: React.FC = () => {
     </Layout>
   )
 }
-

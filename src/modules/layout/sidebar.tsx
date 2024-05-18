@@ -15,7 +15,7 @@ export const Sidebar: React.FC = () => {
         data-drawer-toggle='logo-sidebar'
         aria-controls='logo-sidebar'
         type='button'
-        className='inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
+        className='inline-flex items-center p-2 mt-2 ms-3 text-sm rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200  dark:hover:bg-gray-700 dark:focus:ring-gray-600'
       >
         <span className='sr-only'>Open sidebar</span>
         <svg
@@ -38,15 +38,16 @@ export const Sidebar: React.FC = () => {
         className='fixed top-0 left-0 z-40 w-80 h-screen transition-transform -translate-x-full sm:translate-x-0'
         aria-label='Sidebar'
       >
-        <div className='h-full px-3 py-4 overflow-y-auto dark:bg-gray-800'>
+        <div className='h-full px-3 py-4 overflow-y-auto bg-white dark:bg-gray-800'>
           <span className='flex items-center ps-2.5 sidebar-logo'>
             <img src={StudentSpaceIcon} className='h-6 me-3 sm:h-7' alt='Flowbite Logo' />
-            <span className='text-bold font-size-3'>StudentSpace</span>
+            <span className='text-bold font-size-2 '>StudentSpace</span>
           </span>
           <span className='space-y-3'>
             {sidebarRoutes.map(s => (
               <SidebarItem key={s.index} data={s} isActive={location.pathname === s.path} />
             ))}
+            <DarkMode/>
           </span>
         </div>
       </aside>
@@ -71,13 +72,33 @@ const SidebarItem: React.FC<SidebarItemProps> = props => {
       tabIndex={data.index}
       aria-label={data.title}
       className={clsx(
-        'sidebar-item flex items-c p-3 text-gray-900 rounded-lg hover:bg-gray-100 group',
-        isActive && 'bg-gray-100'
+        'sidebar-item flex p-3 rounded-lg dark:hover:bg-gray-700 hover:bg-gray-100 group',
+        isActive && 'bg-gray-100 dark:bg-gray-700'
       )}
       onClick={() => navigate(data.path)}
     >
       <img src={data.icon} alt={data.title} />
-      <span className='flex-1 ms-4 whitespace-nowrap text-medium font-color-secondary'>{data.title}</span>
+      <span className='flex-1 ms-4 whitespace-nowrap font-color-secondary'>{data.title}</span>
+    </span>
+  )
+}
+
+const DarkMode: React.FC = () => {
+
+  const [dark, setDark] = React.useState(false)
+
+  const darkModeHandler = () => {
+    setDark(!dark)
+    document.body.classList.toggle('dark')
+  }
+
+  return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    <span
+      className={clsx('sidebar-item flex p-3 rounded-lg dark:hover:bg-gray-700 hover:bg-gray-100 group')}
+      onClick={() => darkModeHandler()}
+    >
+      <span className='flex-1 ms-4 whitespace-nowrap font-color-secondary'>Darkmode</span>
     </span>
   )
 }

@@ -12,7 +12,7 @@ module.exports = {
   theme: {
     extend: {},
   },
-  darkMode: true,
+  darkMode: "class",
   plugins: [
     nextui(),
     require('flowbite/plugin'), 

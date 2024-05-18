@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout } from '../../layout'
 import { UserInfo } from './user-info'
 import { UserContext } from '../../../common/context'
-import { Checkbox } from '@nextui-org/react'
+import { Checkbox, Input } from '@nextui-org/react'
 export const DashboardScene: React.FC = () => {
   const { userID } = React.useContext(UserContext)
 
@@ -16,7 +16,8 @@ export const DashboardScene: React.FC = () => {
           <div className="col col-auto">
             <div className='rounded-4 p-4 border '>
               <Checkbox />
-              <UserInfo id={userID} /><DarkMode/>
+              <Input/>
+              <UserInfo id={userID} />
             </div>
           </div>
         
@@ -26,23 +27,3 @@ export const DashboardScene: React.FC = () => {
   )
 }
 
-function DarkMode() {
-
-  const [dark, setDark] = React.useState(false);
-
-  const darkModeHandler = () => {
-    setDark(!dark)
-    console.log('AQUI DARK')
-    
-    document.body.classList.toggle("dark");
-  }
-
-  return (
-    <div className="bg-yellow-100 dark:bg-blue-900">
-      <button onClick={() => darkModeHandler()}>
-      hOLA</button>
-    </div>
-  );
-}
-
-export default DarkMode;

@@ -1,9 +1,10 @@
 import React from 'react'
-import { StudentSpaceIcon } from '../../common/utils/icons'
+import { MoonIcon, StudentSpaceIcon } from '../../common/utils/icons'
 import './layout.scss'
 import { useLocation, useNavigate } from 'react-router'
 import { clsx } from 'clsx'
 import { SidebarRoute, sidebarRoutes } from './layout.vm'
+import { Logo } from '../components/logo'
 
 export const Sidebar: React.FC = () => {
   const location = useLocation()
@@ -39,9 +40,11 @@ export const Sidebar: React.FC = () => {
         aria-label='Sidebar'
       >
         <div className='h-full px-3 py-4 overflow-y-auto bg-white dark:bg-gray-800'>
-          <span className='flex items-center ps-2.5 sidebar-logo'>
-            <img src={StudentSpaceIcon} className='h-6 me-3 sm:h-7' alt='Flowbite Logo' />
-            <span className='text-bold font-size-2 '>StudentSpace</span>
+          <span className='inline-flex gap-3 items-center sidebar-logo pl-3'>
+            <span className='w-8 h-8' >
+              <Logo/>
+            </span>
+            <span className='text-bold font-size-2'>StudentSpace</span>
           </span>
           <span className='space-y-3'>
             {sidebarRoutes.map(s => (
@@ -98,6 +101,7 @@ const DarkMode: React.FC = () => {
       className={clsx('sidebar-item flex p-3 rounded-lg dark:hover:bg-gray-700 hover:bg-gray-100 group')}
       onClick={() => darkModeHandler()}
     >
+      <img src={MoonIcon} alt={'Toggle Darkmode'} />
       <span className='flex-1 ms-4 whitespace-nowrap font-color-secondary'>Darkmode</span>
     </span>
   )

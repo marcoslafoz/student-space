@@ -10,5 +10,7 @@ import TaskIcon from '/src/assets/images/svg/task-square.svg'
 import DocumentsIcon from '/src/assets/images/svg/folder-open.svg'
 import EventsIcon from '/src/assets/images/svg/calendar.svg'
 import SettingsIcon from '/src/assets/images/svg/settings.svg'
+import MoonIcon from '/src/assets/images/svg/moon.svg'
 
-export { DashboardIcon, AcademicCourseIcon, SubjectIcon, TaskIcon, DocumentsIcon, EventsIcon, SettingsIcon }
+
+export { DashboardIcon, AcademicCourseIcon, SubjectIcon, TaskIcon, DocumentsIcon, EventsIcon, SettingsIcon, MoonIcon }

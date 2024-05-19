@@ -7,12 +7,13 @@ import { colorClasses } from '../../../../../common/constants/colors'
 interface TaskFilterChipProps {
   data: Subject | AcademicCourse
   onClick: () => void
+  selected: boolean
 }
 
 export const TaskFilterChip: React.FC<TaskFilterChipProps> = props => {
-  const { data, onClick } = props
+  const { data, onClick, selected : defaultSelected } = props
   const { name, color = '' } = data
-  const [selected, setSelected] = React.useState<boolean>(false)
+  const [selected, setSelected] = React.useState<boolean>(defaultSelected)
   const { bg, text } = colorClasses[color] || { bg: 'bg-gray-200', text: 'text-gray-500' }
 
   const handleClick = () => {

@@ -7,7 +7,7 @@ import { TaskList } from '../../components/tasks'
 export const TasksScene: React.FC = () => {
   const { userID } = useContext(UserContext)
 
-  const [getTasks, { loading, error, data }] = useGetTasksByUserLazyQuery()
+  const [getTasks, { loading, error, data, refetch }] = useGetTasksByUserLazyQuery()
 
   React.useEffect(() => {
     if (userID) {
@@ -19,7 +19,7 @@ export const TasksScene: React.FC = () => {
 
   return (
     <Layout>
-      <TaskList data={data.getTasksByUserId || []} />
+      <TaskList data={data.getTasksByUserId || []} refetch={() => refetch()} />
     </Layout>
   )
 }

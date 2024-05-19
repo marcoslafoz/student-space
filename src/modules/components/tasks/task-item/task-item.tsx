@@ -4,26 +4,35 @@ import React from 'react'
 import { Checkbox } from '@nextui-org/react'
 import { Task } from '../../../../common/types'
 import clsx from 'clsx'
-import { EditTaskModal } from './edit-task-modal'
+import { TaskEditModal } from './task-edit-modal'
 import { TaskChip } from './task-chip'
 import 'moment'
-import { formatDate } from '../../../../common/utils'
+import { useLazyMutationSetTaskCheckedData } from '../../../../common/api/graphql/mutation'
+import { TaskDate } from './task-date'
 
 export interface TaskItemProps {
   data: Task
+  refetch: () => void
 }
 
 export const TaskItem: React.FC<TaskItemProps> = props => {
-  const { data } = props
+  const { data, refetch } = props
 
-  const { title, checked: defaultChecked, description, academicCourse, subject, date } = data
+  const { title, checked: defaultChecked, description, academicCourse, subject, date, id } = data
 
   const [checked, setChecked] = React.useState<boolean>(defaultChecked)
+  const [loading, setLoading] = React.useState(false)
+  const [setTaskCheckedData] = useLazyMutationSetTaskCheckedData()
 
-  // TODO: Aqui se hara la mutación
-  const handleCheck = () => {
-    setChecked(!checked)
-    console.log('AQUI CHECKED: ', !checked)
+  const handleCheck = async () => {
+    try {
+      setLoading(true)
+      await setTaskCheckedData({ variables: { checked: !checked, taskId: id } })
+      setChecked(prevChecked => !prevChecked)
+      refetch()
+    } catch (error) {
+      console.error('Error updating task:', error)
+    } finally { setLoading(false) }
   }
 
   const [showModal, setShowModal] = React.useState<boolean>(false)
@@ -32,6 +41,8 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
     ...(checked ? { opacity: '50%' } : {}),
     cursor: 'pointer',
   }
+
+  if (loading) return <></>
 
   return (
     <>
@@ -46,7 +57,7 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
               {title}
             </span>
 
-            {date && <span className='text-xs text-gray-400	'>{formatDate(date)}</span>}
+            <TaskDate date={date}/>
 
             <span className='flex items-center justify-between gap-2'>
               {academicCourse && <TaskChip data={academicCourse} onClose={() => console.log('Aqui borrado')} />}
@@ -62,7 +73,7 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
         {description && <div className='flex items-center text-xs	text-slate-500 	'>{description}</div>}
       </div>
 
-      <EditTaskModal isOpen={showModal} onClose={() => setShowModal(false)} />
+      <TaskEditModal isOpen={showModal} onClose={() => setShowModal(false)} />
     </>
   )
 }

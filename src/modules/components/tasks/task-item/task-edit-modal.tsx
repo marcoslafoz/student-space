@@ -1,12 +1,12 @@
 import React from 'react'
 import { Modal, ModalContent, ModalHeader, ModalBody, Input, ModalFooter, Button } from '@nextui-org/react'
 
-interface EditTaskModalProps {
+interface TaskEditModalProps {
   isOpen: boolean
   onClose: () => void
 }
 
-export const EditTaskModal: React.FC<EditTaskModalProps> = props => {
+export const TaskEditModal: React.FC<TaskEditModalProps> = props => {
   const { isOpen, onClose } = props
 
   return (

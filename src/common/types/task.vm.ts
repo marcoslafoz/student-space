@@ -7,6 +7,6 @@ export interface Task {
   date?: string
   description?: string
   checked: boolean
-  academicCourse? : AcademicCourse
+  academicCourse?: AcademicCourse
   subject?: Subject
 }

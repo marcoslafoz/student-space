@@ -10,7 +10,6 @@ interface TaskChipProps {
 }
 
 export const TaskChip: React.FC<TaskChipProps> = props => {
-
   const { data, onClose } = props
   const { name, color = '' } = data
 
@@ -25,20 +24,20 @@ export const TaskChip: React.FC<TaskChipProps> = props => {
 
   return (
     <>
-      {
-        showChip &&
+      {showChip && (
         <Chip
           size='sm'
           onClose={handleClose}
           classNames={{
             base: clsx(bg),
             content: clsx(text, 'px-1'),
-            closeButton: clsx(text)
+            closeButton: clsx(text),
           }}
-          variant="flat">
+          variant='flat'
+        >
           {name}
         </Chip>
-      }
+      )}
     </>
   )
 }

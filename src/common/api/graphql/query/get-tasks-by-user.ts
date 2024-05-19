@@ -19,23 +19,18 @@ interface GetTasksByUserVars {
   userId: number
 }
 
-export const useGetTasksByUserLazyQuery = (
-  options?: LazyQueryHookOptions<GetTasksByUserData, GetTasksByUserVars>
-) => {
+export const useGetTasksByUserLazyQuery = (options?: LazyQueryHookOptions<GetTasksByUserData, GetTasksByUserVars>) => {
   return useLazyQuery<GetTasksByUserData, GetTasksByUserVars>(GET_TASKS_BY_USER, {
     errorPolicy: 'all',
     ...options,
   })
 }
-export const useGetTasksByUserQuery = (
-  options?: QueryHookOptions<GetTasksByUserData, GetTasksByUserVars>
-) => {
+export const useGetTasksByUserQuery = (options?: QueryHookOptions<GetTasksByUserData, GetTasksByUserVars>) => {
   return useQuery<GetTasksByUserData, GetTasksByUserVars>(GET_TASKS_BY_USER, {
     errorPolicy: 'all',
     ...options,
   })
 }
-
 
 /*
 query GetTasksBySubjectId {

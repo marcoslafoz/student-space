@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
   },
   {
     path: 'tasks',
-    element: <TasksScene/>,
+    element: <TasksScene />,
     loader: authLoader,
   },
 ])

@@ -1,7 +1,5 @@
 import { StoryFn, Meta } from '@storybook/react'
-import {
-  TaskItem, TaskItemProps,
-} from '../../modules/components/tasks/task-item/task-item.container'
+import { TaskItem, TaskItemProps } from '../../modules/components/tasks/task-item/task-item'
 
 export default {
   title: 'Components/Tasks',
@@ -23,11 +21,11 @@ TaskItemStory.args = {
     academicCourse: {
       id: 11,
       name: 'Literatura',
-      color: 'red'
+      color: 'red',
     },
     subject: {
       id: 12,
       name: '4º ESO',
-    }
+    },
   },
 }

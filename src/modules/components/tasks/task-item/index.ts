@@ -1,2 +1,1 @@
-export * from './task-item.container'
-export * from './task-filter-chip'
+export * from './task-item'

@@ -1,8 +1,8 @@
 import { Chip } from '@nextui-org/react'
 import React from 'react'
-import { AcademicCourse, Subject } from '../../../../common/types'
+import { AcademicCourse, Subject } from '../../../../../common/types'
 import { clsx } from 'clsx'
-import { colorClasses } from '../../../../common/constants/colors'
+import { colorClasses } from '../../../../../common/constants/colors'
 
 interface TaskFilterChipProps {
   data: Subject | AcademicCourse
@@ -10,7 +10,6 @@ interface TaskFilterChipProps {
 }
 
 export const TaskFilterChip: React.FC<TaskFilterChipProps> = props => {
-
   const { data, onClick } = props
   const { name, color = '' } = data
   const [selected, setSelected] = React.useState<boolean>(false)
@@ -24,15 +23,16 @@ export const TaskFilterChip: React.FC<TaskFilterChipProps> = props => {
   return (
     <>
       <Chip
-        style={{cursor: 'pointer'}}
+        style={{ cursor: 'pointer' }}
         size='sm'
         onClick={handleClick}
         classNames={{
-          base: clsx(selected ? bg : 'bg-gray-100',),
+          base: clsx(selected ? bg : 'bg-gray-100'),
           content: clsx(selected ? text : 'text-gray-400', 'px-1'),
-          closeButton: clsx(selected ? text : 'text-gray-400')
+          closeButton: clsx(selected ? text : 'text-gray-400'),
         }}
-        variant="flat">
+        variant='flat'
+      >
         {name}
       </Chip>
     </>

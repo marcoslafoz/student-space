@@ -11,7 +11,7 @@ interface TaskFilterChipProps {
 }
 
 export const TaskFilterChip: React.FC<TaskFilterChipProps> = props => {
-  const { data, onClick, selected : defaultSelected } = props
+  const { data, onClick, selected: defaultSelected } = props
   const { name, color = '' } = data
   const [selected, setSelected] = React.useState<boolean>(defaultSelected)
   const { bg, text } = colorClasses[color] || { bg: 'bg-gray-200', text: 'text-gray-500' }

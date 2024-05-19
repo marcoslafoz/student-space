@@ -12,7 +12,7 @@ const Story: StoryFn<TaskListProps> = args => {
 
 export const TaskListStory = Story.bind({})
 TaskListStory.args = {
-  data : [
+  data: [
     {
       id: 1,
       title: 'Leer capítulo 5',
@@ -98,6 +98,5 @@ TaskListStory.args = {
         color: 'red',
       },
     },
-  ]
-
+  ],
 }

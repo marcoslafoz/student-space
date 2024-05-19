@@ -1,8 +1,8 @@
 import { MutationHookOptions, gql, useMutation } from '@apollo/client'
 
 const SET_TASK_CHECKED = gql`
-  mutation setTaskChecked($taskId: ID $checked: Boolean) {
-    setTaskChecked(taskId: $taskId checked: $checked)
+  mutation setTaskChecked($taskId: ID, $checked: Boolean) {
+    setTaskChecked(taskId: $taskId, checked: $checked)
   }
 `
 

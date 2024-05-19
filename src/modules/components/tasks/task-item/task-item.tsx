@@ -32,7 +32,9 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
       refetch()
     } catch (error) {
       console.error('Error updating task:', error)
-    } finally { setLoading(false) }
+    } finally {
+      setLoading(false)
+    }
   }
 
   const [showModal, setShowModal] = React.useState<boolean>(false)
@@ -57,7 +59,7 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
               {title}
             </span>
 
-            <TaskDate date={date}/>
+            <TaskDate date={date} />
 
             <span className='flex items-center justify-between gap-2'>
               {academicCourse && <TaskChip data={academicCourse} onClose={() => console.log('Aqui borrado')} />}

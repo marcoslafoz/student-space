@@ -5,8 +5,7 @@ import { Checkbox  } from '@nextui-org/react'
 import { Task } from '../../../../common/types'
 import clsx from 'clsx'
 import { EditTaskModal } from './edit-task-modal.component'
-import { CourseChip } from './course-chip'
-import { SubjectChip } from './subject-chip'
+import { TaskChip } from './task-chip'
 import 'moment'
 import { formatDate } from '../../../../common/utils'
 
@@ -20,13 +19,14 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
   const { title, checked: defaultChecked, description, academicCourse, subject, date } = data
 
   const [checked, setChecked] = React.useState<boolean>(defaultChecked)
+  
+  // TODO: Aqui se hara la mutación
+  const handleCheck = () => {
+    setChecked(!checked)
+    console.log('AQUI CHECKED: ',!checked)
+  }
 
   const [showModal, setShowModal] = React.useState<boolean>(false)
-
-
-
-  //Aqui llamara a la mutation
-  React.useMemo(() => { console.log('AQUI', checked) }, [checked])
 
   const style = {
     ...(checked ? { opacity: '50%' } : {}),
@@ -48,14 +48,14 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
             {date && <span className='text-xs text-gray-400	'>{formatDate(date)}</span>}
 
             <span className='flex items-center justify-between gap-2'>
-              {academicCourse && <CourseChip data={academicCourse} />}
-              {subject && <SubjectChip data={subject} />}
+              {academicCourse && <TaskChip data={academicCourse} onClose={() => console.log('Aqui borrado')} />}
+              {subject && <TaskChip data={subject} onClose={() => console.log('Aqui borrado')} />}
             </span>
 
           </div>
 
           <div className='ml-2'>
-            <Checkbox isSelected={checked} onValueChange={() => setChecked(!checked)} size="lg" />
+            <Checkbox isSelected={checked} onValueChange={handleCheck} size="lg" />
           </div>
         </div>
 

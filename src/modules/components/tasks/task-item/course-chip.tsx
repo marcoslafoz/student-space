@@ -14,7 +14,7 @@ export const CourseChip: React.FC<CourseChipProps> = props => {
 
   const [showChip, setShowChip] = React.useState<boolean>(true)
 
-  const { bg, text } = colorClasses[color] || { bg: 'bg-gray-200', text: 'text-black-500' }
+  const { bg, text } = colorClasses[color] || { bg: 'bg-gray-200', text: 'text-gray-500' }
 
   return (
     <>

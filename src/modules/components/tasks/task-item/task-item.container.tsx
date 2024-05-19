@@ -7,6 +7,8 @@ import clsx from 'clsx'
 import { EditTaskModal } from './edit-task-modal.component'
 import { CourseChip } from './course-chip'
 import { SubjectChip } from './subject-chip'
+import 'moment'
+import { formatDate } from '../../../../common/utils'
 
 export interface TaskItemProps {
   data: Task
@@ -27,31 +29,31 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
   React.useMemo(() => { console.log('AQUI', checked) }, [checked])
 
   const style = {
-    ...(checked ? { opacity: '60%' } : {}),
+    ...(checked ? { opacity: '50%' } : {}),
     cursor: 'pointer'
   }
 
   return (
     <>
-      <div className='grid grid-cols-1 border rounded-lg p-4 gap-y-3' style={style} onClick={() => setShowModal(true)}>
+      <div className='grid grid-cols-1 border rounded-lg p-4 gap-y-3' style={style}>
 
-        <div className='flex items-center justify-between  '>
+        <div className='flex items-center justify-between'>
           <div className='flex items-center justify-start gap-3 flex-wrap'>
+            
+            <span className={clsx('hover:text-gray-400', checked && 'line-through')} style={{ cursor: 'pointer' }} onClick={() => setShowModal(true)}>
+              {title}
+            </span>
+            
 
-            <div className="flex flex-wrap gap-4">
-              <span className={clsx('hover:text-gray-400', checked && 'line-through')} style={{ cursor: 'pointer' }}>{title}</span>
-            </div>
-
-            {date && <span className='text-xs text-gray-400	'>{date}</span>}
+            {date && <span className='text-xs text-gray-400	'>{formatDate(date)}</span>}
 
             <span className='flex items-center justify-between gap-2'>
-
               {academicCourse && <CourseChip data={academicCourse} />}
               {subject && <SubjectChip data={subject} />}
-
             </span>
 
           </div>
+
           <div className='ml-2'>
             <Checkbox isSelected={checked} onValueChange={() => setChecked(!checked)} size="lg" />
           </div>

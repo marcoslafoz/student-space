@@ -1,5 +1,5 @@
 import React from 'react'
-import { MoonIcon } from '../../common/utils/icons'
+import { MoonIcon } from '../../common/constants/icons'
 import './layout.scss'
 import { useLocation, useNavigate } from 'react-router'
 import { clsx } from 'clsx'

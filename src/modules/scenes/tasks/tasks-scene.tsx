@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
-import { TaskList } from './tasks'
-import { useGetAcademicCourseListQuery, useGetTasksByUserLazyQuery } from '../../../common/api/graphql/query'
+import {  useGetTasksByUserLazyQuery } from '../../../common/api/graphql/query'
 import { UserContext } from '../../../common/context'
 import { Layout } from '../../layout'
+import { TaskList } from '../../components/tasks'
 
 export const TasksScene: React.FC = () => {
   const { userID } = useContext(UserContext)

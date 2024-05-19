@@ -6,7 +6,7 @@ import {
   DocumentsIcon,
   EventsIcon,
   SettingsIcon,
-} from '../../common/utils/icons'
+} from '../../common/constants/icons'
 
 export interface SidebarRoute {
   title: string

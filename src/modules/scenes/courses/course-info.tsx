@@ -18,7 +18,7 @@ export const CourseInfo: React.FC<CourseInfoProps> = props => {
               <h4 className="text-white font-medium text-large">{ac.name}</h4>
             </CardHeader>
             <Image
-              isZoomed
+              // isZoomed
               removeWrapper
               alt="Card background"
               className="z-0 w-full h-full object-cover"

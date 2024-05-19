@@ -1,6 +1,6 @@
 import React from 'react'
 import './spinner.scss'
-import { StudentSpaceIcon } from '../../../../common/utils/icons'
+import { StudentSpaceIcon } from '../../../../common/constants/icons'
 import clsx from 'clsx'
 
 interface SpinnerProps {

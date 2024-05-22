@@ -1,25 +1,27 @@
 import React from 'react'
 import moment from 'moment'
+import { formatLocalTimezoneToString } from '../../../../common/utils'
 
 interface TaskDateProps {
   date?: string
 }
 
-export const formatDate = (date: string): string => {
-  const fecha = moment(date)
-  return fecha.isSame(moment(), 'day') ? 'hoy, ' + fecha.format('HH:mm') : fecha.format('MM/DD/YY, HH:mm')
-}
 
 export const TaskDate: React.FC<TaskDateProps> = props => {
   const { date } = props
 
   if (!date) return <></>
 
-  const momentDate = moment(date)
+  const momentDate = moment(formatLocalTimezoneToString(date))
+
+  // Si es hoy y ha caducado
+  if (momentDate.isSame(moment(), 'day') && momentDate.isBefore(moment()))
+    return <span className='text-xs text-red-400'>{'hoy, ' + momentDate.format('HH:mm')}</span>
 
   // Si es hoy
   if (momentDate.isSame(moment(), 'day'))
     return <span className='text-xs text-gray-400'>{'hoy, ' + momentDate.format('HH:mm')}</span>
+
 
   // Si es ayer
   if (momentDate.isSame(moment().subtract(1, 'day'), 'day'))

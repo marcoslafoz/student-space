@@ -1,9 +1,9 @@
 import { gql, LazyQueryHookOptions, QueryHookOptions, useLazyQuery, useQuery } from '@apollo/client'
-import { ACADEMIC_COURSE_FIELDS } from '../fragments'
+import { SUBJECT_FIELDS } from '../fragments'
 import { Subject } from '../../../types'
 
 const GET_SUBJECT_LIST_BY_USER = gql`
-  ${ACADEMIC_COURSE_FIELDS}
+  ${SUBJECT_FIELDS}
   query getSubjectListByUserId($userId: ID!) {
     getSubjectListByUserId(userId: $userId) {
       ...SubjectFields

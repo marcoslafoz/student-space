@@ -1,5 +1,5 @@
 import React from 'react'
-import moment from 'moment'
+import moment from 'moment-timezone'
 import { formatLocalTimezoneToString } from '../../../../common/utils'
 
 interface TaskDateProps {
@@ -29,12 +29,12 @@ export const TaskDate: React.FC<TaskDateProps> = props => {
 
   //Anterior
   if (momentDate.isBefore(moment(), 'day'))
-    return <span className='text-xs text-red-400'>{momentDate.format('MM/DD/YY, HH:mm')}</span>
+    return <span className='text-xs text-red-400'>{momentDate.format('DD/MM/YY, HH:mm')}</span>
 
   //Mañana
   if (momentDate.isSame(moment().add(1, 'day'), 'day'))
     return <span className='text-xs text-gray-400'>{'mañana, ' + momentDate.format('HH:mm')}</span>
 
   //Otro
-  return <span className='text-xs text-gray-400'>{momentDate.format('MM/DD/YY, HH:mm')}</span>
+  return <span className='text-xs text-gray-400'>{momentDate.format('DD/MM/YY, HH:mm')}</span>
 }

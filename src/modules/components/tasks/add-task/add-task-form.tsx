@@ -87,7 +87,6 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = props => {
       </ModalBody>
 
       <ModalFooter>
-        <Button color='danger' className='bg-transparent border border-red-500 text-red-500'  size='sm' onClick={onClose}>Cancelar</Button>
         <Button color='primary' size='sm' type='submit' >Guardar</Button>
       </ModalFooter>
     </form>

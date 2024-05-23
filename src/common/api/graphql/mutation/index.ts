@@ -1,2 +1,6 @@
 export * from './set-task-checked.ts'
 export * from './add-task.ts'
+export * from './remove-task.ts'
+export * from './edit-task.ts'
+export * from './remove-task-subject.ts'
+export * from './remove-task-academic-course.ts'

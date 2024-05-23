@@ -4,10 +4,10 @@ import React from 'react'
 import { Checkbox } from '@nextui-org/react'
 import { Task } from '../../../../common/types'
 import clsx from 'clsx'
-import { TaskEditModal } from './task-edit-modal'
+import { TaskEditModal } from '../edit-task/task-edit-modal'
 import { TaskChip } from './task-chip'
 import 'moment'
-import { useLazyMutationSetTaskCheckedData } from '../../../../common/api/graphql/mutation'
+import { useLazyMutationRemoveTaskSubject, useLazyMutationSetTaskCheckedData, useLazyMutationRemoveTaskAcademicCourse } from '../../../../common/api/graphql/mutation'
 import { TaskDate } from './task-date'
 
 export interface TaskItemProps {
@@ -23,6 +23,9 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
   const [checked, setChecked] = React.useState<boolean>(defaultChecked)
   const [loading, setLoading] = React.useState(false)
   const [setTaskCheckedData] = useLazyMutationSetTaskCheckedData()
+
+  const [removeTaskSubject] = useLazyMutationRemoveTaskSubject()
+  const [removeTaskAcademicCourse] = useLazyMutationRemoveTaskAcademicCourse()
 
   const handleCheck = async () => {
     try {
@@ -62,8 +65,8 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
             <TaskDate date={date} />
 
             <span className='flex items-center justify-between gap-2'>
-              {academicCourse && <TaskChip data={academicCourse} onClose={() => console.log('Aqui borrado')} />}
-              {subject && <TaskChip data={subject} onClose={() => console.log('Aqui borrado')} />}
+              {academicCourse && <TaskChip data={academicCourse} onClose={() => removeTaskAcademicCourse({ variables: { taskId: data?.id || 0, academicCourseId: data?.academicCourse?.id || 0 } })} />}
+              {subject && <TaskChip data={subject} onClose={() => removeTaskSubject({ variables: { taskId: data?.id || 0, subjectId: data?.subject?.id || 0 }})} />}
             </span>
           </div>
 
@@ -75,7 +78,7 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
         {description && <div className='flex items-center text-xs	text-slate-500 	'>{description}</div>}
       </div>
 
-      <TaskEditModal isOpen={showModal} onClose={() => setShowModal(false)} />
+      <TaskEditModal isOpen={showModal} onClose={() => setShowModal(false)} data={data} refetch={refetch} />
     </>
   )
 }

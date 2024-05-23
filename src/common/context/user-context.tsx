@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react'
 import axios from 'axios'
-import { Spinner } from '../../modules/components/base'
 
 interface UserContextType {
   userID: number | null

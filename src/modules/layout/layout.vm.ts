@@ -1,7 +1,6 @@
 import {
   DashboardIcon,
   AcademicCourseIcon,
-  SubjectIcon,
   TaskIcon,
   DocumentsIcon,
   EventsIcon,

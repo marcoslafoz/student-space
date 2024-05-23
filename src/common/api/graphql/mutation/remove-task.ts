@@ -14,9 +14,7 @@ interface RemoveTaskVars {
   taskId: number
 }
 
-export const useLazyMutationRemoveTask = (
-  options?: MutationHookOptions<RemoveTaskData, RemoveTaskVars>
-) => {
+export const useLazyMutationRemoveTask = (options?: MutationHookOptions<RemoveTaskData, RemoveTaskVars>) => {
   return useMutation<RemoveTaskData, RemoveTaskVars>(
     REMOVE_TASK,
     options ?? {

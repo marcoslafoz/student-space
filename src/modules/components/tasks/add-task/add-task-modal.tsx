@@ -15,14 +15,18 @@ export const AddTaskModal: React.FC<AddTaskModalProps> = props => {
 
   const { userID } = useContext(UserContext)
 
-  const { data : courseList } = useGetAcademicCourseListQuery({ variables: { userId: userID || 0 } })
+  const { data: courseList } = useGetAcademicCourseListQuery({ variables: { userId: userID || 0 } })
   const { data: subjectList } = useGetSubjectListByUserQuery({ variables: { userId: userID || 0 } })
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} placement='top-center' backdrop='opaque'>
       <ModalContent>
         <ModalHeader className='flex flex-col gap-1'>Añadir tarea</ModalHeader>
-        <AddTaskForm courseList={courseList?.getAcademicCourseListByUserId || []} subjectList={subjectList?.getSubjectListByUserId || []} {...props} />
+        <AddTaskForm
+          courseList={courseList?.getAcademicCourseListByUserId || []}
+          subjectList={subjectList?.getSubjectListByUserId || []}
+          {...props}
+        />
       </ModalContent>
     </Modal>
   )

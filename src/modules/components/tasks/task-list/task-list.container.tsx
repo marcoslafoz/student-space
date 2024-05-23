@@ -58,13 +58,11 @@ export const TaskList: React.FC<TaskListProps> = props => {
   }
 
   return (
-
     <>
       <div className='flex flex-col min-[1200px]:flex-row gap-6'>
         <div className='grid grid-cols-1 space-y-3 flex-grow'>
           <div className='flex whitespace-pre-wrap space-x-0 justify-between gap-3 '>
             <div className='flex flex-wrap items-center gap-3 '>
-
               {uniqueCourses.map(course => (
                 <TaskFilterChip
                   key={`${course.id}-${resetCounter}`}
@@ -105,12 +103,7 @@ export const TaskList: React.FC<TaskListProps> = props => {
             </div>
             <div>
               <button className='rounded-xl' onClick={() => setShowModal(true)}>
-                <Chip
-                  variant='flat'
-                  color='primary'
-                  classNames={{ content: 'px-1' }}
-                  size='sm'
-                  endContent={<></>} >
+                <Chip variant='flat' color='primary' classNames={{ content: 'px-1' }} size='sm' endContent={<></>}>
                   Añadir tarea
                 </Chip>
               </button>
@@ -119,7 +112,9 @@ export const TaskList: React.FC<TaskListProps> = props => {
 
           <div className='grid grid-cols-1 gap-y-2'>
             {data
-              .filter(task => selectedCourses.length === 0 || selectedCourses.some(c => c.id === task.academicCourse?.id))
+              .filter(
+                task => selectedCourses.length === 0 || selectedCourses.some(c => c.id === task.academicCourse?.id)
+              )
               .filter(task => selectedSubjects.length === 0 || selectedSubjects.some(s => s.id === task.subject?.id))
               .map(t => (
                 <TaskItem key={t.id} data={t} refetch={refetch} />

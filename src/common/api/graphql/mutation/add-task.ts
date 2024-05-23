@@ -16,9 +16,7 @@ interface AddTaskVars {
   task: Task
 }
 
-export const useLazyMutationAddTask = (
-  options?: MutationHookOptions<AddTaskData, AddTaskVars>
-) => {
+export const useLazyMutationAddTask = (options?: MutationHookOptions<AddTaskData, AddTaskVars>) => {
   return useMutation<AddTaskData, AddTaskVars>(
     ADD_TASK,
     options ?? {

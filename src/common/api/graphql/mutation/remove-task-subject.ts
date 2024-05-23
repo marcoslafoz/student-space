@@ -1,8 +1,8 @@
 import { MutationHookOptions, gql, useMutation } from '@apollo/client'
 
 const REMOVE_TASK_SUBJECT = gql`
-  mutation RemoveTaskSubject($taskId: ID $subjectId: ID) {
-    removeTaskSubject(taskId: $taskId subjectId: $subjectId)
+  mutation RemoveTaskSubject($taskId: ID, $subjectId: ID) {
+    removeTaskSubject(taskId: $taskId, subjectId: $subjectId)
   }
 `
 

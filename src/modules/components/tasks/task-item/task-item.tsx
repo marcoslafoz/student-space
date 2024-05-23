@@ -7,7 +7,11 @@ import clsx from 'clsx'
 import { TaskEditModal } from '../edit-task/task-edit-modal'
 import { TaskChip } from './task-chip'
 import 'moment'
-import { useLazyMutationRemoveTaskSubject, useLazyMutationSetTaskCheckedData, useLazyMutationRemoveTaskAcademicCourse } from '../../../../common/api/graphql/mutation'
+import {
+  useLazyMutationRemoveTaskSubject,
+  useLazyMutationSetTaskCheckedData,
+  useLazyMutationRemoveTaskAcademicCourse,
+} from '../../../../common/api/graphql/mutation'
 import { TaskDate } from './task-date'
 
 export interface TaskItemProps {
@@ -65,8 +69,24 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
             <TaskDate date={date} />
 
             <span className='flex items-center justify-between gap-2'>
-              {academicCourse && <TaskChip data={academicCourse} onClose={() => removeTaskAcademicCourse({ variables: { taskId: data?.id || 0, academicCourseId: data?.academicCourse?.id || 0 } })} />}
-              {subject && <TaskChip data={subject} onClose={() => removeTaskSubject({ variables: { taskId: data?.id || 0, subjectId: data?.subject?.id || 0 }})} />}
+              {academicCourse && (
+                <TaskChip
+                  data={academicCourse}
+                  onClose={() =>
+                    removeTaskAcademicCourse({
+                      variables: { taskId: data?.id || 0, academicCourseId: data?.academicCourse?.id || 0 },
+                    })
+                  }
+                />
+              )}
+              {subject && (
+                <TaskChip
+                  data={subject}
+                  onClose={() =>
+                    removeTaskSubject({ variables: { taskId: data?.id || 0, subjectId: data?.subject?.id || 0 } })
+                  }
+                />
+              )}
             </span>
           </div>
 

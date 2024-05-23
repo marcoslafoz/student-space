@@ -10,15 +10,13 @@ export const formatLocalTimezoneToString = (date: string): string => {
   return moment.utc(date).local().format('YYYY-MM-DD HH:mm:ss')
 }
 
-export const formatTime = (isoString?: string): TimeInputValue | undefined | null=> {
-  
-  if(isoString == null || isoString == undefined) return
+export const formatTime = (isoString?: string): TimeInputValue | undefined | null => {
+  if (isoString == null || isoString == undefined) return
   const date = new Date(isoString)
   return new Time(date.getHours(), date.getMinutes(), date.getSeconds())
 }
 
 export const formatDate = (date?: string): DateValue | undefined | null => {
- 
   if (date == null || date == undefined) return
   return parseDate(moment(formatLocalTimezoneToString(date)).format('YYYY-MM-DD'))
 }

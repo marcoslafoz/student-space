@@ -1,8 +1,8 @@
 import { MutationHookOptions, gql, useMutation } from '@apollo/client'
 
 const REMOVE_TASK_ACADEMIC_COURSE = gql`
-  mutation RemoveTaskAcademicCourse($taskId: ID $academicCourseId: ID) {
-    removeTaskAcademicCourse(taskId: $taskId academicCourseId: $academicCourseId)
+  mutation RemoveTaskAcademicCourse($taskId: ID, $academicCourseId: ID) {
+    removeTaskAcademicCourse(taskId: $taskId, academicCourseId: $academicCourseId)
   }
 `
 

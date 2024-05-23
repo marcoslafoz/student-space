@@ -15,9 +15,7 @@ interface EditTaskVars {
   task: Task
 }
 
-export const useLazyMutationEditTask = (
-  options?: MutationHookOptions<EditTaskData, EditTaskVars>
-) => {
+export const useLazyMutationEditTask = (options?: MutationHookOptions<EditTaskData, EditTaskVars>) => {
   return useMutation<EditTaskData, EditTaskVars>(
     EDIT_TASK,
     options ?? {

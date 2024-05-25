@@ -4,7 +4,6 @@ import React from 'react'
 import { Checkbox } from '@nextui-org/react'
 import { Task } from '../../../../common/types'
 import clsx from 'clsx'
-import { TaskEditModal } from '../edit-task/task-edit-modal'
 import { TaskChip } from './task-chip'
 import 'moment'
 import {
@@ -13,6 +12,7 @@ import {
   useLazyMutationRemoveTaskAcademicCourse,
 } from '../../../../common/api/graphql/mutation'
 import { TaskDate } from './task-date'
+import { TaskFormModal } from '../task-form/task-form-modal'
 
 export interface TaskItemProps {
   data: Task
@@ -26,8 +26,9 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
 
   const [checked, setChecked] = React.useState<boolean>(defaultChecked)
   const [loading, setLoading] = React.useState(false)
-  const [setTaskCheckedData] = useLazyMutationSetTaskCheckedData()
+  const [showModal, setShowModal] = React.useState<boolean>(false)
 
+  const [setTaskCheckedData] = useLazyMutationSetTaskCheckedData()
   const [removeTaskSubject] = useLazyMutationRemoveTaskSubject()
   const [removeTaskAcademicCourse] = useLazyMutationRemoveTaskAcademicCourse()
 
@@ -43,8 +44,6 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
       setLoading(false)
     }
   }
-
-  const [showModal, setShowModal] = React.useState<boolean>(false)
 
   const style = {
     ...(checked ? { opacity: '50%' } : {}),
@@ -98,7 +97,13 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
         {description && <div className='flex items-center text-xs	text-slate-500 	'>{description}</div>}
       </div>
 
-      <TaskEditModal isOpen={showModal} onClose={() => setShowModal(false)} data={data} refetch={refetch} />
+      <TaskFormModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        refetch={refetch}
+        data={data}
+        formType='edit'
+      ></TaskFormModal>
     </>
   )
 }

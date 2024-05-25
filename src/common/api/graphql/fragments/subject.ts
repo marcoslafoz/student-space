@@ -5,5 +5,8 @@ export const SUBJECT_FIELDS = gql`
     id
     name
     color
+    academicCourse {
+      id
+    }
   }
 `

@@ -3,7 +3,7 @@ import { AcademicCourse, Subject, Task } from '../../../../common/types'
 import { TaskItem } from '../task-item'
 import { Chip } from '@nextui-org/react'
 import { TaskFilterChip } from './task-filter-chip'
-import { AddTaskModal } from '../add-task/add-task-modal'
+import { TaskFormModal } from '../task-form/task-form-modal'
 
 export interface TaskListProps {
   data: Task[]
@@ -127,7 +127,7 @@ export const TaskList: React.FC<TaskListProps> = props => {
           </div>
         </div>
       </div>
-      <AddTaskModal isOpen={showModal} onClose={() => setShowModal(false)} refetch={refetch} />
+      <TaskFormModal isOpen={showModal} onClose={() => setShowModal(false)} refetch={refetch} />
     </>
   )
 }

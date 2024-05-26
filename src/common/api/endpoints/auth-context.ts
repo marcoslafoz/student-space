@@ -1,14 +1,14 @@
 import axios from 'axios'
 
 export const isAuthenticated = async (): Promise<boolean> => {
-  const token = localStorage.getItem('token')
+  const jwttoken = localStorage.getItem('jwttoken')
 
-  if (!token) return false
+  if (!jwttoken) return false
 
   try {
     const response = await axios.post(`${import.meta.env.VITE_PROXY}/auth/context`, null, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${jwttoken}`,
       },
       withCredentials: true,
     })

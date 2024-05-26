@@ -31,21 +31,3 @@ export const useGetTasksByUserQuery = (options?: QueryHookOptions<GetTasksByUser
     ...options,
   })
 }
-
-/*
-query GetTasksBySubjectId {
-    getTasksByUserId(userId: "52") {
-        id
-        title
-        description
-        checked
-        subject {
-            id
-            name
-        }
-        academicCourse {
-            id
-            name
-        }
-    }
-*/

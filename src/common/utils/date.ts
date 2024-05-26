@@ -2,7 +2,8 @@ import { TimeInputValue } from '@nextui-org/react'
 import moment from 'moment-timezone'
 import { Time, DateValue, parseDate } from '@internationalized/date'
 
-export const formatStringToLocalTimezone = (date: string, time: string): string => {
+export const formatStringToLocalTimezone = (date: string, time: string): string => {  
+  if (time == undefined) return moment.tz(`${date} 23:59:59`, moment.tz.guess()).format()
   return moment.tz(`${date} ${time}`, moment.tz.guess()).format()
 }
 

@@ -4,15 +4,13 @@ import React from 'react'
 import { Checkbox } from '@nextui-org/react'
 import { Task } from '../../../../common/types'
 import clsx from 'clsx'
-import { TaskChip } from './task-chip'
 import 'moment'
 import {
-  useLazyMutationRemoveTaskSubject,
   useLazyMutationSetTaskCheckedData,
-  useLazyMutationRemoveTaskAcademicCourse,
 } from '../../../../common/api/graphql/mutation'
 import { TaskDate } from './task-date'
 import { TaskFormModal } from '../task-form/task-form-modal'
+import { AddCourseButton } from '../../add-course'
 
 export interface TaskItemProps {
   data: Task
@@ -22,15 +20,13 @@ export interface TaskItemProps {
 export const TaskItem: React.FC<TaskItemProps> = props => {
   const { data, refetch } = props
 
-  const { title, checked: defaultChecked, description, academicCourse, subject, date, id } = data
+  const { title, checked: defaultChecked, description, date, id } = data
 
   const [checked, setChecked] = React.useState<boolean>(defaultChecked)
   const [loading, setLoading] = React.useState(false)
   const [showModal, setShowModal] = React.useState<boolean>(false)
 
   const [setTaskCheckedData] = useLazyMutationSetTaskCheckedData()
-  const [removeTaskSubject] = useLazyMutationRemoveTaskSubject()
-  const [removeTaskAcademicCourse] = useLazyMutationRemoveTaskAcademicCourse()
 
   const handleCheck = async () => {
     try {
@@ -38,9 +34,7 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
       await setTaskCheckedData({ variables: { checked: !checked, taskId: id } })
       setChecked(prevChecked => !prevChecked)
       refetch()
-    } catch (error) {
-      console.error('Error updating task:', error)
-    } finally {
+    }finally {
       setLoading(false)
     }
   }
@@ -67,26 +61,7 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
 
             <TaskDate date={date} />
 
-            <span className='flex items-center justify-between gap-2'>
-              {academicCourse && (
-                <TaskChip
-                  data={academicCourse}
-                  onClose={() =>
-                    removeTaskAcademicCourse({
-                      variables: { taskId: data?.id || 0, academicCourseId: data?.academicCourse?.id || 0 },
-                    })
-                  }
-                />
-              )}
-              {subject && (
-                <TaskChip
-                  data={subject}
-                  onClose={() =>
-                    removeTaskSubject({ variables: { taskId: data?.id || 0, subjectId: data?.subject?.id || 0 } })
-                  }
-                />
-              )}
-            </span>
+            <AddCourseButton data={data} refetch={refetch}/>
           </div>
 
           <div className='ml-2'>

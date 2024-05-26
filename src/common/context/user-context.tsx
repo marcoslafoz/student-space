@@ -20,9 +20,9 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   useEffect(() => {
     const getUserData = async () => {
-      const token = localStorage.getItem('token')?.toString()
+      const jwttoken = localStorage.getItem('jwttoken')?.toString()
 
-      if (!token) {
+      if (!jwttoken) {
         setLoading(false)
         return false
       }
@@ -30,7 +30,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       try {
         const response = await axios.post(`${import.meta.env.VITE_PROXY}/auth/context`, null, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${jwttoken}`,
           },
           withCredentials: true,
         })

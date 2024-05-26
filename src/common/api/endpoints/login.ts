@@ -4,20 +4,17 @@ export const loginQuery = async (username: string, password: string) => {
   await axios
     .post(`${import.meta.env.VITE_PROXY}/auth/login`, { username, password }, { withCredentials: true })
     .then(res => {
-      if (res.data) localStorage.setItem('token', res.data)
+      if (res.data) localStorage.setItem('jwttoken', res.data)
     })
     .catch(() => {
-      localStorage.removeItem('token')
-      console.log('Error al iniciar sesion')
+      localStorage.removeItem('jwttoken')
     })
 }
 
-export const destroyToken = () => {
+export const destroyJwtToken = () => {
   try {
-    localStorage.removeItem('token')
-  } catch {
-    console.log('Error al eliminar el token')
+    localStorage.removeItem('jwttoken')
+  }finally{
+    window.location.reload()
   }
-
-  window.location.reload()
 }

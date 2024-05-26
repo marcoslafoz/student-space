@@ -1,5 +1,6 @@
-//Logo
+// Logo
 import StudentSpaceIcon from '/src/assets/images/svg/studentspace.svg'
+
 export { StudentSpaceIcon }
 
 // Sidebar
@@ -13,3 +14,11 @@ import SettingsIcon from '/src/assets/images/svg/settings.svg'
 import MoonIcon from '/src/assets/images/svg/moon.svg'
 
 export { DashboardIcon, AcademicCourseIcon, SubjectIcon, TaskIcon, DocumentsIcon, EventsIcon, SettingsIcon, MoonIcon }
+
+// Others
+import CloudSuccessIcon from '/src/assets/images/svg/cloud-success.svg'
+import CloudErrorIcon from '/src/assets/images/svg/cloud-error.svg'
+import ArrowLeftIcon from '/src/assets/images/svg/arrow-left.svg'
+import PlusIcon from '/src/assets/images/svg/plus.svg'
+
+export { CloudSuccessIcon, CloudErrorIcon, ArrowLeftIcon, PlusIcon }

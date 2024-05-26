@@ -1,15 +1,15 @@
 import { Chip } from '@nextui-org/react'
 import React from 'react'
-import { AcademicCourse, Subject } from '../../../../common/types'
+import { AcademicCourse, Subject } from '../../../common/types'
 import { clsx } from 'clsx'
-import { colorClasses } from '../../../../common/constants/colors'
+import { colorClasses } from '../../../common/constants/colors'
 
-interface TaskChipProps {
+interface ChipItemProps {
   data: Subject | AcademicCourse
   onClose: () => void
 }
 
-export const TaskChip: React.FC<TaskChipProps> = props => {
+export const ChipItem: React.FC<ChipItemProps> = props => {
   const { data, onClose } = props
   const { name, color = '' } = data
 

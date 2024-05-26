@@ -64,8 +64,16 @@ export const TaskFormModal: React.FC<TaskModalProps> = props => {
     },
   })
 
-  data && data.date && setValue('time', moment(formatLocalTimezoneToString(data.date)).format('HH:mm'))
+  data && data.date && setValue('time', moment(formatLocalTimezoneToString(data.date)).format('HH:mm:ss'))
   data && data.date && setValue('date', moment(formatLocalTimezoneToString(data.date)).format('YYYY-MM-DD'))
+
+  const [timeDisabled, setTimeDisabled] = React.useState<boolean>(false)
+
+  // useEffect(() => {
+  //   if (isOpen) setTimeDisabled(!(watch('date')))
+  //   console.log('AQUI', watch('date'))
+
+  // }, [isOpen, watch, timeDisabled])
 
   const { data: courseListData } = useGetAcademicCourseListQuery({ variables: { userId: userID || 0 } })
   const { data: subjectListData } = useGetSubjectListByUserQuery({ variables: { userId: userID || 0 } })
@@ -81,17 +89,17 @@ export const TaskFormModal: React.FC<TaskModalProps> = props => {
       .finally(() => onClose())
   }
 
-
   React.useMemo(() => {
     if (isOpen) {
       if (!subjectListData || subjectListData?.getSubjectListByUserId.length < 1) {
         setSubjectFilteredOptions([])
         return
       }
-      setSubjectFilteredOptions(subjectListData.getSubjectListByUserId.filter(x => x.academicCourse?.id == Number(watch('courseId'))))
-
+      setSubjectFilteredOptions(
+        subjectListData.getSubjectListByUserId.filter(x => x.academicCourse?.id == Number(watch('courseId')))
+      )
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watch('courseId'), isOpen])
 
   const handleAddTask: SubmitHandler<TaskForm> = async values => {
@@ -102,7 +110,7 @@ export const TaskFormModal: React.FC<TaskModalProps> = props => {
         userId: userID,
         task: {
           title: values.title,
-          date: (values.date && values.time && formatStringToLocalTimezone(values.date, values.time)) || '',
+          date: formatStringToLocalTimezone(values.date, values.time),
           description: values.description,
           academicCourse: {
             id: Number(values.courseId),
@@ -110,7 +118,7 @@ export const TaskFormModal: React.FC<TaskModalProps> = props => {
           },
           subject: {
             id: Number(values.subjectId),
-            name: ''
+            name: '',
           },
           id: 0,
           checked: false,
@@ -125,12 +133,16 @@ export const TaskFormModal: React.FC<TaskModalProps> = props => {
   }
 
   const handleEditTask: SubmitHandler<TaskForm> = async values => {
+    
+    console.log('AQUI', values)
+    
+    
     editTaskMutation({
       variables: {
         task: {
           id: data?.id || 0,
           title: values.title,
-          date: (values.date && values.time && formatStringToLocalTimezone(values.date, values.time)) || '',
+          date: formatStringToLocalTimezone(values.date, values.time),
           academicCourse: {
             id: Number(values.courseId),
             name: '',
@@ -138,7 +150,7 @@ export const TaskFormModal: React.FC<TaskModalProps> = props => {
           description: values.description,
           subject: {
             id: Number(values.subjectId),
-            name: ''
+            name: '',
           },
           checked: false,
         },
@@ -158,9 +170,14 @@ export const TaskFormModal: React.FC<TaskModalProps> = props => {
         onClose()
         reset()
       }}
-      placement='top-center' backdrop='opaque'>
+      placement='top-center'
+      backdrop='opaque'
+    >
       <ModalContent>
-        <ModalHeader className='flex flex-col gap-1'> {formType == 'edit' ? 'Editar tarea' : 'Añadir tarea'}</ModalHeader>
+        <ModalHeader className='flex flex-col gap-1'>
+          {' '}
+          {formType == 'edit' ? 'Editar tarea' : 'Añadir tarea'}
+        </ModalHeader>
         <form onSubmit={formType == 'edit' ? handleSubmit(handleEditTask) : handleSubmit(handleAddTask)}>
           <ModalBody>
             <Input {...register('title', { required: true })} isRequired placeholder='Nombre de la tarea' size='sm' />
@@ -175,11 +192,12 @@ export const TaskFormModal: React.FC<TaskModalProps> = props => {
               />
 
               <TimeInput
-                onChange={e => setValue('time', e.toString())}
+                onChange={e => setValue('time', e ? e.toString() : '23:59:59')}
                 size='sm'
                 label='Hora'
                 hourCycle={24}
-                defaultValue={formatTime(data?.date)}
+                isDisabled={timeDisabled}
+                defaultValue={formatTime(data?.date)?.toString() != '23:59:59' ? formatTime(data?.date) : undefined}
               />
             </div>
 
@@ -209,13 +227,16 @@ export const TaskFormModal: React.FC<TaskModalProps> = props => {
                 label='Asignatura'
                 size='sm'
                 isDisabled={
-
-                  !(formType == 'edit' && data?.academicCourse?.id != undefined && !(subjectFilteredOptions.length < 1)) && (watch('courseId') == undefined || watch('courseId') == '' || subjectFilteredOptions.length < 1)
-
+                  !(
+                    formType == 'edit' &&
+                    data?.academicCourse?.id != undefined &&
+                    !(subjectFilteredOptions.length < 1)
+                  ) &&
+                  (watch('courseId') == undefined || watch('courseId') == '' || subjectFilteredOptions.length < 1)
                 }
                 onChange={e => setValue('subjectId', e.target.value)}
-                // TODO: REVISAR PROBLEMA 
-                // defaultSelectedKeys={[data?.subject?.id || '']}
+              // TODO: REVISAR PROBLEMA
+              // defaultSelectedKeys={[data?.subject?.id || '']}
               >
                 {subjectFilteredOptions.map(a => (
                   <SelectItem key={a.id} value={a.id}>

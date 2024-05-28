@@ -23,12 +23,14 @@ interface GetDocumentVars {
 export const useGetDocumentLazyQuery = (options?: LazyQueryHookOptions<GetDocumentData, GetDocumentVars>) => {
   return useLazyQuery<GetDocumentData, GetDocumentVars>(GET_DOCUMENT, {
     errorPolicy: 'all',
+    fetchPolicy: 'no-cache',
     ...options,
   })
 }
 export const useGetDocumentQuery = (options?: QueryHookOptions<GetDocumentData, GetDocumentVars>) => {
   return useQuery<GetDocumentData, GetDocumentVars>(GET_DOCUMENT, {
     errorPolicy: 'all',
+    fetchPolicy: 'no-cache',
     ...options,
   })
 }

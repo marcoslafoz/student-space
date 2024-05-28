@@ -67,28 +67,19 @@ export const TaskFormModal: React.FC<TaskModalProps> = props => {
   data && data.date && setValue('time', moment(formatLocalTimezoneToString(data.date)).format('HH:mm:ss'))
   data && data.date && setValue('date', moment(formatLocalTimezoneToString(data.date)).format('YYYY-MM-DD'))
 
-  const [timeDisabled, setTimeDisabled] = React.useState<boolean>(false)
-
-  // useEffect(() => {
-  //   if (isOpen) setTimeDisabled(!(watch('date')))
-  //   console.log('AQUI', watch('date'))
-
-  // }, [isOpen, watch, timeDisabled])
-
   const { data: courseListData } = useGetAcademicCourseListQuery({ variables: { userId: userID || 0 } })
   const { data: subjectListData } = useGetSubjectListByUserQuery({ variables: { userId: userID || 0 } })
 
   const courseOptions: AcademicCourse[] = courseListData?.getAcademicCourseListByUserId || []
   const [subjectFilteredOptions, setSubjectFilteredOptions] = React.useState<Subject[]>([])
 
-  const handleRemoveTask = () => {
+  const handleRemoveTask = React.useCallback(() => {
     removeTaskMutation({
       variables: { taskId: data?.id || 0 },
-    })
-      .then(() => refetch())
-      .finally(() => onClose())
-  }
-
+    }).then(() => refetch()).finally(() => onClose())
+  },[data?.id, onClose, refetch, removeTaskMutation],
+  )
+  
   React.useMemo(() => {
     if (isOpen) {
       if (!subjectListData || subjectListData?.getSubjectListByUserId.length < 1) {
@@ -102,10 +93,13 @@ export const TaskFormModal: React.FC<TaskModalProps> = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watch('courseId'), isOpen])
 
-  const handleAddTask: SubmitHandler<TaskForm> = async values => {
+  const onSuccessAddTask: SubmitHandler<TaskForm> = values => {
+   
+    console.log('AQUI',values.time)
+    
     if (!userID) return
 
-    await addTaskMutation({
+    addTaskMutation({
       variables: {
         userId: userID,
         task: {
@@ -124,19 +118,15 @@ export const TaskFormModal: React.FC<TaskModalProps> = props => {
           checked: false,
         },
       },
-    })
-      .then(() => refetch())
+    }).then(() => refetch())
       .finally(() => {
         onClose()
         reset()
       })
   }
 
-  const handleEditTask: SubmitHandler<TaskForm> = async values => {
-    
-    console.log('AQUI', values)
-    
-    
+  const onSuccessEditTask: SubmitHandler<TaskForm> = values => {
+        
     editTaskMutation({
       variables: {
         task: {
@@ -155,8 +145,7 @@ export const TaskFormModal: React.FC<TaskModalProps> = props => {
           checked: false,
         },
       },
-    })
-      .then(() => refetch())
+    }).then(() => refetch())
       .finally(() => {
         onClose()
         reset()
@@ -178,7 +167,7 @@ export const TaskFormModal: React.FC<TaskModalProps> = props => {
           {' '}
           {formType == 'edit' ? 'Editar tarea' : 'Añadir tarea'}
         </ModalHeader>
-        <form onSubmit={formType == 'edit' ? handleSubmit(handleEditTask) : handleSubmit(handleAddTask)}>
+        <form onSubmit={formType == 'edit' ? handleSubmit(onSuccessEditTask) : handleSubmit(onSuccessAddTask)}>
           <ModalBody>
             <Input {...register('title', { required: true })} isRequired placeholder='Nombre de la tarea' size='sm' />
 
@@ -196,7 +185,6 @@ export const TaskFormModal: React.FC<TaskModalProps> = props => {
                 size='sm'
                 label='Hora'
                 hourCycle={24}
-                isDisabled={timeDisabled}
                 defaultValue={formatTime(data?.date)?.toString() != '23:59:59' ? formatTime(data?.date) : undefined}
               />
             </div>

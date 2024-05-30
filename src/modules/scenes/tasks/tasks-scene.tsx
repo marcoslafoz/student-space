@@ -1,15 +1,13 @@
 import React, { useContext } from 'react'
-import { useGetTasksByUserLazyQuery } from '../../../common/api/graphql/query'
 import { UserContext } from '../../../common/context'
-import { Layout } from '../../layout'
+import { Layout } from '../../components/layout'
 import { TaskList } from '../../components/tasks'
-import { useLazyMutationRemoveCheckedTasks } from '../../../common/api/graphql/mutation'
-import { Chip } from '@nextui-org/react'
+import { useTaskGetListByUserLazyQuery } from '../../../common/api/apollo/graphql/task'
 
 export const TasksScene: React.FC = () => {
   const { userID } = useContext(UserContext)
 
-  const [getTasks, { loading, error, data, refetch }] = useGetTasksByUserLazyQuery()
+  const [getTasks, { loading, error, data, refetch }] = useTaskGetListByUserLazyQuery()
 
   React.useEffect(() => {
     if (userID) {
@@ -17,28 +15,11 @@ export const TasksScene: React.FC = () => {
     }
   }, [userID, getTasks])
 
-  const [removeCheckedTasks] = useLazyMutationRemoveCheckedTasks()
-
-  const handleRemoveCheckedTasks = () => {
-    if (!userID) return
-
-    removeCheckedTasks({
-      variables: {
-        userId: userID,
-      },
-    }).then(() => refetch())
-  }
-
   if (!data || loading || error) return <></>
 
   return (
     <Layout>
-      <button onClick={handleRemoveCheckedTasks}>
-        <Chip variant='flat' color='warning' size='sm'>
-          Borrar tareas completadas
-        </Chip>
-      </button>
-      <TaskList data={data.getTasksByUserId || []} refetch={() => refetch()} />
+      <TaskList data={data.taskGetListByUser || []} refetch={() => refetch()} />
     </Layout>
   )
 }

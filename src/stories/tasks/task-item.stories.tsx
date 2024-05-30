@@ -1,13 +1,15 @@
 import { StoryFn, Meta } from '@storybook/react'
 import { TaskItem, TaskItemProps } from '../../modules/components/tasks/task-item/task-item'
+import { ApolloProvider } from '@apollo/client'
+import { client } from '../../common/api/apollo/config/client'
 
 export default {
-  title: 'Components/Tasks',
+  title: 'Components/Tasks/Task Item',
   component: TaskItem,
 } as Meta
 
 const Story: StoryFn<TaskItemProps> = args => {
-  return <TaskItem {...args} />
+  return <ApolloProvider client={client}><TaskItem {...args} /></ApolloProvider>
 }
 
 export const TaskItemStory = Story.bind({})
@@ -17,15 +19,16 @@ TaskItemStory.args = {
     title: 'Titulo',
     description: 'Esto es una breve descripcion de la tarea',
     checked: false,
-    date: '20:46 19/04',
-    academicCourse: {
+    date: '2024-05-20T10:00Z',
+    course: {
       id: 11,
-      name: 'Literatura',
+      name: '4º ESO',
       color: 'red',
     },
     subject: {
-      id: 12,
-      name: '4º ESO',
+      id: 111,
+      name: 'Biología',
+      color: 'indigo',
     },
   },
 }

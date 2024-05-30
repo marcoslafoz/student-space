@@ -1,4 +1,4 @@
-import { useGetUserQuery } from '../../../common/api/graphql/query'
+import { useUserReadQuery } from '../../../common/api/apollo/graphql/user'
 import { User } from '../../../common/types'
 
 interface UserInfoProps {
@@ -8,7 +8,7 @@ interface UserInfoProps {
 export const UserInfo: React.FC<UserInfoProps> = props => {
   const { id } = props
 
-  const { data, loading, error } = useGetUserQuery({ variables: { userId: id } })
+  const { data, loading, error } = useUserReadQuery({ variables: { userId: id } })
 
   const userData: User | undefined = data?.getUserById
 

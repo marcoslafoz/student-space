@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { isAuthenticated } from '../../../common/api/endpoints/auth-context'
-import { loginQuery } from '../../../common/api/endpoints/login'
+import { isAuthenticated } from '../../../common/api/axios/auth-context'
+import { loginQuery } from '../../../common/api/axios/login'
 import { Button, Input } from '@nextui-org/react'
 export const LoginScene: React.FC = () => {
   const [username, setUsername] = useState('marcos')

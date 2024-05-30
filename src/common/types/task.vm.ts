@@ -1,4 +1,4 @@
-import { AcademicCourse } from './academic-course.vm'
+import { Course } from './course.vm'
 import { Subject } from './subject.vm'
 
 export interface Task {
@@ -7,6 +7,6 @@ export interface Task {
   date?: string
   description?: string
   checked: boolean
-  academicCourse?: AcademicCourse
+  course?: Course
   subject?: Subject
 }

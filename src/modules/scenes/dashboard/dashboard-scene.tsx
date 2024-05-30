@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout } from '../../layout'
+import { Layout } from '../../components/layout'
 import { UserInfo } from './user-info'
 import { UserContext } from '../../../common/context'
 export const DashboardScene: React.FC = () => {

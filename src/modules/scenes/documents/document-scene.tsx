@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
-import { useGetDocumentsByUserLazyQuery } from '../../../common/api/graphql/query'
 import { UserContext } from '../../../common/context'
-import { Layout } from '../../layout'
+import { Layout } from '../../components/layout'
 import { Spinner } from '@nextui-org/react'
 import { Link } from 'react-router-dom'
+import { useDocumentGetListByUserLazyQuery } from '../../../common/api/apollo/graphql/document/query'
 
 export const DocumentsScene: React.FC = () => {
   const { userID } = useContext(UserContext)
 
-  const [getDocuments, { loading, error, data }] = useGetDocumentsByUserLazyQuery()
+  const [getDocuments, { loading, error, data }] = useDocumentGetListByUserLazyQuery()
 
   React.useEffect(() => {
     if (userID) {
@@ -20,7 +20,7 @@ export const DocumentsScene: React.FC = () => {
 
   return (
     <Layout>
-      {data.getDocumentListByUserId.map(x => (
+      {data.documentGetListByUser.map(x => (
         <li key={x.id}>
           <Link to={`/documents/detail/${x.id}`}>{x.title}</Link>
         </li>

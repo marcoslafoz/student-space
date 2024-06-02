@@ -10,7 +10,7 @@ import { useDocumentReadQuery } from '../../../common/api/apollo/graphql/documen
 
 export const DocumentDetailScene: React.FC = () => {
   const { documentId } = useParams()
-  const { userID } = useContext(UserContext)
+  const { userId: userID } = useContext(UserContext)
 
   const { data, error, loading } = useDocumentReadQuery({
     variables: {

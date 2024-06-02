@@ -1,6 +1,6 @@
 import {
   DashboardIcon,
-  AcademicCourseIcon,
+  CourseIcon,
   TaskIcon,
   DocumentsIcon,
   EventsIcon,
@@ -16,7 +16,7 @@ export interface SidebarRoute {
 
 export const sidebarRoutes: SidebarRoute[] = [
   { title: 'Inicio', icon: DashboardIcon, path: '/dashboard', index: 0 },
-  { title: 'Cursos académicos', icon: AcademicCourseIcon, path: '/courses', index: 1 },
+  { title: 'Cursos', icon: CourseIcon, path: '/courses', index: 1 },
   { title: 'Tareas', icon: TaskIcon, path: '/tasks', index: 2 },
   { title: 'Documentos', icon: DocumentsIcon, path: '/documents', index: 3 },
   { title: 'Eventos', icon: EventsIcon, path: '/', index: 4 },

@@ -9,7 +9,11 @@ export default {
 } as Meta
 
 const Story: StoryFn<TaskListProps> = args => {
-  return <ApolloProvider client={client}><TaskList {...args} /></ApolloProvider>
+  return (
+    <ApolloProvider client={client}>
+      <TaskList {...args} />
+    </ApolloProvider>
+  )
 }
 
 export const TaskListStory = Story.bind({})

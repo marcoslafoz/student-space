@@ -9,13 +9,13 @@ interface ChipItemProps {
   onClose: () => void
 }
 
-export const ChipItem: React.FC<ChipItemProps> = props => {
+export const ItemChip: React.FC<ChipItemProps> = props => {
   const { data, onClose } = props
   const { name, color = '' } = data
 
   const [showChip, setShowChip] = React.useState<boolean>(true)
 
-  const { bg, text } = colorClasses[color] || { bg: 'bg-gray-200', text: 'text-gray-500' }
+  const { bgLighter: bg, text } = colorClasses[color] || { bgLighter: 'bg-gray-200', text: 'text-gray-500' }
 
   const handleClose = () => {
     setShowChip(false)

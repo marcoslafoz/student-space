@@ -10,7 +10,7 @@ export const UserInfo: React.FC<UserInfoProps> = props => {
 
   const { data, loading, error } = useUserReadQuery({ variables: { userId: id } })
 
-  const userData: User | undefined = data?.getUserById
+  const userData: User | undefined = data?.userRead
 
   if (!data || loading || error) return <></>
 

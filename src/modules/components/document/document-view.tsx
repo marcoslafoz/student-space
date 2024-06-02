@@ -75,15 +75,15 @@ export const DocumentView: React.FC<DocumentViewProps> = props => {
     <>
       <div className='grid grid-cols-1'>
         <div className='px-3 pb-3 flex items-center gap-3 flex-wrap'>
-          <Tooltip content='Documentos'>
+          <Tooltip closeDelay={0} content='Documentos'>
             <Link to={'/documents'}>
               <img src={ArrowLeftIcon} alt='' />
             </Link>
           </Tooltip>
           <span className='text-xl'>{data.title}</span>
-          <Tooltip content='Guardar'>
+          <Tooltip closeDelay={0} content='Guardar manualmente'>
             <button onClick={handleSave}>
-              <img src={successSaved ? CloudSuccessIcon : CloudErrorIcon} alt='' />
+              <img src={successSaved ? CloudSuccessIcon : CloudErrorIcon} alt='Guardar manualmente' className='w-5' />
             </button>
           </Tooltip>
         </div>

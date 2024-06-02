@@ -1,38 +1,47 @@
-export const colorClasses: { [key: string]: { bg: string; text: string } } = {
+export const colorClasses: { [key: string]: { bgLighter: string; text: string; bgDarker: string } } = {
   red: {
-    bg: 'bg-red-200',
+    bgLighter: 'bg-red-200',
+    bgDarker: 'bg-red-500',
     text: 'text-red-500',
   },
   blue: {
-    bg: 'bg-blue-200',
+    bgLighter: 'bg-blue-200',
+    bgDarker: 'bg-blue-400',
     text: 'text-blue-500',
   },
   green: {
-    bg: 'bg-green-200',
+    bgLighter: 'bg-green-200',
+    bgDarker: 'bg-green-400',
     text: 'text-green-500',
   },
   yellow: {
-    bg: 'bg-yellow-200',
-    text: 'text-yellow-500',
+    bgLighter: 'bg-yellow-200',
+    bgDarker: 'bg-yellow-300',
+    text: 'text-yellow-300',
   },
   purple: {
-    bg: 'bg-purple-200',
+    bgLighter: 'bg-purple-200',
+    bgDarker: 'bg-purple-400',
     text: 'text-purple-500',
   },
   pink: {
-    bg: 'bg-pink-200',
+    bgLighter: 'bg-pink-200',
+    bgDarker: 'bg-pink-400',
     text: 'text-pink-500',
   },
   orange: {
-    bg: 'bg-orange-200',
+    bgLighter: 'bg-orange-200',
+    bgDarker: 'bg-orange-400',
     text: 'text-orange-500',
   },
   indigo: {
-    bg: 'bg-indigo-200',
+    bgLighter: 'bg-indigo-200',
+    bgDarker: 'bg-indigo-400',
     text: 'text-indigo-500',
   },
   cyan: {
-    bg: 'bg-cyan-200',
+    bgLighter: 'bg-cyan-200',
+    bgDarker: 'bg-cyan-400',
     text: 'text-cyan-500',
   },
 }

@@ -24,6 +24,7 @@ export const useDocumentGetListByUserLazyQuery = (
 ) => {
   return useLazyQuery<DocumentGetListByUserData, DocumentGetListByUserVars>(GET_DOCUMENTS_BY_USER, {
     errorPolicy: 'all',
+    fetchPolicy: 'no-cache',
     ...options,
   })
 }
@@ -33,6 +34,7 @@ export const useDocumentGetListByUserQuery = (
 ) => {
   return useQuery<DocumentGetListByUserData, DocumentGetListByUserVars>(GET_DOCUMENTS_BY_USER, {
     errorPolicy: 'all',
+    fetchPolicy: 'no-cache',
     ...options,
   })
 }

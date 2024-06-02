@@ -7,3 +7,11 @@ export const SUBJECT_FIELDS = gql`
     color
   }
 `
+
+export const SUBJECT_READ_FIELDS = gql`
+  fragment SubjectReadFields on SubjectDto {
+    id
+    name
+    color
+  }
+`

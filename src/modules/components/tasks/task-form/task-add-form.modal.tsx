@@ -8,10 +8,12 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Select,
+  SelectItem,
   Textarea,
   TimeInput,
 } from '@nextui-org/react'
-import { UserContext } from '../../../../common/context'
+import { CourseContext, UserContext } from '../../../../common/context'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Task } from '../../../../common/types'
 import {
@@ -25,7 +27,6 @@ import { TaskForm } from './task-form.vm'
 import { useLazyMutationTaskAdd } from '../../../../common/api/apollo/graphql/task'
 import { getLocalTimeZone, today } from '@internationalized/date'
 
-
 interface TaskModalProps {
   isOpen: boolean
   onClose: () => void
@@ -35,7 +36,9 @@ interface TaskModalProps {
 
 export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
   const { isOpen, onClose, refetch, data } = props
-  const { userID } = useContext(UserContext)
+  const { userId } = useContext(UserContext)
+
+  const { courseList } = useContext(CourseContext)
 
   const [addTaskMutation] = useLazyMutationTaskAdd()
 
@@ -47,20 +50,22 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
   })
 
   const onSuccessAddTask: SubmitHandler<TaskForm> = values => {
-    if (!userID) return
+    if (!userId) return
 
     addTaskMutation({
       variables: {
-        userId: userID,
+        userId: userId,
         task: {
           title: values.title,
           date: formatStringToLocalTimezone(values.date, values.time),
           description: values.description,
           id: 0,
           checked: false,
+          course: { id: Number(values.courseId), name: '' },
         },
       },
-    }).then(() => refetch())
+    })
+      .then(() => refetch())
       .finally(() => {
         onClose()
         reset()
@@ -77,7 +82,7 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
         onClose()
         reset()
       }}
-      placement='top-center'
+      placement='center'
       backdrop='opaque'
     >
       <ModalContent>
@@ -111,6 +116,21 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
               className=''
               size='sm'
             />
+
+            <div className='grid grid-cols-2 gap-3'>
+              <Select
+                label='Curso'
+                size='sm'
+                onChange={e => setValue('courseId', e.target.value)}
+                defaultSelectedKeys={[data?.course?.id || 0]}
+              >
+                {courseList.map(a => (
+                  <SelectItem key={a.id} value={a.id}>
+                    {a.name}
+                  </SelectItem>
+                ))}
+              </Select>
+            </div>
           </ModalBody>
 
           <ModalFooter>
@@ -118,7 +138,10 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
               color='danger'
               className='bg-transparent border border-red-500 text-red-500'
               size='sm'
-              onClick={onClose}
+              onClick={() => {
+                onClose()
+                reset()
+              }}
             >
               Cancelar
             </Button>

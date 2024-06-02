@@ -17,20 +17,20 @@ export interface TaskListProps {
 export const TaskList: React.FC<TaskListProps> = props => {
   const { refetch, data } = props
 
-  const { userID } = useContext(UserContext)
+  const { userId } = useContext(UserContext)
   const [showModal, setShowModal] = React.useState<boolean>(false)
 
   const [removeCheckedTasks] = useLazyMutationTaskDeleteCheckedList()
 
   const handleRemoveCheckedTasks = React.useCallback(() => {
-    if (!userID) return
+    if (!userId) return
 
     removeCheckedTasks({
       variables: {
-        userId: userID,
+        userId: userId,
       },
     }).then(() => refetch())
-  }, [refetch, removeCheckedTasks, userID])
+  }, [refetch, removeCheckedTasks, userId])
 
   return (
     <>

@@ -3,4 +3,6 @@ export interface TaskForm {
   description: string
   date: string
   time: string
+  courseId?: string
+  subjectId?: string
 }

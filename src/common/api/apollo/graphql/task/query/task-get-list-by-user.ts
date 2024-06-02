@@ -24,6 +24,7 @@ export const useTaskGetListByUserLazyQuery = (
 ) => {
   return useLazyQuery<TaskGetListByUserData, TaskGetListByUserVars>(TASK_GET_LIST_BY_USER, {
     errorPolicy: 'all',
+    fetchPolicy: 'no-cache',
     ...options,
   })
 }
@@ -31,6 +32,7 @@ export const useTaskGetListByUserLazyQuery = (
 export const useTaskGetListByUserQuery = (options?: QueryHookOptions<TaskGetListByUserData, TaskGetListByUserVars>) => {
   return useQuery<TaskGetListByUserData, TaskGetListByUserVars>(TASK_GET_LIST_BY_USER, {
     errorPolicy: 'all',
+    fetchPolicy: 'no-cache',
     ...options,
   })
 }

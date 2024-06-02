@@ -6,15 +6,15 @@ import { Link } from 'react-router-dom'
 import { useDocumentGetListByUserLazyQuery } from '../../../common/api/apollo/graphql/document/query'
 
 export const DocumentsScene: React.FC = () => {
-  const { userID } = useContext(UserContext)
+  const { userId } = useContext(UserContext)
 
   const [getDocuments, { loading, error, data }] = useDocumentGetListByUserLazyQuery()
 
   React.useEffect(() => {
-    if (userID) {
-      getDocuments({ variables: { userId: userID } })
+    if (userId) {
+      getDocuments({ variables: { userId: userId } })
     }
-  }, [userID, getDocuments])
+  }, [userId, getDocuments])
 
   if (!data || loading || error) return <Spinner />
 

@@ -5,14 +5,14 @@ import { User } from '../../../../../types'
 const GET_USER = gql`
   ${USER_READ_FIELDS}
   query userRead($userId: ID!) {
-    userRead(id: $userId) {
+    userRead(userId: $userId) {
       ...UserReadFields
     }
   }
 `
 
 interface UserReadData {
-  getUserById: User
+  userRead: User
 }
 
 interface UserReadVars {
@@ -22,6 +22,7 @@ interface UserReadVars {
 export const useUserReadLazyQuery = (options?: LazyQueryHookOptions<UserReadData, UserReadVars>) => {
   return useLazyQuery<UserReadData, UserReadVars>(GET_USER, {
     errorPolicy: 'all',
+    fetchPolicy: 'no-cache',
     ...options,
   })
 }
@@ -29,6 +30,7 @@ export const useUserReadLazyQuery = (options?: LazyQueryHookOptions<UserReadData
 export const useUserReadQuery = (options?: QueryHookOptions<UserReadData, UserReadVars>) => {
   return useQuery<UserReadData, UserReadVars>(GET_USER, {
     errorPolicy: 'all',
+    fetchPolicy: 'no-cache',
     ...options,
   })
 }

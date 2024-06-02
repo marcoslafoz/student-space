@@ -1,14 +1,14 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react'
 import axios from 'axios'
 
-interface UserContextType {
-  userID: number | null
+interface UserContext {
+  userId: number | null
   authenticated: boolean
   loading: boolean
 }
 
-export const UserContext = createContext<UserContextType>({
-  userID: null,
+export const UserContext = createContext<UserContext>({
+  userId: null,
   authenticated: false,
   loading: true,
 })
@@ -50,5 +50,5 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return <></>
   }
 
-  return <UserContext.Provider value={{ userID, loading, authenticated }}>{children}</UserContext.Provider>
+  return <UserContext.Provider value={{ userId: userID, loading, authenticated }}>{children}</UserContext.Provider>
 }

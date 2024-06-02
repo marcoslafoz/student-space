@@ -9,7 +9,11 @@ export default {
 } as Meta
 
 const Story: StoryFn<TaskItemProps> = args => {
-  return <ApolloProvider client={client}><TaskItem {...args} /></ApolloProvider>
+  return (
+    <ApolloProvider client={client}>
+      <TaskItem {...args} />
+    </ApolloProvider>
+  )
 }
 
 export const TaskItemStory = Story.bind({})

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react'
-import { Checkbox } from '@nextui-org/react'
+import { Checkbox, Tooltip } from '@nextui-org/react'
 import { Task } from '../../../../common/types'
 import clsx from 'clsx'
 import 'moment'
@@ -11,7 +11,7 @@ import {
   useLazyMutationTaskDelete,
   useLazyMutationTaskSetCheckedData,
 } from '../../../../common/api/apollo/graphql/task'
-import { TrashIcon } from '../../../../common/constants/icons'
+import { DeleteIcon, EditIcon } from '../../base/nextui-icons'
 
 export interface TaskItemProps {
   /** Task data */
@@ -27,7 +27,7 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
   const { title, checked: defaultChecked, description, date, id } = data
 
   const [checked, setChecked] = React.useState<boolean>(defaultChecked)
-  const [showModal, setShowModal] = React.useState<boolean>(false)
+  const [showEditTaskModal, setShowEditTaskModal] = React.useState<boolean>(false)
 
   const [setTaskCheckedData] = useLazyMutationTaskSetCheckedData()
   const [removeTaskMutation] = useLazyMutationTaskDelete()
@@ -52,22 +52,35 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
 
   return (
     <>
-      <div className='group grid grid-cols-1 border rounded-lg p-4 gap-y-3 cursor-pointer ' style={style}>
+      <div className='group grid grid-cols-1 border rounded-lg p-4 gap-y-1 cursor-pointer ' style={style}>
         <div className='flex items-center justify-between'>
           <div className='flex items-center justify-start gap-3 flex-wrap'>
             <Checkbox isSelected={checked} onValueChange={handleCheck} size='lg' />
             <span
               className={clsx('hover:text-gray-400 cursor-pointer', checked && 'line-through')}
-              onClick={() => setShowModal(true)}
+              onClick={() => setShowEditTaskModal(true)}
             >
               {title}
             </span>
 
             <TaskDate date={date} />
           </div>
-          <button className='hidden group-hover:block' onClick={handleRemoveTask}>
-            <img src={TrashIcon} alt='delete'></img>
-          </button>
+          <div className='flex flex-row flex-wrap gap-3'>
+            <button className='hidden group-hover:block' onClick={() => setShowEditTaskModal(true)}>
+              <Tooltip content='Editar tarea' closeDelay={0}>
+                <span className='text-lg text-default-400 cursor-pointer active:opacity-50'>
+                  <EditIcon />
+                </span>
+              </Tooltip>
+            </button>
+            <button className='hidden group-hover:block' onClick={handleRemoveTask}>
+              <Tooltip content='Eliminar tarea' color='danger' closeDelay={0}>
+                <span className='text-lg text-danger cursor-pointer active:opacity-50'>
+                  <DeleteIcon />
+                </span>
+              </Tooltip>
+            </button>
+          </div>
         </div>
 
         {description && (
@@ -77,7 +90,12 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
         )}
       </div>
 
-      <TaskEditFormModal isOpen={showModal} onClose={() => setShowModal(false)} refetch={refetch} data={data} />
+      <TaskEditFormModal
+        isOpen={showEditTaskModal}
+        onClose={() => setShowEditTaskModal(false)}
+        refetch={refetch}
+        data={data}
+      />
     </>
   )
 }

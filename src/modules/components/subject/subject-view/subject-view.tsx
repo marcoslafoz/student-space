@@ -4,6 +4,8 @@ import { Tooltip } from '@nextui-org/react'
 import { Link } from 'react-router-dom'
 import { ArrowLeftIcon, EditIcon } from '../../../../common/constants/icons'
 import { SubjectEditModal } from '../subject-form'
+import { ScoreTable } from '../../score'
+import { useScoreGetListBySubjectLazyQuery } from '../../../../common/api/apollo/graphql/score'
 
 interface SubjectViewProps {
   data: Subject
@@ -17,10 +19,22 @@ export const SubjectView: React.FC<SubjectViewProps> = props => {
 
   const [showSubjectEditModal, setShowSubjectEditModal] = React.useState<boolean>(false)
 
+  const [scoreGetListBySubject, { data: scoreData }] = useScoreGetListBySubjectLazyQuery()
+
+  React.useEffect(() => {
+    scoreGetListBySubject({ variables: { subjectId: data.id } })
+  }, [scoreGetListBySubject, data.id])
+
+  React.useEffect(() => {
+    return () => {
+      document.title = 'StudentSpace'
+    }
+  }, [])
+
   return (
     <>
       <div className='grid grid-cols-1'>
-        <div className='px-3 pb-3 flex items-center gap-3 flex-wrap'>
+        <div className='pb-3 flex items-center gap-3 flex-wrap'>
           <Tooltip closeDelay={0} content='Volver'>
             <Link to={`/courses/detail/${courseId}`}>
               <img src={ArrowLeftIcon} alt='' />
@@ -32,6 +46,11 @@ export const SubjectView: React.FC<SubjectViewProps> = props => {
               <img src={EditIcon} className='opacity-40 w-5' alt='Editar curso' />
             </button>
           </Tooltip>
+        </div>
+        <div className='flex'>
+          <div className='w-full max-w-2xl'>
+            <ScoreTable data={scoreData?.scoreGetListBySubject || []} />
+          </div>
         </div>
       </div>
       <SubjectEditModal

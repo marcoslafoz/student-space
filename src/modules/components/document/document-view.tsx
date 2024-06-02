@@ -74,7 +74,7 @@ export const DocumentView: React.FC<DocumentViewProps> = props => {
   return (
     <>
       <div className='grid grid-cols-1'>
-        <div className='px-3 pb-3 flex items-center gap-3 flex-wrap'>
+        <div className='pb-3 flex items-center gap-3 flex-wrap'>
           <Tooltip closeDelay={0} content='Documentos'>
             <Link to={'/documents'}>
               <img src={ArrowLeftIcon} alt='' />

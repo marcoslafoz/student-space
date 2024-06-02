@@ -1,1 +1,1 @@
-export * from './task-list.container'
+export * from './task-list'

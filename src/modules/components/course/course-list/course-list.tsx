@@ -13,7 +13,7 @@ export const CourseList: React.FC = () => {
   return (
     <>
       <div className='grid grid-cols-1'>
-        <div className='px-3 pb-3 flex items-center gap-2 flex-wrap'>
+        <div className=' pb-3 flex items-center gap-2 flex-wrap'>
           <span className='text-xl'>Cursos</span>
           <Tooltip closeDelay={0} content='Añadir curso'>
             <button onClick={() => setShowCourseAddModal(true)}>

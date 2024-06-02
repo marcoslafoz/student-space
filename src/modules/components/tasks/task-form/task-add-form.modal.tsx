@@ -32,10 +32,11 @@ interface TaskModalProps {
   onClose: () => void
   refetch: () => void
   data?: Task
+  lockCourseId?: number
 }
 
 export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
-  const { isOpen, onClose, refetch, data } = props
+  const { isOpen, onClose, refetch, data, lockCourseId } = props
   const { userId } = useContext(UserContext)
 
   const { courseList } = useContext(CourseContext)
@@ -61,7 +62,7 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
           description: values.description,
           id: 0,
           checked: false,
-          course: { id: Number(values.courseId), name: '' },
+          course: { id: lockCourseId == undefined ? Number(values.courseId) : lockCourseId, name: '' },
         },
       },
     })
@@ -122,7 +123,8 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
                 label='Curso'
                 size='sm'
                 onChange={e => setValue('courseId', e.target.value)}
-                defaultSelectedKeys={[data?.course?.id || 0]}
+                defaultSelectedKeys={[lockCourseId || 0]}
+                isDisabled={lockCourseId != undefined && true}
               >
                 {courseList.map(a => (
                   <SelectItem key={a.id} value={a.id}>

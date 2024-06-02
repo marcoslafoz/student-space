@@ -57,8 +57,6 @@ export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
   }, [data?.id, onClose, refetch, removeTaskMutation])
 
   const onSuccessEditTask: SubmitHandler<TaskForm> = values => {
-    console.log('AQUI VALUES', values)
-
     editTaskMutation({
       variables: {
         task: {

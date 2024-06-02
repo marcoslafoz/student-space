@@ -26,7 +26,7 @@ export const SubjectDetailScene: React.FC = () => {
     }
   }, [])
 
-  if (error) return <Navigate to={'/courses'} />
+  if (error) return <Navigate to={`/courses/detail/${Number(courseId)}`} />
 
   if (!data || loading || error) return <></>
 

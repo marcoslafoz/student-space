@@ -34,7 +34,7 @@ export const SubjectDetailScene: React.FC = () => {
       <Helmet>
         <title>{htmlTitle(data.subjectRead.name)}</title>
       </Helmet>
-      <SubjectView data={data.subjectRead} refetch={refetch} courseId={Number(courseId)} />
+      <SubjectView data={data.subjectRead} refetchSubject={refetch} courseId={Number(courseId)} />
     </>
   )
 }

@@ -3,44 +3,25 @@ import { Subject } from '../../../../common/types'
 import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { SubjectForm } from './subject-form.vm'
-import {
-  useLazyMutationSubjectDelete,
-  useLazyMutationSubjectEdit,
-} from '../../../../common/api/apollo/graphql/subject/mutation'
-import { useNavigate } from 'react-router-dom'
+import { useLazyMutationSubjectEdit } from '../../../../common/api/apollo/graphql/subject/mutation'
 
 interface SubjectEditModalProps {
   isOpen: boolean
   onClose: () => void
   refetch: () => void
   data?: Subject
-  courseId: number
 }
 
 export const SubjectEditModal: React.FC<SubjectEditModalProps> = props => {
-  const { isOpen, onClose, data, refetch, courseId } = props
+  const { isOpen, onClose, data, refetch } = props
 
   const [subjectEdit] = useLazyMutationSubjectEdit()
-  const [removeSubjectMutation] = useLazyMutationSubjectDelete()
-
-  const navigate = useNavigate()
 
   const { handleSubmit, register, reset } = useForm<SubjectForm>({
     defaultValues: {
       name: data?.name,
     },
   })
-
-  const handleRemoveSubject = React.useCallback(() => {
-    removeSubjectMutation({
-      variables: { subjectId: data?.id || 0 },
-    })
-      .then(() => {
-        refetch()
-        navigate(`/courses/detail/${courseId}`)
-      })
-      .finally(() => onClose())
-  }, [courseId, data?.id, navigate, onClose, refetch, removeSubjectMutation])
 
   const onSuccessEditSubject: SubmitHandler<SubjectForm> = values => {
     subjectEdit({
@@ -50,10 +31,12 @@ export const SubjectEditModal: React.FC<SubjectEditModalProps> = props => {
           id: data?.id || 0,
         },
       },
-    }).then(() => {
-      refetch()
-      onClose()
     })
+      .then(() => {
+        refetch()
+        onClose()
+      })
+      .catch(() => reset())
   }
 
   return (
@@ -75,8 +58,17 @@ export const SubjectEditModal: React.FC<SubjectEditModalProps> = props => {
             </ModalBody>
 
             <ModalFooter>
-              <Button color='danger' size='sm' onClick={handleRemoveSubject}>
-                Eliminar
+              <Button
+                color='danger'
+                variant='bordered'
+                className='border-1'
+                size='sm'
+                onClick={() => {
+                  onClose()
+                  reset()
+                }}
+              >
+                Cancelar
               </Button>
               <Button color='primary' size='sm' type='submit'>
                 Editar

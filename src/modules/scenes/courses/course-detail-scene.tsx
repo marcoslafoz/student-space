@@ -34,7 +34,7 @@ export const CourseDetailScene: React.FC = () => {
         <Helmet>
           <title>{htmlTitle(data.courseRead.name)}</title>
         </Helmet>
-        <CourseView data={data.courseRead} refetch={refetch} />
+        <CourseView data={data.courseRead} refetchCourse={refetch} />
       </CourseProvider>
     </>
   )

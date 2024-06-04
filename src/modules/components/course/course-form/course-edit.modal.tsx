@@ -16,21 +16,12 @@ export const CourseEditModal: React.FC<CourseEditModalProps> = props => {
   const { isOpen, onClose, data, refetch } = props
 
   const [courseEdit] = useLazyMutationCourseEdit()
-  const [removeCourseMutation] = useLazyMutationCourseDelete()
 
   const { handleSubmit, register, reset } = useForm<CourseForm>({
     defaultValues: {
       name: data?.name,
     },
   })
-
-  const handleRemoveCourse = React.useCallback(() => {
-    removeCourseMutation({
-      variables: { courseId: data?.id || 0 },
-    })
-      .then(() => refetch())
-      .finally(() => onClose())
-  }, [data?.id, onClose, refetch, removeCourseMutation])
 
   const onSuccessEditCourse: SubmitHandler<CourseForm> = values => {
     courseEdit({
@@ -65,8 +56,11 @@ export const CourseEditModal: React.FC<CourseEditModalProps> = props => {
             </ModalBody>
 
             <ModalFooter>
-              <Button color='danger' size='sm' onClick={handleRemoveCourse}>
-                Eliminar
+              <Button color='danger' variant='bordered' className='border-1' size='sm' onClick={() => {
+                onClose()
+                reset()
+              }}>
+                Cancelar
               </Button>
               <Button color='primary' size='sm' type='submit'>
                 Editar

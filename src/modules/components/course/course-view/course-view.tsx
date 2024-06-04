@@ -1,21 +1,22 @@
 import React from 'react'
 import { Course } from '../../../../common/types'
-import { Tooltip } from '@nextui-org/react'
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tooltip } from '@nextui-org/react'
 import { Link } from 'react-router-dom'
-import { ArrowLeftIcon, EditIcon, PlusIcon } from '../../../../common/constants/icons'
-import { CourseEditModal } from '../course-form'
+import { ArrowLeftIcon, PlusIcon } from '../../../../common/constants/icons'
+import { CourseEditModal, CourseModalDelete } from '../course-form'
 import { SubjectList } from '../../subject'
 import { useTaskGetListByCourseLazyQuery } from '../../../../common/api/apollo/graphql/task'
 import { TaskList } from '../../tasks'
 import { TaskAddFormModal } from '../../tasks/task-form'
+import { DeleteDocumentIcon, EditDocumentIcon, VerticalDotsIcon } from '../../base/nextui-icons'
 
 interface CourseViewProps {
   data: Course
-  refetch: () => void
+  refetchCourse: () => void
 }
 
 export const CourseView: React.FC<CourseViewProps> = props => {
-  const { data, refetch } = props
+  const { data, refetchCourse } = props
   const { name, subjects, id } = data
 
   const [showCourseEditModal, setShowCourseEditModal] = React.useState<boolean>(false)
@@ -37,13 +38,14 @@ export const CourseView: React.FC<CourseViewProps> = props => {
             </Link>
           </Tooltip>
           <span className='text-xl'>{name}</span>
-          <Tooltip closeDelay={0} content='Editar'>
+          <CourseDropdownOptions {...props}/>
+          {/* <Tooltip closeDelay={0} content='Editar'>
             <button onClick={() => setShowCourseEditModal(true)}>
               <img src={EditIcon} className='opacity-40 w-5' alt='Editar curso' />
             </button>
-          </Tooltip>
+          </Tooltip> */}
         </div>
-        <SubjectList data={subjects} courseId={id} refetch={refetch} />
+        <SubjectList data={subjects} courseId={id} refetch={refetchCourse} />
 
         <div className='my-3'>
           <div className='py-2 flex items-center gap-2 flex-wrap'>
@@ -63,13 +65,75 @@ export const CourseView: React.FC<CourseViewProps> = props => {
         isOpen={showCourseEditModal}
         onClose={() => setShowCourseEditModal(false)}
         data={data}
-        refetch={refetch}
+        refetch={refetchCourse}
       />
       <TaskAddFormModal
         isOpen={showAddTaskModal}
         onClose={() => setShowAddTaskModal(false)}
         refetch={refetchTasks}
         lockCourseId={data.id}
+      />
+    </>
+  )
+}
+
+const CourseDropdownOptions: React.FC<CourseViewProps> = props => {
+  const { data, refetchCourse } = props
+
+  const [showCourseEditModal, setShowCourseEditModal] = React.useState<boolean>(false)
+  const [showCourseDeleteModal, setShowCourseDeleteModal] = React.useState<boolean>(false)
+
+  return (
+    <>
+      <div className='flex'>
+        <Dropdown>
+          <DropdownTrigger>
+            <Button isIconOnly size='sm' variant='light'>
+              <VerticalDotsIcon className='text-default-300' />
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu variant='faded' aria-label='Dropdown menu with description'>
+            <DropdownItem
+              key='edit'
+              showDivider
+              description={<>Edita los detalles de {data.name}</>}
+              onPress={() => setShowCourseEditModal(true)}
+              startContent={
+                <span className='text-xl text-default-500 pointer-events-none flex-shrink-0'>
+                  <EditDocumentIcon />
+                </span>
+              }
+            >
+              Editar curso
+            </DropdownItem>
+            <DropdownItem
+              onPress={() => setShowCourseDeleteModal(true)}
+              key='delete'
+              className='text-danger'
+              color='danger'
+              description='Elimina permanente este curso'
+              startContent={
+                <span className='text-xl pointer-events-none flex-shrink-0'>
+                  <DeleteDocumentIcon />
+                </span>
+              }
+            >
+              Eliminar curso
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </div>
+      <CourseEditModal
+        isOpen={showCourseEditModal}
+        onClose={() => setShowCourseEditModal(false)}
+        data={data}
+        refetch={refetchCourse}
+      />
+      <CourseModalDelete
+        data={data}
+        isOpen={showCourseDeleteModal}
+        onClose={() => setShowCourseDeleteModal(false)}
+        refetchCourse={refetchCourse}
       />
     </>
   )

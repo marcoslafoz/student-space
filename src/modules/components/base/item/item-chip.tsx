@@ -1,12 +1,12 @@
 import { Chip } from '@nextui-org/react'
 import React from 'react'
-import { Course, Subject } from '../../../common/types'
+import { Course, Subject } from '../../../../common/types'
 import { clsx } from 'clsx'
-import { colorClasses } from '../../../common/constants/colors'
+import { colorClasses } from '../../../../common/constants/colors'
 
 interface ChipItemProps {
   data: Subject | Course
-  onClose: () => void
+  onClose?: () => void
 }
 
 export const ItemChip: React.FC<ChipItemProps> = props => {
@@ -19,7 +19,7 @@ export const ItemChip: React.FC<ChipItemProps> = props => {
 
   const handleClose = () => {
     setShowChip(false)
-    onClose()
+    onClose && onClose()
   }
 
   return (
@@ -27,7 +27,7 @@ export const ItemChip: React.FC<ChipItemProps> = props => {
       {showChip && (
         <Chip
           size='sm'
-          onClose={handleClose}
+          onClose={onClose && handleClose}
           classNames={{
             base: clsx(bg),
             content: clsx(text, 'px-1'),

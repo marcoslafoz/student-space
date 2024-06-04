@@ -25,6 +25,7 @@ import moment from 'moment'
 import { TaskForm } from './task-form.vm'
 import { useLazyMutationTaskDelete, useLazyMutationTaskEdit } from '../../../../common/api/apollo/graphql/task'
 import { CourseContext } from '../../../../common/context'
+import { ClockCircleLinearIcon } from '../../base/nextui-icons'
 
 interface TaskModalProps {
   isOpen: boolean
@@ -121,6 +122,11 @@ export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
                 label='Hora'
                 hourCycle={24}
                 defaultValue={formatTime(data?.date)?.toString() != '23:59:59' ? formatTime(data?.date) : undefined}
+                endContent={
+                  <span className='className="text-xl text-default-400 pointer-events-none flex-shrink-0"'>
+                    <ClockCircleLinearIcon />
+                  </span>
+                }
               />
             </div>
 

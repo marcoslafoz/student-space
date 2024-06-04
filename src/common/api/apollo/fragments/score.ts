@@ -6,5 +6,11 @@ export const SCORE_LIST_FIELDS = gql`
     name
     score
     date
+    status
+    subject {
+      name
+      color
+      id
+    }
   }
 `

@@ -50,7 +50,7 @@ export const Sidebar: React.FC = () => {
             {sidebarRoutes.map(s => (
               <SidebarItem key={s.index} data={s} isActive={location.pathname === s.path} />
             ))}
-            <DarkMode />
+            {/* <DarkMode /> */}
           </span>
         </div>
       </aside>
@@ -86,7 +86,7 @@ const SidebarItem: React.FC<SidebarItemProps> = props => {
   )
 }
 
-const DarkMode: React.FC = () => {
+export const DarkMode: React.FC = () => {
   const [dark, setDark] = React.useState(false)
 
   const darkModeHandler = () => {

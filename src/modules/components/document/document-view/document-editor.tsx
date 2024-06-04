@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-import { Document } from '../../../common/types/document.vm'
-import './document.scss'
+import { Document } from '../../../../common/types/document.vm'
+import '../document.scss'
 
 interface EditorProps {
   data: Document

@@ -1,7 +1,7 @@
 import React from 'react'
 import clsx from 'clsx'
-import { Course, Subject } from '../../../common/types'
-import { colorClasses } from '../../../common/constants/colors'
+import { Course, Subject } from '../../../../common/types'
+import { colorClasses } from '../../../../common/constants/colors'
 
 interface ItemCardProps {
   data: Course | Subject

@@ -1,14 +1,12 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../../../common/context'
-import { Layout } from '../../components/layout'
-import { Spinner } from '@nextui-org/react'
-import { Link } from 'react-router-dom'
 import { useDocumentGetListByUserLazyQuery } from '../../../common/api/apollo/graphql/document/query'
+import { DocumentList } from '../../components/document'
 
 export const DocumentsScene: React.FC = () => {
   const { userId } = useContext(UserContext)
 
-  const [getDocuments, { loading, error, data }] = useDocumentGetListByUserLazyQuery()
+  const [getDocuments, { loading, error, data, refetch }] = useDocumentGetListByUserLazyQuery()
 
   React.useEffect(() => {
     if (userId) {
@@ -16,15 +14,7 @@ export const DocumentsScene: React.FC = () => {
     }
   }, [userId, getDocuments])
 
-  if (!data || loading || error) return <Spinner />
+  if (!data || loading || error) return <></>
 
-  return (
-    <Layout>
-      {data.documentGetListByUser.map(x => (
-        <li key={x.id}>
-          <Link to={`/documents/detail/${x.id}`}>{x.title}</Link>
-        </li>
-      ))}
-    </Layout>
-  )
+  return <DocumentList data={data.documentGetListByUser} refetchDocuments={refetch} />
 }

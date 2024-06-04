@@ -16,10 +16,11 @@ export const UserInfo: React.FC<UserInfoProps> = props => {
 
   return (
     <div>
-      <p>Username: {userData?.username}</p>
-      <p>Nombre: {userData?.name}</p>
-      <p>Surname: {userData?.surname}</p>
-      <p>Email: {userData?.email}</p>
+      {userData?.name && (
+        <div className='text-2xl'>
+          Bienvenido de nuevo <span className='text-bold'>{userData.name}</span>!
+        </div>
+      )}
     </div>
   )
 }

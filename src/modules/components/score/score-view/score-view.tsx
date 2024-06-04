@@ -15,7 +15,7 @@ export const ScoreView: React.FC<ScoreViewProps> = props => {
       <div className='grid grid-cols-1'>
         <div className='pb-3 flex items-center gap-2 flex-wrap'>
           <span className='text-xl'>Notas</span>
-          <Tooltip closeDelay={0} content='Añadir tarea'>
+          <Tooltip closeDelay={0} content='Añadir nota'>
             <button className='rounded-full' onClick={() => {}}>
               <img src={PlusIcon} className='w-5' alt='Añadir tarea' />
             </button>

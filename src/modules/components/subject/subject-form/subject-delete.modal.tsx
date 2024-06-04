@@ -4,10 +4,6 @@ import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from
 import { useLazyMutationSubjectDelete } from '../../../../common/api/apollo/graphql/subject/mutation'
 import { useNavigate } from 'react-router'
 
-export interface SubjectDeleteForm {
-  title: string
-}
-
 interface SubjectModalDeleteProps {
   data: Subject
   isOpen: boolean

@@ -1,3 +1,4 @@
+import { Course } from './course.vm'
 import { Subject } from './subject.vm'
 
 export interface Score {
@@ -7,6 +8,7 @@ export interface Score {
   date?: string
   status: number
   subject: Subject
+  course: Course
 }
 
 export enum ScoreStatusEnum {

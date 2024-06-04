@@ -93,7 +93,7 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
       <TaskEditFormModal
         isOpen={showEditTaskModal}
         onClose={() => setShowEditTaskModal(false)}
-        refetch={refetch}
+        refetchTasks={refetch}
         data={data}
       />
     </>

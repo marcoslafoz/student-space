@@ -1,29 +1,29 @@
 import React from 'react'
-import { Document } from '../../../../common/types'
+import { Score } from '../../../../common/types'
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
-import { useLazyMutationDocumentDelete } from '../../../../common/api/apollo/graphql/document'
+import { useLazyMutationScoreDelete } from '../../../../common/api/apollo/graphql/score'
 
-interface DocumentModalDeleteProps {
-  data: Document
+interface ScoreModalDeleteProps {
+  data: Score
   isOpen: boolean
   onClose: () => void
-  refetchDocuments: () => void
+  refetchScore: () => void
 }
 
-export const DocumentModalDelete: React.FC<DocumentModalDeleteProps> = props => {
-  const { data, isOpen, onClose, refetchDocuments } = props
+export const ScoreModalDelete: React.FC<ScoreModalDeleteProps> = props => {
+  const { isOpen, onClose, refetchScore, data } = props
 
-  const [documentDelete] = useLazyMutationDocumentDelete()
+  const [removeScoreMutation] = useLazyMutationScoreDelete()
 
-  const handleRemoveDocument = React.useCallback(() => {
-    documentDelete({
-      variables: {
-        documentId: data.id,
-      },
+  const handleRemoveScore = React.useCallback(() => {
+    removeScoreMutation({
+      variables: { scoreId: data.id },
     })
-      .then(() => refetchDocuments())
+      .then(() => {
+        refetchScore()
+      })
       .finally(() => onClose())
-  }, [data.id, documentDelete, onClose, refetchDocuments])
+  }, [data.id, onClose, refetchScore, removeScoreMutation])
 
   return (
     <>
@@ -33,7 +33,7 @@ export const DocumentModalDelete: React.FC<DocumentModalDeleteProps> = props => 
 
           <ModalBody>
             <p className='text-sm text-gray-500'>
-              <span className='font-bold text-black'>{data.title}</span> se eliminará definitivamente y no podras
+              <span className='font-bold text-black'>{data.name}</span> se eliminará definitivamente y no podras
               restaurarlo
             </p>
           </ModalBody>
@@ -48,7 +48,7 @@ export const DocumentModalDelete: React.FC<DocumentModalDeleteProps> = props => 
             >
               Cancelar
             </Button>
-            <Button color='danger' size='sm' onClick={handleRemoveDocument}>
+            <Button color='danger' size='sm' onClick={handleRemoveScore}>
               Eliminar
             </Button>
           </ModalFooter>

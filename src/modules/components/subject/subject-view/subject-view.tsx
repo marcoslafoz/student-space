@@ -18,7 +18,7 @@ export const SubjectView: React.FC<SubjectViewProps> = props => {
   const { data, courseId } = props
   const { name } = data
 
-  const [scoreGetListBySubject, { data: scoreData }] = useScoreGetListBySubjectLazyQuery()
+  const [scoreGetListBySubject, { data: scoreData, refetch: refetchScores }] = useScoreGetListBySubjectLazyQuery()
 
   React.useEffect(() => {
     scoreGetListBySubject({ variables: { subjectId: data.id } })
@@ -44,7 +44,11 @@ export const SubjectView: React.FC<SubjectViewProps> = props => {
         </div>
         <div className='flex'>
           <div className='w-full max-w-2xl'>
-            <ScoreTable data={scoreData?.scoreGetListBySubject || []} />
+            <ScoreTable
+              initialVisibleColumns={['name', 'status', 'actions', 'date', 'score']}
+              data={scoreData?.scoreGetListBySubject || []}
+              refetchScores={refetchScores}
+            />
           </div>
         </div>
       </div>

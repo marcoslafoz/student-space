@@ -3,7 +3,7 @@ import { Course } from '../../../../common/types'
 import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { CourseForm } from './course-form.vm'
-import { useLazyMutationCourseDelete, useLazyMutationCourseEdit } from '../../../../common/api/apollo/graphql/course'
+import { useLazyMutationCourseEdit } from '../../../../common/api/apollo/graphql/course'
 
 interface CourseEditModalProps {
   isOpen: boolean
@@ -56,10 +56,16 @@ export const CourseEditModal: React.FC<CourseEditModalProps> = props => {
             </ModalBody>
 
             <ModalFooter>
-              <Button color='danger' variant='bordered' className='border-1' size='sm' onClick={() => {
-                onClose()
-                reset()
-              }}>
+              <Button
+                color='danger'
+                variant='bordered'
+                className='border-1'
+                size='sm'
+                onClick={() => {
+                  onClose()
+                  reset()
+                }}
+              >
                 Cancelar
               </Button>
               <Button color='primary' size='sm' type='submit'>

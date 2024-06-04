@@ -38,7 +38,7 @@ export const CourseView: React.FC<CourseViewProps> = props => {
             </Link>
           </Tooltip>
           <span className='text-xl'>{name}</span>
-          <CourseDropdownOptions {...props}/>
+          <CourseDropdownOptions {...props} />
           {/* <Tooltip closeDelay={0} content='Editar'>
             <button onClick={() => setShowCourseEditModal(true)}>
               <img src={EditIcon} className='opacity-40 w-5' alt='Editar curso' />
@@ -70,7 +70,7 @@ export const CourseView: React.FC<CourseViewProps> = props => {
       <TaskAddFormModal
         isOpen={showAddTaskModal}
         onClose={() => setShowAddTaskModal(false)}
-        refetch={refetchTasks}
+        refetchTasks={refetchTasks}
         lockCourseId={data.id}
       />
     </>

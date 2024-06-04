@@ -30,12 +30,12 @@ import { ClockCircleLinearIcon } from '../../base/nextui-icons'
 interface TaskModalProps {
   isOpen: boolean
   onClose: () => void
-  refetch: () => void
+  refetchTasks: () => void
   data?: Task
 }
 
 export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
-  const { isOpen, onClose, refetch, data } = props
+  const { isOpen, onClose, refetchTasks, data } = props
 
   const [editTaskMutation] = useLazyMutationTaskEdit()
   const [removeTaskMutation] = useLazyMutationTaskDelete()
@@ -53,9 +53,9 @@ export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
     removeTaskMutation({
       variables: { taskId: data?.id || 0 },
     })
-      .then(() => refetch())
+      .then(() => refetchTasks())
       .finally(() => onClose())
-  }, [data?.id, onClose, refetch, removeTaskMutation])
+  }, [data?.id, onClose, refetchTasks, removeTaskMutation])
 
   const onSuccessEditTask: SubmitHandler<TaskForm> = values => {
     editTaskMutation({
@@ -70,7 +70,7 @@ export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
         },
       },
     })
-      .then(() => refetch())
+      .then(() => refetchTasks())
       .finally(() => {
         onClose()
       })
@@ -106,7 +106,7 @@ export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
         <ModalHeader className='flex flex-col gap-1'>Editar tarea</ModalHeader>
         <form onSubmit={handleSubmit(onSuccessEditTask)}>
           <ModalBody>
-            <Input {...register('title', { required: true })} isRequired placeholder='Nombre de la tarea' size='sm' />
+            <Input {...register('title', { required: true })} isRequired placeholder='Nombre de la tarea' />
 
             <div className='grid grid-cols-2 gap-3'>
               <DatePicker

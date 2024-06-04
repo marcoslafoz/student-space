@@ -3,10 +3,6 @@ import { Course } from '../../../../common/types'
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { useLazyMutationCourseDelete } from '../../../../common/api/apollo/graphql/course/mutation'
 
-export interface CourseDeleteForm {
-  title: string
-}
-
 interface CourseModalDeleteProps {
   data: Course
   isOpen: boolean

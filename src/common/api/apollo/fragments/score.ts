@@ -12,5 +12,10 @@ export const SCORE_LIST_FIELDS = gql`
       color
       id
     }
+    course {
+      name
+      color
+      id
+    }
   }
 `

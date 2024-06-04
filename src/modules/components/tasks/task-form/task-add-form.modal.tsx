@@ -15,14 +15,7 @@ import {
 } from '@nextui-org/react'
 import { CourseContext, UserContext } from '../../../../common/context'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Task } from '../../../../common/types'
-import {
-  formatDate,
-  formatLocalTimezoneToString,
-  formatStringToLocalTimezone,
-  formatTime,
-} from '../../../../common/utils'
-import moment from 'moment'
+import { formatStringToLocalTimezone } from '../../../../common/utils'
 import { TaskForm } from './task-form.vm'
 import { useLazyMutationTaskAdd } from '../../../../common/api/apollo/graphql/task'
 import { getLocalTimeZone, today } from '@internationalized/date'
@@ -31,25 +24,19 @@ import { ClockCircleLinearIcon } from '../../base/nextui-icons'
 interface TaskModalProps {
   isOpen: boolean
   onClose: () => void
-  refetch: () => void
-  data?: Task
+  refetchTasks: () => void
   lockCourseId?: number
 }
 
 export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
-  const { isOpen, onClose, refetch, data, lockCourseId } = props
+  const { isOpen, onClose, refetchTasks, lockCourseId } = props
   const { userId } = useContext(UserContext)
 
   const { courseList } = useContext(CourseContext)
 
   const [addTaskMutation] = useLazyMutationTaskAdd()
 
-  const { handleSubmit, register, setValue, reset } = useForm<TaskForm>({
-    defaultValues: {
-      title: data?.title || '',
-      description: data?.description || '',
-    },
-  })
+  const { handleSubmit, register, setValue, reset } = useForm<TaskForm>()
 
   const onSuccessAddTask: SubmitHandler<TaskForm> = values => {
     if (!userId) return
@@ -67,15 +54,12 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
         },
       },
     })
-      .then(() => refetch())
+      .then(() => refetchTasks())
       .finally(() => {
         onClose()
         reset()
       })
   }
-
-  data && data.date && setValue('time', moment(formatLocalTimezoneToString(data.date)).format('HH:mm:ss'))
-  data && data.date && setValue('date', moment(formatLocalTimezoneToString(data.date)).format('YYYY-MM-DD'))
 
   return (
     <Modal
@@ -91,7 +75,7 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
         <ModalHeader className='flex flex-col gap-1'>Añadir tarea</ModalHeader>
         <form onSubmit={handleSubmit(onSuccessAddTask)}>
           <ModalBody>
-            <Input {...register('title', { required: true })} isRequired placeholder='Nombre de la tarea' size='sm' />
+            <Input {...register('title', { required: true })} isRequired placeholder='Nombre de la tarea' />
 
             <div className='grid grid-cols-2 gap-3'>
               <DatePicker
@@ -99,7 +83,6 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
                 size='sm'
                 label='Fecha'
                 minValue={today(getLocalTimeZone())}
-                defaultValue={formatDate(data?.date)}
               />
 
               <TimeInput
@@ -107,7 +90,6 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
                 size='sm'
                 label='Hora'
                 hourCycle={24}
-                defaultValue={formatTime(data?.date)?.toString() != '23:59:59' ? formatTime(data?.date) : undefined}
                 endContent={
                   <span className='className="text-xl text-default-400 pointer-events-none flex-shrink-0"'>
                     <ClockCircleLinearIcon />

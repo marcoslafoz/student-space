@@ -63,7 +63,7 @@ export const TasksView: React.FC<TasksViewProps> = props => {
         </div>
       </div>
 
-      <TaskAddFormModal isOpen={showAddTaskModal} onClose={() => setShowAddTaskModal(false)} refetch={refetch} />
+      <TaskAddFormModal isOpen={showAddTaskModal} onClose={() => setShowAddTaskModal(false)} refetchTasks={refetch} />
     </>
   )
 }

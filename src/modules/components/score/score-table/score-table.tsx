@@ -24,7 +24,6 @@ import {
   ChevronDownIcon,
   DeleteDocumentIcon,
   EditDocumentIcon,
-  PlusIcon,
   SearchIcon,
   VerticalDotsIcon,
 } from '../../base/nextui-icons'
@@ -32,17 +31,21 @@ import { Score, Subject } from '../../../../common/types'
 import moment from 'moment'
 import { formatLocalTimezoneToString, scoreStatusCodeToString } from '../../../../common/utils'
 import { ItemChip } from '../../base/item'
+import { ScoreModalDelete } from '../score-form'
 
 interface ScoreTableProps {
   data: Score[]
   initialVisibleColumns?: string[]
+  refetchScores: () => void
 }
 
 export const ScoreTable: React.FC<ScoreTableProps> = props => {
-  const { data, initialVisibleColumns = DEFAULT_INITIAL_VISIBLE_COLUMNS } = props
+  const { data, initialVisibleColumns = DEFAULT_INITIAL_VISIBLE_COLUMNS, refetchScores } = props
 
   const [filterValue, setFilterValue] = React.useState('')
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]))
+  const [showScoreDeleteModal, setShowScoreDeleteModal] = React.useState<boolean>(false)
+  const [selectedScore, setSelectedScore] = React.useState<Score>()
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(new Set(initialVisibleColumns))
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
@@ -92,6 +95,7 @@ export const ScoreTable: React.FC<ScoreTableProps> = props => {
   const renderCell = React.useCallback((score: Score, columnKey: React.Key): React.ReactNode => {
     const cellValue = score[columnKey as keyof Score]
     const subject: Subject = score.subject
+    const course: Subject = score.course
 
     switch (columnKey) {
       case 'date':
@@ -111,49 +115,53 @@ export const ScoreTable: React.FC<ScoreTableProps> = props => {
           </>
         )
       case 'subject':
-        return (
-          <>
-            <ItemChip data={subject} />
-          </>
-        )
+        return <>{subject && <ItemChip data={subject} />}</>
+      case 'course':
+        return <>{course && <ItemChip data={course} />}</>
       case 'actions':
         return (
-          <div className='flex'>
-            <Dropdown>
-              <DropdownTrigger>
-                <Button isIconOnly size='sm' variant='light'>
-                  <VerticalDotsIcon className='text-default-300' />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu variant='faded' aria-label='Dropdown menu with description'>
-                <DropdownItem
-                  key='edit'
-                  showDivider
-                  description='Edita el detalle de esta nota'
-                  startContent={
-                    <span className='text-xl text-default-500 pointer-events-none flex-shrink-0'>
-                      <EditDocumentIcon />
-                    </span>
-                  }
-                >
-                  Editar nota
-                </DropdownItem>
-                <DropdownItem
-                  key='delete'
-                  className='text-danger'
-                  color='danger'
-                  description='Elimina permanente esta nota'
-                  startContent={
-                    <span className='text-xl pointer-events-none flex-shrink-0'>
-                      <DeleteDocumentIcon />
-                    </span>
-                  }
-                >
-                  Eliminar nota
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
+          <>
+            <div className='flex'>
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button isIconOnly size='sm' variant='light'>
+                    <VerticalDotsIcon className='text-default-300' />
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu variant='faded' aria-label='Dropdown menu with description'>
+                  <DropdownItem
+                    key='edit'
+                    showDivider
+                    description='Edita el detalle de esta nota'
+                    startContent={
+                      <span className='text-xl text-default-500 pointer-events-none flex-shrink-0'>
+                        <EditDocumentIcon />
+                      </span>
+                    }
+                  >
+                    Editar nota
+                  </DropdownItem>
+                  <DropdownItem
+                    key='delete'
+                    onPress={() => {
+                      setSelectedScore(score)
+                      setShowScoreDeleteModal(true)
+                    }}
+                    className='text-danger'
+                    color='danger'
+                    description='Elimina permanente esta nota'
+                    startContent={
+                      <span className='text-xl pointer-events-none flex-shrink-0'>
+                        <DeleteDocumentIcon />
+                      </span>
+                    }
+                  >
+                    Eliminar nota
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+          </>
         )
       default:
         return cellValue?.toString()
@@ -181,53 +189,50 @@ export const ScoreTable: React.FC<ScoreTableProps> = props => {
 
   const topContent = React.useMemo(() => {
     return (
-      <div className='flex flex-col gap-4'>
-        <div className='flex justify-between gap-3 items-end'>
-          <div className='flex flex-row gap-3'>
-            <Input
-              isClearable
-              size='sm'
-              className='w-full sm:max-w-[60%]'
-              placeholder='Buscar por nombre...'
-              startContent={<SearchIcon />}
-              value={filterValue}
-              onClear={() => onClear()}
-              onValueChange={onSearchChange}
-            />
-            <Dropdown>
-              <DropdownTrigger className='hidden sm:flex'>
-                <Button
-                  size='sm'
-                  className='text-foreground-500'
-                  endContent={<ChevronDownIcon className='text-small' />}
-                  variant='flat'
+      <>
+        <div className='flex flex-col gap-4'>
+          <div className='flex justify-between gap-3 items-end'>
+            <div className='flex flex-row gap-3'>
+              <Input
+                isClearable
+                size='sm'
+                className='w-full sm:max-w-[60%]'
+                placeholder='Buscar por nombre...'
+                startContent={<SearchIcon />}
+                value={filterValue}
+                onClear={() => onClear()}
+                onValueChange={onSearchChange}
+              />
+              <Dropdown>
+                <DropdownTrigger className='hidden sm:flex'>
+                  <Button
+                    size='sm'
+                    className='text-foreground-500'
+                    endContent={<ChevronDownIcon className='text-small' />}
+                    variant='flat'
+                  >
+                    Columnas
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu
+                  disallowEmptySelection
+                  aria-label='Table Columns'
+                  closeOnSelect={false}
+                  selectedKeys={visibleColumns}
+                  selectionMode='multiple'
+                  onSelectionChange={setVisibleColumns}
                 >
-                  Columnas
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                disallowEmptySelection
-                aria-label='Table Columns'
-                closeOnSelect={false}
-                selectedKeys={visibleColumns}
-                selectionMode='multiple'
-                onSelectionChange={setVisibleColumns}
-              >
-                {columns.map(column => (
-                  <DropdownItem key={column.uid} className='capitalize'>
-                    {capitalize(column.name)}
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            </Dropdown>
-          </div>
-          <div className='flex gap-3'>
-            <Button size='sm' color='primary' endContent={<PlusIcon />}>
-              Añadir
-            </Button>
+                  {columns.map(column => (
+                    <DropdownItem key={column.uid} className='capitalize'>
+                      {capitalize(column.name)}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     )
   }, [filterValue, visibleColumns, onSearchChange, onRowsPerPageChange, data.length, hasSearchFilter])
 
@@ -264,32 +269,44 @@ export const ScoreTable: React.FC<ScoreTableProps> = props => {
   }, [selectedKeys, items.length, page, pages, hasSearchFilter])
 
   return (
-    <Table
-      removeWrapper
-      bottomContent={bottomContent}
-      bottomContentPlacement='outside'
-      classNames={{ wrapper: 'max-h-[382px]' }}
-      selectedKeys={selectedKeys}
-      sortDescriptor={sortDescriptor}
-      topContent={topContent}
-      topContentPlacement='outside'
-      onSelectionChange={setSelectedKeys}
-      onSortChange={setSortDescriptor}
-    >
-      <TableHeader columns={headerColumns}>
-        {column => (
-          <TableColumn
-            key={column.uid}
-            align={column.uid === 'actions' ? 'center' : 'start'}
-            allowsSorting={column.sortable}
-          >
-            {column.name}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody emptyContent={'No se han encontrado notas'} items={sortedItems}>
-        {item => <TableRow key={item.id}>{columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>}
-      </TableBody>
-    </Table>
+    <>
+      <Table
+        removeWrapper
+        bottomContent={bottomContent}
+        bottomContentPlacement='outside'
+        classNames={{ wrapper: 'max-h-[382px]' }}
+        selectedKeys={selectedKeys}
+        sortDescriptor={sortDescriptor}
+        topContent={topContent}
+        topContentPlacement='outside'
+        onSelectionChange={setSelectedKeys}
+        onSortChange={setSortDescriptor}
+      >
+        <TableHeader columns={headerColumns}>
+          {column => (
+            <TableColumn
+              key={column.uid}
+              align={column.uid === 'actions' ? 'center' : 'start'}
+              allowsSorting={column.sortable}
+            >
+              {column.name}
+            </TableColumn>
+          )}
+        </TableHeader>
+        <TableBody emptyContent={'No se han encontrado notas'} items={sortedItems}>
+          {item => (
+            <TableRow key={item.id}>{columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>
+          )}
+        </TableBody>
+      </Table>
+      {selectedScore && (
+        <ScoreModalDelete
+          data={selectedScore}
+          isOpen={showScoreDeleteModal}
+          onClose={() => setShowScoreDeleteModal(false)}
+          refetchScore={refetchScores}
+        />
+      )}
+    </>
   )
 }

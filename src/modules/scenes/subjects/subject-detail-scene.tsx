@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigate, useParams } from 'react-router-dom'
-import { UserContext } from '../../../common/context'
+import { CourseProvider, UserContext } from '../../../common/context'
 import { Helmet } from 'react-helmet'
 import { htmlTitle } from '../../../common/utils'
 
@@ -34,7 +34,9 @@ export const SubjectDetailScene: React.FC = () => {
       <Helmet>
         <title>{htmlTitle(data.subjectRead.name)}</title>
       </Helmet>
-      <SubjectView data={data.subjectRead} refetchSubject={refetch} courseId={Number(courseId)} />
+      <CourseProvider userId={userId || 0}>
+        <SubjectView data={data.subjectRead} refetchSubject={refetch} courseId={Number(courseId)} />
+      </CourseProvider>
     </>
   )
 }

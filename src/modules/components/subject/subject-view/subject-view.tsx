@@ -2,11 +2,12 @@ import React from 'react'
 import { Subject } from '../../../../common/types'
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tooltip } from '@nextui-org/react'
 import { Link } from 'react-router-dom'
-import { ArrowLeftIcon } from '../../../../common/constants/icons'
+import { ArrowLeftIcon, PlusIcon } from '../../../../common/constants/icons'
 import { SubjectEditModal, SubjectModalDelete } from '../subject-form'
 import { ScoreTable } from '../../score'
 import { useScoreGetListBySubjectLazyQuery } from '../../../../common/api/apollo/graphql/score'
 import { EditDocumentIcon, VerticalDotsIcon, DeleteDocumentIcon } from '../../base/nextui-icons'
+import { ScoreCreateFormModal } from '../../score'
 
 interface SubjectViewProps {
   data: Subject
@@ -17,6 +18,8 @@ interface SubjectViewProps {
 export const SubjectView: React.FC<SubjectViewProps> = props => {
   const { data, courseId } = props
   const { name } = data
+
+  const [showScoreCreateModal, setShowScoreCreateModal] = React.useState<boolean>(false)
 
   const [scoreGetListBySubject, { data: scoreData, refetch: refetchScores }] = useScoreGetListBySubjectLazyQuery()
 
@@ -42,16 +45,28 @@ export const SubjectView: React.FC<SubjectViewProps> = props => {
           <span className='text-xl'>{name}</span>
           <SubjectDropdownOptions {...props} />
         </div>
-        <div className='flex'>
-          <div className='w-full max-w-2xl'>
-            <ScoreTable
-              initialVisibleColumns={['name', 'status', 'actions', 'date', 'score']}
-              data={scoreData?.scoreGetListBySubject || []}
-              refetchScores={refetchScores}
-            />
-          </div>
+        <div className='py-2 flex items-center gap-2 flex-wrap'>
+          <span>Notas</span>
+          <Tooltip closeDelay={0} content='Añadir nota'>
+            <button onClick={() => setShowScoreCreateModal(true)}>
+              <img src={PlusIcon} className='w-5' alt='Añadir nota' />
+            </button>
+          </Tooltip>
+        </div>
+        <div className='w-full max-w-2xl'>
+          <ScoreTable
+            initialVisibleColumns={['name', 'status', 'actions', 'date', 'score']}
+            data={scoreData?.scoreGetListBySubject || []}
+            refetchScores={refetchScores}
+          />
         </div>
       </div>
+      <ScoreCreateFormModal
+        isOpen={showScoreCreateModal}
+        onClose={() => setShowScoreCreateModal(false)}
+        refetchScores={refetchScores}
+        lockCourseId={courseId}
+      />
     </>
   )
 }

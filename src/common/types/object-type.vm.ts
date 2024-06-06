@@ -3,3 +3,8 @@ export enum objectTypeEnum {
   DOCUMENT = 'DOCUMENT',
   EVENT = 'EVENT',
 }
+
+export interface  SelectItem {
+  label: string
+  value: number
+}

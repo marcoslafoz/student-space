@@ -27,27 +27,29 @@ import {
   SearchIcon,
   VerticalDotsIcon,
 } from '../../base/nextui-icons'
-import { Score, Subject } from '../../../../common/types'
+import { Course, Score, Subject } from '../../../../common/types'
 import moment from 'moment'
 import { formatLocalTimezoneToString, scoreStatusCodeToString } from '../../../../common/utils'
 import { ItemChip } from '../../base/item'
-import { ScoreModalDelete } from '../score-form'
+import { ScoreDeleteModal, ScoreEditFormModal } from '../score-form'
 
 interface ScoreTableProps {
   data: Score[]
   initialVisibleColumns?: string[]
   refetchScores: () => void
+  defaultRowsPerPage?: number
 }
 
 export const ScoreTable: React.FC<ScoreTableProps> = props => {
-  const { data, initialVisibleColumns = DEFAULT_INITIAL_VISIBLE_COLUMNS, refetchScores } = props
+  const { data, initialVisibleColumns = DEFAULT_INITIAL_VISIBLE_COLUMNS, refetchScores, defaultRowsPerPage = 10 } = props
 
   const [filterValue, setFilterValue] = React.useState('')
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]))
   const [showScoreDeleteModal, setShowScoreDeleteModal] = React.useState<boolean>(false)
+  const [showScoreEditModal, setShowScoreEditModal] = React.useState<boolean>(false)
   const [selectedScore, setSelectedScore] = React.useState<Score>()
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(new Set(initialVisibleColumns))
-  const [rowsPerPage, setRowsPerPage] = React.useState(5)
+  const [rowsPerPage, setRowsPerPage] = React.useState(defaultRowsPerPage)
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
     column: 'name',
     direction: 'ascending',
@@ -95,7 +97,7 @@ export const ScoreTable: React.FC<ScoreTableProps> = props => {
   const renderCell = React.useCallback((score: Score, columnKey: React.Key): React.ReactNode => {
     const cellValue = score[columnKey as keyof Score]
     const subject: Subject = score.subject
-    const course: Subject = score.course
+    const course: Course = score.course
 
     switch (columnKey) {
       case 'date':
@@ -107,9 +109,9 @@ export const ScoreTable: React.FC<ScoreTableProps> = props => {
       case 'status':
         return (
           <>
-            {cellValue && (
+            {score.status && (
               <Chip className='capitalize' color={statusColorMap[score.status]} size='sm' variant='flat'>
-                {scoreStatusCodeToString(Number(cellValue))}
+                {scoreStatusCodeToString(score.status)}
               </Chip>
             )}
           </>
@@ -133,6 +135,10 @@ export const ScoreTable: React.FC<ScoreTableProps> = props => {
                     key='edit'
                     showDivider
                     description='Edita el detalle de esta nota'
+                    onPress={() => {
+                      setSelectedScore(score)
+                      setShowScoreEditModal(true)
+                    }}
                     startContent={
                       <span className='text-xl text-default-500 pointer-events-none flex-shrink-0'>
                         <EditDocumentIcon />
@@ -243,21 +249,23 @@ export const ScoreTable: React.FC<ScoreTableProps> = props => {
           <span className='text-default-400 text-xs '>Notas totales {data.length}</span>
         </div>
         <div className='w-1/3 flex justify-center'>
-          <Pagination
-            isCompact
-            size='sm'
-            showControls
-            showShadow
-            color='default'
-            page={page}
-            total={pages}
-            onChange={setPage}
-          />
+          {data.length > defaultRowsPerPage && (
+            <Pagination
+              isCompact
+              size='sm'
+              showControls
+              showShadow
+              color='default'
+              page={page}
+              total={pages}
+              onChange={setPage}
+            />
+          )}
         </div>
         <div className='w-1/3 flex justify-end'>
           <label className='flex items-center text-default-400 text-xs'>
             Notas por página:
-            <select className='bg-transparent outline-none text-default-400 text-xs' onChange={onRowsPerPageChange}>
+            <select className='bg-transparent outline-none text-default-400 text-xs' defaultValue={defaultRowsPerPage} onChange={onRowsPerPageChange}>
               <option value='5'>5</option>
               <option value='10'>10</option>
               <option value='15'>15</option>
@@ -300,12 +308,20 @@ export const ScoreTable: React.FC<ScoreTableProps> = props => {
         </TableBody>
       </Table>
       {selectedScore && (
-        <ScoreModalDelete
-          data={selectedScore}
-          isOpen={showScoreDeleteModal}
-          onClose={() => setShowScoreDeleteModal(false)}
-          refetchScore={refetchScores}
-        />
+        <>
+          <ScoreDeleteModal
+            data={selectedScore}
+            isOpen={showScoreDeleteModal}
+            onClose={() => setShowScoreDeleteModal(false)}
+            refetchScore={refetchScores}
+          />
+          <ScoreEditFormModal
+            data={selectedScore}
+            isOpen={showScoreEditModal}
+            onClose={() => setShowScoreEditModal(false)}
+            refetchScores={refetchScores}
+          />
+        </>
       )}
     </>
   )

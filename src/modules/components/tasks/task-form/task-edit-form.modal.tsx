@@ -69,11 +69,9 @@ export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
           course: { id: Number(values.courseId), name: '' },
         },
       },
-    })
-      .then(() => refetchTasks())
-      .finally(() => {
-        onClose()
-      })
+    }).then(() => refetchTasks())
+      .catch(() => reset())
+      .finally(() => onClose())
   }
 
   // const [subjects, setSubjects] = React.useState<Subject[] | undefined>(courseList.find(c => c.id === defaultSelectedCourseId)?.subjects)
@@ -143,7 +141,7 @@ export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
                 label='Curso'
                 size='sm'
                 onChange={e => setValue('courseId', e.target.value)}
-                defaultSelectedKeys={[data?.course?.id || 0]}
+                defaultSelectedKeys={data && data.course && [data.course.id]}
               >
                 {courseList.map(a => (
                   <SelectItem key={a.id} value={a.id}>

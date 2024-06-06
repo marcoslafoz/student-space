@@ -53,12 +53,9 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
           course: { id: lockCourseId == undefined ? Number(values.courseId) : lockCourseId, name: '' },
         },
       },
-    })
-      .then(() => refetchTasks())
-      .finally(() => {
-        onClose()
-        reset()
-      })
+    }).then(() => refetchTasks())
+      .catch(() => reset())
+      .finally(() => onClose())
   }
 
   return (

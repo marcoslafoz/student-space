@@ -9,18 +9,17 @@ import { SearchIcon } from '../../base/nextui-icons'
 interface DocumentTableProps {
   data: Document[]
   refetchDocuments: () => void
+  defaultRowsPerPage?: number
 }
 
 export const DocumentTable: React.FC<DocumentTableProps> = props => {
-  const { data, refetchDocuments } = props
+  const { data, refetchDocuments, defaultRowsPerPage = 10 } = props
 
   const [showCreateDocumentModal, setShowCreateDocumentModal] = React.useState(false)
   const [filterValue, setFilterValue] = React.useState('')
   const [page, setPage] = React.useState(1)
 
-  const rowsPerPage = 10
-
-  const pages = Math.ceil(data.length / rowsPerPage)
+  const pages = Math.ceil(data.length / defaultRowsPerPage)
   const hasSearchFilter = Boolean(filterValue)
 
   const filteredItems = React.useMemo(() => {
@@ -49,11 +48,11 @@ export const DocumentTable: React.FC<DocumentTableProps> = props => {
 
 
   const items = React.useMemo(() => {
-    const start = (page - 1) * rowsPerPage
-    const end = start + rowsPerPage
+    const start = (page - 1) * defaultRowsPerPage
+    const end = start + defaultRowsPerPage
 
     return filteredItems.slice(start, end)
-  }, [page, filteredItems, rowsPerPage])
+  }, [page, filteredItems, defaultRowsPerPage])
 
   const topContent = React.useMemo(() => {
     return (
@@ -110,7 +109,7 @@ export const DocumentTable: React.FC<DocumentTableProps> = props => {
           hideHeader
           removeWrapper
           topContent={topContent}
-          bottomContent={bottomContent}
+          bottomContent={items.length > defaultRowsPerPage && bottomContent}
         >
           <TableHeader >
             <TableColumn key="title">Nombre</TableColumn>

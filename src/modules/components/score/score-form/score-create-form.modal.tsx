@@ -85,7 +85,7 @@ export const ScoreCreateFormModal: React.FC<ScoreCreateProps> = props => {
                   </SelectItem>
                 ))}
               </Select>
-              <DatePicker onChange={e => setValue('date', e.toString())} size='sm' label='Fecha' />
+              <DatePicker onChange={e => setValue('date', e ? e.toString() : '')} size='sm' label='Fecha' />
             </div>
             <div className='grid grid-cols-2 gap-3'>
               <Select

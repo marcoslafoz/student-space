@@ -1,19 +1,16 @@
 import React from 'react'
-import { Subject } from '../../../../common/types'
+import { ModalForm, Subject } from '../../../../common/types'
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { useLazyMutationSubjectDelete } from '../../../../common/api/apollo/graphql/subject/mutation'
 import { useNavigate } from 'react-router'
 
-interface SubjectModalDeleteProps {
+interface SubjectModalDeleteProps extends ModalForm {
   data: Subject
-  isOpen: boolean
-  onClose: () => void
-  refetchSubject: () => void
   courseId: number
 }
 
 export const SubjectModalDelete: React.FC<SubjectModalDeleteProps> = props => {
-  const { data, isOpen, onClose, refetchSubject, courseId } = props
+  const { data, isOpen, onClose, onRefetch: refetchSubject, courseId } = props
 
   const [removeSubjectMutation] = useLazyMutationSubjectDelete()
   const navigate = useNavigate()

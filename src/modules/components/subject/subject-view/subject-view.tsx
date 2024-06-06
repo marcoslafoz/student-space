@@ -66,6 +66,7 @@ export const SubjectView: React.FC<SubjectViewProps> = props => {
         onClose={() => setShowScoreCreateModal(false)}
         onRefetch={refetchScores}
         lockCourseId={courseId}
+        lockSubjectId={data.id}
       />
     </>
   )
@@ -121,14 +122,14 @@ const SubjectDropdownOptions: React.FC<SubjectViewProps> = props => {
         isOpen={showSubjectEditModal}
         onClose={() => setShowSubjectEditModal(false)}
         data={data}
-        refetch={refetchSubject}
+        onRefetch={refetchSubject}
       />
       <SubjectModalDelete
         courseId={courseId}
         data={data}
         isOpen={showSubjectDeleteModal}
         onClose={() => setShowSubjectDeleteModal(false)}
-        refetchSubject={refetchSubject}
+        onRefetch={refetchSubject}
       />
     </>
   )

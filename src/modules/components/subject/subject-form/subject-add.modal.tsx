@@ -1,20 +1,17 @@
 import React from 'react'
-import { Subject } from '../../../../common/types'
+import { ModalForm, Subject } from '../../../../common/types'
 import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { SubjectForm } from './subject-form.vm'
 import { useLazyMutationSubjectAdd } from '../../../../common/api/apollo/graphql/subject/mutation'
 
-interface SubjectAddModalProps {
-  isOpen: boolean
-  onClose: () => void
+interface SubjectAddModalProps extends ModalForm {
   data?: Subject
   courseId: number
-  refetch: () => void
 }
 
 export const SubjectAddModal: React.FC<SubjectAddModalProps> = props => {
-  const { isOpen, onClose, data, courseId, refetch } = props
+  const { isOpen, onClose, data, courseId, onRefetch: refetchSubject } = props
 
   const [subjectAdd] = useLazyMutationSubjectAdd()
 
@@ -35,7 +32,7 @@ export const SubjectAddModal: React.FC<SubjectAddModalProps> = props => {
       },
     })
       .then(() => {
-        refetch()
+        refetchSubject()
         onClose()
       })
       .finally(() => reset())

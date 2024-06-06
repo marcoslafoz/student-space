@@ -65,7 +65,7 @@ export const CourseView: React.FC<CourseViewProps> = props => {
         isOpen={showCourseEditModal}
         onClose={() => setShowCourseEditModal(false)}
         data={data}
-        refetch={refetchCourse}
+        onRefetch={refetchCourse}
       />
       <TaskAddFormModal
         isOpen={showAddTaskModal}
@@ -127,7 +127,7 @@ const CourseDropdownOptions: React.FC<CourseViewProps> = props => {
         isOpen={showCourseEditModal}
         onClose={() => setShowCourseEditModal(false)}
         data={data}
-        refetch={refetchCourse}
+        onRefetch={refetchCourse}
       />
       <CourseModalDelete
         data={data}

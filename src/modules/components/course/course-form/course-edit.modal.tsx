@@ -1,19 +1,16 @@
 import React from 'react'
-import { Course } from '../../../../common/types'
+import { Course, ModalForm } from '../../../../common/types'
 import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { CourseForm } from './course-form.vm'
 import { useLazyMutationCourseEdit } from '../../../../common/api/apollo/graphql/course'
 
-interface CourseEditModalProps {
-  isOpen: boolean
-  onClose: () => void
-  refetch: () => void
-  data?: Course
+interface CourseEditModalProps extends ModalForm {
+  data: Course
 }
 
 export const CourseEditModal: React.FC<CourseEditModalProps> = props => {
-  const { isOpen, onClose, data, refetch } = props
+  const { isOpen, onClose, data, onRefetch: refetchCourse } = props
 
   const [courseEdit] = useLazyMutationCourseEdit()
 
@@ -32,7 +29,7 @@ export const CourseEditModal: React.FC<CourseEditModalProps> = props => {
         },
       },
     }).then(() => {
-      refetch()
+      refetchCourse()
       onClose()
     })
   }

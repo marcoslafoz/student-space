@@ -41,7 +41,7 @@ export const SubjectList: React.FC<SubjectListProps> = props => {
         isOpen={showSubjectAddModal}
         onClose={() => setShowSubjectAddModal(false)}
         courseId={courseId}
-        refetch={refetch}
+        onRefetch={refetch}
       />
     </>
   )

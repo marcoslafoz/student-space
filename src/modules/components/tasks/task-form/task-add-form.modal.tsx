@@ -20,16 +20,12 @@ import { TaskForm } from './task-form.vm'
 import { useLazyMutationTaskAdd } from '../../../../common/api/apollo/graphql/task'
 import { getLocalTimeZone, today } from '@internationalized/date'
 import { ClockCircleLinearIcon } from '../../base/nextui-icons'
+import { ModalForm } from '../../../../common/types'
 
-interface TaskModalProps {
-  isOpen: boolean
-  onClose: () => void
-  refetchTasks: () => void
-  lockCourseId?: number
-}
+interface TaskModalProps extends ModalForm {}
 
 export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
-  const { isOpen, onClose, refetchTasks, lockCourseId } = props
+  const { isOpen, onClose, onRefetch: refetchTasks, lockCourseId } = props
   const { userId } = useContext(UserContext)
 
   const { courseList } = useContext(CourseContext)
@@ -53,7 +49,8 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
           course: { id: lockCourseId == undefined ? Number(values.courseId) : lockCourseId, name: '' },
         },
       },
-    }).then(() => refetchTasks())
+    })
+      .then(() => refetchTasks())
       .catch(() => reset())
       .finally(() => onClose())
   }

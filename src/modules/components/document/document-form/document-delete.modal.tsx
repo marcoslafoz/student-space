@@ -1,17 +1,14 @@
 import React from 'react'
-import { Document } from '../../../../common/types'
+import { Document, ModalForm } from '../../../../common/types'
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { useLazyMutationDocumentDelete } from '../../../../common/api/apollo/graphql/document'
 
-interface DocumentModalDeleteProps {
+interface DocumentModalDeleteProps extends ModalForm {
   data: Document
-  isOpen: boolean
-  onClose: () => void
-  refetchDocuments: () => void
 }
 
 export const DocumentModalDelete: React.FC<DocumentModalDeleteProps> = props => {
-  const { data, isOpen, onClose, refetchDocuments } = props
+  const { data, isOpen, onClose, onRefetch: refetchDocuments } = props
 
   const [documentDelete] = useLazyMutationDocumentDelete()
 

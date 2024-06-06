@@ -31,7 +31,7 @@ export const ScoreView: React.FC<ScoreViewProps> = props => {
       <ScoreCreateFormModal
         isOpen={showScoreCreateModal}
         onClose={() => setShowScoreCreateModal(false)}
-        refetchScores={refetchScores}
+        onRefetch={refetchScores}
       />
     </>
   )

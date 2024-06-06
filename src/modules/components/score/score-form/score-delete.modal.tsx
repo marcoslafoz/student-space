@@ -1,17 +1,14 @@
 import React from 'react'
-import { Score } from '../../../../common/types'
+import { ModalForm, Score } from '../../../../common/types'
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { useLazyMutationScoreDelete } from '../../../../common/api/apollo/graphql/score'
 
-interface ScoreDeleteModalProps {
+interface ScoreDeleteModalProps extends ModalForm {
   data: Score
-  isOpen: boolean
-  onClose: () => void
-  refetchScore: () => void
 }
 
 export const ScoreDeleteModal: React.FC<ScoreDeleteModalProps> = props => {
-  const { isOpen, onClose, refetchScore, data } = props
+  const { isOpen, onClose, onRefetch: refetchScore, data } = props
 
   const [removeScoreMutation] = useLazyMutationScoreDelete()
 

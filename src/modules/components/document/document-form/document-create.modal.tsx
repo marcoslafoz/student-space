@@ -3,19 +3,16 @@ import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useLazyMutationDocumentCreate } from '../../../../common/api/apollo/graphql/document'
 import { UserContext } from '../../../../common/context'
+import { ModalForm } from '../../../../common/types'
 
 export interface DocumentCreateForm {
   title: string
 }
 
-interface DocumentCreateRenameProps {
-  isOpen: boolean
-  onClose: () => void
-  refetchDocuments: () => void
-}
+interface DocumentCreateRenameProps extends ModalForm {}
 
 export const DocumentModalCreate: React.FC<DocumentCreateRenameProps> = props => {
-  const { isOpen, onClose, refetchDocuments } = props
+  const { isOpen, onClose, onRefetch: refetchDocuments } = props
 
   const { userId } = React.useContext(UserContext)
 

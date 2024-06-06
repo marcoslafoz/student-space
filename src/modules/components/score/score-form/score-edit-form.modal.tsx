@@ -14,21 +14,17 @@ import {
 import { CourseContext } from '../../../../common/context'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ScoreForm } from './score-form.vm'
-import { Score, scoreSelectOptions } from '../../../../common/types'
+import { ModalForm, Score, scoreSelectOptions } from '../../../../common/types'
 import { useLazyMutationScoreEdit } from '../../../../common/api/apollo/graphql/score'
 import { formatDate, formatLocalTimezoneToString, formatStringToLocalTimezone } from '../../../../common/utils'
 import moment from 'moment'
 
-interface ScoreEditProps {
-  isOpen: boolean
-  onClose: () => void
-  refetchScores: () => void
-  lockCourseId?: number
+interface ScoreEditProps extends ModalForm {
   data: Score
 }
 
 export const ScoreEditFormModal: React.FC<ScoreEditProps> = props => {
-  const { isOpen, onClose, refetchScores, lockCourseId, data } = props
+  const { isOpen, onClose, onRefetch: refetchScores, lockCourseId, data } = props
 
   const { courseList } = useContext(CourseContext)
   const [scoreEdit] = useLazyMutationScoreEdit()
@@ -37,12 +33,11 @@ export const ScoreEditFormModal: React.FC<ScoreEditProps> = props => {
     defaultValues: {
       name: data.name,
       score: data.score,
-      status: data.status?.toString() || ''
-    }
+      status: data.status?.toString() || '',
+    },
   })
 
   const onSuccessScoreCreate: SubmitHandler<ScoreForm> = values => {
-
     scoreEdit({
       variables: {
         score: {
@@ -52,10 +47,11 @@ export const ScoreEditFormModal: React.FC<ScoreEditProps> = props => {
           score: Number(values.score),
           status: values.status ? Number(values.status) : undefined,
           course: { id: lockCourseId == undefined ? Number(values.courseId) : lockCourseId, name: '' },
-          subject: { id: 7, name: '' }
+          subject: { id: 7, name: '' },
         },
       },
-    }).then(() => refetchScores())
+    })
+      .then(() => refetchScores())
       .catch(() => reset())
       .finally(() => onClose())
   }
@@ -76,9 +72,15 @@ export const ScoreEditFormModal: React.FC<ScoreEditProps> = props => {
         <ModalHeader className='flex flex-col gap-1'>Editar nota</ModalHeader>
         <form onSubmit={handleSubmit(onSuccessScoreCreate)}>
           <ModalBody>
-            <div className='flex flex-row gap-3' >
+            <div className='flex flex-row gap-3'>
               <Input {...register('name', { required: true })} className='w-4/6' isRequired placeholder='Nombre' />
-              <Input {...register('score', { required: true })} className='w-2/6' type={'number'} isRequired placeholder='Nota' />
+              <Input
+                {...register('score', { required: true })}
+                className='w-2/6'
+                type={'number'}
+                isRequired
+                placeholder='Nota'
+              />
             </div>
             <div className='grid grid-cols-2 gap-3'>
               <Select
@@ -93,7 +95,12 @@ export const ScoreEditFormModal: React.FC<ScoreEditProps> = props => {
                   </SelectItem>
                 ))}
               </Select>
-              <DatePicker onChange={e => setValue('date', e.toString())} size='sm' label='Fecha' defaultValue={formatDate(data?.date)} />
+              <DatePicker
+                onChange={e => setValue('date', e.toString())}
+                size='sm'
+                label='Fecha'
+                defaultValue={formatDate(data?.date)}
+              />
             </div>
             <div className='grid grid-cols-2 gap-3'>
               <Select

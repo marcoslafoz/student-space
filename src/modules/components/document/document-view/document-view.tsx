@@ -147,13 +147,13 @@ const DocumentDropdownOptions: React.FC<DocumentViewProps> = props => {
         data={data}
         isOpen={showRenameDocumentModal}
         onClose={() => setShowRenameDocumentModal(false)}
-        refetchDocuments={refetchDocument}
+        onRefetch={refetchDocument}
       />
       <DocumentModalDelete
         data={data}
         isOpen={showDeleteDocumentModal}
         onClose={() => setShowDeleteDocumentModal(false)}
-        refetchDocuments={refetchDocument}
+        onRefetch={refetchDocument}
       />
     </>
   )

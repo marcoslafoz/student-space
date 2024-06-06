@@ -41,7 +41,12 @@ interface ScoreTableProps {
 }
 
 export const ScoreTable: React.FC<ScoreTableProps> = props => {
-  const { data, initialVisibleColumns = DEFAULT_INITIAL_VISIBLE_COLUMNS, refetchScores, defaultRowsPerPage = 10 } = props
+  const {
+    data,
+    initialVisibleColumns = DEFAULT_INITIAL_VISIBLE_COLUMNS,
+    refetchScores,
+    defaultRowsPerPage = 10,
+  } = props
 
   const [filterValue, setFilterValue] = React.useState('')
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]))
@@ -265,7 +270,11 @@ export const ScoreTable: React.FC<ScoreTableProps> = props => {
         <div className='w-1/3 flex justify-end'>
           <label className='flex items-center text-default-400 text-xs'>
             Notas por página:
-            <select className='bg-transparent outline-none text-default-400 text-xs' defaultValue={defaultRowsPerPage} onChange={onRowsPerPageChange}>
+            <select
+              className='bg-transparent outline-none text-default-400 text-xs'
+              defaultValue={defaultRowsPerPage}
+              onChange={onRowsPerPageChange}
+            >
               <option value='5'>5</option>
               <option value='10'>10</option>
               <option value='15'>15</option>
@@ -313,13 +322,13 @@ export const ScoreTable: React.FC<ScoreTableProps> = props => {
             data={selectedScore}
             isOpen={showScoreDeleteModal}
             onClose={() => setShowScoreDeleteModal(false)}
-            refetchScore={refetchScores}
+            onRefetch={refetchScores}
           />
           <ScoreEditFormModal
             data={selectedScore}
             isOpen={showScoreEditModal}
             onClose={() => setShowScoreEditModal(false)}
-            refetchScores={refetchScores}
+            onRefetch={refetchScores}
           />
         </>
       )}

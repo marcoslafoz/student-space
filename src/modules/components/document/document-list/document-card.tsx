@@ -52,13 +52,13 @@ export const DocumentCard: React.FC<DocumentCardProps> = props => {
         data={data}
         isOpen={showRenameDocumentModal}
         onClose={() => setShowRenameDocumentModal(false)}
-        refetchDocuments={refetchDocuments}
+        onRefetch={refetchDocuments}
       />
       <DocumentModalDelete
         data={data}
         isOpen={showDeleteDocumentModal}
         onClose={() => setShowDeleteDocumentModal(false)}
-        refetchDocuments={refetchDocuments}
+        onRefetch={refetchDocuments}
       />
     </>
   )

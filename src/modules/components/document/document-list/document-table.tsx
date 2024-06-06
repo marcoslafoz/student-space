@@ -1,7 +1,17 @@
 import React from 'react'
 import { Document } from '../../../../common/types'
 import { DocumentCard } from './document-card'
-import { Input, Pagination, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip } from '@nextui-org/react'
+import {
+  Input,
+  Pagination,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+  Tooltip,
+} from '@nextui-org/react'
 import { PlusIcon } from '../../../../common/constants/icons'
 import { DocumentModalCreate } from '../document-form'
 import { SearchIcon } from '../../base/nextui-icons'
@@ -46,7 +56,6 @@ export const DocumentTable: React.FC<DocumentTableProps> = props => {
     setPage(1)
   }, [])
 
-
   const items = React.useMemo(() => {
     const start = (page - 1) * defaultRowsPerPage
     const end = start + defaultRowsPerPage
@@ -76,16 +85,16 @@ export const DocumentTable: React.FC<DocumentTableProps> = props => {
   }, [filterValue, onSearchChange, onClear])
 
   const bottomContent = (
-    <div className="flex w-full justify-center">
+    <div className='flex w-full justify-center'>
       <Pagination
         isCompact
         size='sm'
         showControls
         showShadow
-        color="default"
+        color='default'
         page={page}
         total={pages}
-        onChange={(page) => setPage(page)}
+        onChange={page => setPage(page)}
       />
     </div>
   )
@@ -103,31 +112,34 @@ export const DocumentTable: React.FC<DocumentTableProps> = props => {
         </div>
 
         <Table
-          aria-label="Example table with client side pagination"
+          aria-label='Example table with client side pagination'
           className={'max-w-xl'}
-          classNames={{td:'py-1 px-0'}}
+          classNames={{ td: 'py-1 px-0' }}
           hideHeader
           removeWrapper
           topContent={topContent}
           bottomContent={items.length > defaultRowsPerPage && bottomContent}
         >
-          <TableHeader >
-            <TableColumn key="title">Nombre</TableColumn>
+          <TableHeader>
+            <TableColumn key='title'>Nombre</TableColumn>
           </TableHeader>
           <TableBody items={items}>
-            {(item) => (
-              <TableRow key={item.id} >
-                {<TableCell><DocumentCard data={item} key={item.id} refetchDocuments={refetchDocuments} /></TableCell>}
+            {item => (
+              <TableRow key={item.id}>
+                {
+                  <TableCell>
+                    <DocumentCard data={item} key={item.id} refetchDocuments={refetchDocuments} />
+                  </TableCell>
+                }
               </TableRow>
             )}
           </TableBody>
         </Table>
-
       </div>
       <DocumentModalCreate
         isOpen={showCreateDocumentModal}
         onClose={() => setShowCreateDocumentModal(false)}
-        refetchDocuments={refetchDocuments}
+        onRefetch={refetchDocuments}
       />
     </>
   )

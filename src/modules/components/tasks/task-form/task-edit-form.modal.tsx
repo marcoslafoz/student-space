@@ -14,7 +14,7 @@ import {
   TimeInput,
 } from '@nextui-org/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Task } from '../../../../common/types'
+import { ModalForm, Task } from '../../../../common/types'
 import {
   formatDate,
   formatLocalTimezoneToString,
@@ -27,15 +27,12 @@ import { useLazyMutationTaskDelete, useLazyMutationTaskEdit } from '../../../../
 import { CourseContext } from '../../../../common/context'
 import { ClockCircleLinearIcon } from '../../base/nextui-icons'
 
-interface TaskModalProps {
-  isOpen: boolean
-  onClose: () => void
-  refetchTasks: () => void
-  data?: Task
+interface TaskModalProps extends ModalForm {
+  data: Task
 }
 
 export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
-  const { isOpen, onClose, refetchTasks, data } = props
+  const { isOpen, onClose, onRefetch: refetchTasks, data } = props
 
   const [editTaskMutation] = useLazyMutationTaskEdit()
   const [removeTaskMutation] = useLazyMutationTaskDelete()
@@ -69,7 +66,8 @@ export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
           course: { id: Number(values.courseId), name: '' },
         },
       },
-    }).then(() => refetchTasks())
+    })
+      .then(() => refetchTasks())
       .catch(() => reset())
       .finally(() => onClose())
   }

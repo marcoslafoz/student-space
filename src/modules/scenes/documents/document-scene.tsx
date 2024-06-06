@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../../../common/context'
 import { useDocumentGetListByUserLazyQuery } from '../../../common/api/apollo/graphql/document/query'
-import { DocumentList } from '../../components/document'
+import { DocumentTable } from '../../components/document'
 
 export const DocumentsScene: React.FC = () => {
   const { userId } = useContext(UserContext)
@@ -16,5 +16,5 @@ export const DocumentsScene: React.FC = () => {
 
   if (!data || loading || error) return <></>
 
-  return <DocumentList data={data.documentGetListByUser} refetchDocuments={refetch} />
+  return <DocumentTable data={data.documentGetListByUser} refetchDocuments={refetch} />
 }

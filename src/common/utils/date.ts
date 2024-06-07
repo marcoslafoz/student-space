@@ -3,12 +3,11 @@ import moment from 'moment-timezone'
 import { Time, DateValue, parseDate } from '@internationalized/date'
 
 export const formatStringToLocalTimezone = (date: string, time: string | undefined): string | undefined => {
-  
   const validDate = date != undefined && moment.tz(date).isValid() ? date : undefined
   const validTime = time != undefined && moment.tz(`2004-04-16 ${time}`, moment.tz.guess()).isValid() ? time : undefined
 
   if (!validDate && !validTime) return undefined
-  
+
   if (!validDate && validTime) {
     return moment.tz(`${moment().format('YYYY-MM-DD')} ${validTime}`, moment.tz.guess()).format()
   }
@@ -16,7 +15,6 @@ export const formatStringToLocalTimezone = (date: string, time: string | undefin
   if (validDate && !validTime) {
     return moment.tz(validDate, moment.tz.guess()).format()
   }
-
 
   return moment.tz(`${validDate} ${validTime}`, moment.tz.guess()).format()
 }

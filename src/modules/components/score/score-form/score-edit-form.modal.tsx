@@ -38,8 +38,8 @@ export const ScoreEditFormModal: React.FC<ScoreEditProps> = props => {
   })
 
   const onSuccessScoreCreate: SubmitHandler<ScoreForm> = values => {
-    console.log('AQUI VALUES',values)
-    
+    console.log('AQUI VALUES', values)
+
     scoreEdit({
       variables: {
         score: {

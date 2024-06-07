@@ -22,7 +22,7 @@ import { getLocalTimeZone, today } from '@internationalized/date'
 import { ClockCircleLinearIcon } from '../../base/nextui-icons'
 import { ModalForm } from '../../../../common/types'
 
-interface TaskModalProps extends ModalForm { }
+interface TaskModalProps extends ModalForm {}
 
 export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
   const { isOpen, onClose, onRefetch: refetchTasks, lockCourseId } = props
@@ -49,7 +49,8 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
           course: { id: lockCourseId == undefined ? Number(values.courseId) : lockCourseId, name: '' },
         },
       },
-    }).then(() => refetchTasks())
+    })
+      .then(() => refetchTasks())
       .finally(() => {
         onClose()
         reset()

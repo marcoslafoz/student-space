@@ -38,11 +38,13 @@ export const ScoreEditFormModal: React.FC<ScoreEditProps> = props => {
   })
 
   const onSuccessScoreCreate: SubmitHandler<ScoreForm> = values => {
+    console.log('AQUI VALUES',values)
+    
     scoreEdit({
       variables: {
         score: {
           name: values.name,
-          date: formatStringToLocalTimezone(values.date, '00:00:00'),
+          date: formatStringToLocalTimezone(values.date, undefined),
           id: data.id,
           score: Number(values.score),
           status: values.status ? Number(values.status) : undefined,
@@ -96,7 +98,7 @@ export const ScoreEditFormModal: React.FC<ScoreEditProps> = props => {
                 ))}
               </Select>
               <DatePicker
-                onChange={e => setValue('date', e.toString())}
+                onChange={e => setValue('date', e ? e.toString() : '')}
                 size='sm'
                 label='Fecha'
                 defaultValue={formatDate(data?.date)}

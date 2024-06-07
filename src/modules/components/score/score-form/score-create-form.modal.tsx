@@ -37,7 +37,7 @@ export const ScoreCreateFormModal: React.FC<ScoreCreateProps> = props => {
         userId: userId,
         score: {
           name: values.name,
-          date: formatStringToLocalTimezone(values.date, '00:00:00'),
+          date: formatStringToLocalTimezone(values.date, undefined),
           id: 0,
           score: Number(values.score),
           status: values.status ? Number(values.status) : undefined,

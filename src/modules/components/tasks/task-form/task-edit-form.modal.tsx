@@ -60,7 +60,7 @@ export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
         task: {
           id: data?.id || 0,
           title: values.title,
-          date: formatStringToLocalTimezone(values.date, values.time),
+          date: formatStringToLocalTimezone(values.date, values.time || '23:59:59'),
           description: values.description,
           checked: false,
           course: { id: Number(values.courseId), name: '' },
@@ -106,7 +106,7 @@ export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
 
             <div className='grid grid-cols-2 gap-3'>
               <DatePicker
-                onChange={e => setValue('date', e.toString())}
+                onChange={e => setValue('date', e ? e.toString() : '')}
                 size='sm'
                 label='Fecha'
                 defaultValue={formatDate(data?.date)}

@@ -10,10 +10,7 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-  Tooltip,
 } from '@nextui-org/react'
-import { PlusIcon } from '../../../../common/constants/icons'
-import { DocumentModalCreate } from '../document-form'
 import { SearchIcon } from '../../base/nextui-icons'
 
 interface DocumentTableProps {
@@ -25,7 +22,6 @@ interface DocumentTableProps {
 export const DocumentTable: React.FC<DocumentTableProps> = props => {
   const { data, refetchDocuments, defaultRowsPerPage = 10 } = props
 
-  const [showCreateDocumentModal, setShowCreateDocumentModal] = React.useState(false)
   const [filterValue, setFilterValue] = React.useState('')
   const [page, setPage] = React.useState(1)
 
@@ -94,53 +90,37 @@ export const DocumentTable: React.FC<DocumentTableProps> = props => {
         color='default'
         page={page}
         total={pages}
-        onChange={page => setPage(page)}
+        onChange={(page: number) => setPage(page)}
       />
     </div>
   )
 
   return (
     <>
-      <div className='grid grid-cols-1'>
-        <div className='pb-3 flex items-center gap-2 flex-wrap'>
-          <span className='text-xl'>Documentos</span>
-          <Tooltip closeDelay={0} content='Añadir documento'>
-            <button className='rounded-full' onClick={() => setShowCreateDocumentModal(true)}>
-              <img src={PlusIcon} className='w-5' alt='Añadir tarea' />
-            </button>
-          </Tooltip>
-        </div>
-
-        <Table
-          aria-label='Example table with client side pagination'
-          className={'max-w-xl'}
-          classNames={{ td: 'py-1 px-0' }}
-          hideHeader
-          removeWrapper
-          topContent={topContent}
-          bottomContent={items.length > defaultRowsPerPage && bottomContent}
-        >
-          <TableHeader>
-            <TableColumn key='title'>Nombre</TableColumn>
-          </TableHeader>
-          <TableBody items={items}>
-            {item => (
-              <TableRow key={item.id}>
-                {
-                  <TableCell>
-                    <DocumentCard data={item} key={item.id} refetchDocuments={refetchDocuments} />
-                  </TableCell>
-                }
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
-      <DocumentModalCreate
-        isOpen={showCreateDocumentModal}
-        onClose={() => setShowCreateDocumentModal(false)}
-        onRefetch={refetchDocuments}
-      />
+      <Table
+        aria-label='Example table with client side pagination'
+        className={'max-w-xl'}
+        classNames={{ td: 'py-1 px-0' }}
+        hideHeader
+        removeWrapper
+        topContent={topContent}
+        bottomContent={items.length > defaultRowsPerPage && bottomContent}
+      >
+        <TableHeader>
+          <TableColumn key='title'>Nombre</TableColumn>
+        </TableHeader>
+        <TableBody items={items}>
+          {item => (
+            <TableRow key={item.id}>
+              {
+                <TableCell>
+                  <DocumentCard data={item} key={item.id} refetchDocuments={refetchDocuments} />
+                </TableCell>
+              }
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
     </>
   )
 }

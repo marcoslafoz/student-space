@@ -1,1 +1,1 @@
-export * from './document-table'
+export * from './document-list'

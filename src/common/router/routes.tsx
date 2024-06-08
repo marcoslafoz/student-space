@@ -1,17 +1,17 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import {
+  CourseDetailScene,
+  CoursesScene,
   DashboardScene,
   DocumentDetailScene,
   DocumentsScene,
   ErrorScene,
   LoginScene,
+  ScoresScene,
   SubjectDetailScene,
   TasksScene,
 } from '../../modules/scenes'
 import { authLoader, loginLoader } from './loaders'
-import { CoursesScene } from '../../modules/scenes/courses'
-import { CourseDetailScene } from '../../modules/scenes/courses/course-detail-scene'
-import { ScoresScene } from '../../modules/scenes/scores'
 import { Layout } from '../../modules/components/layout'
 
 export const router = createBrowserRouter([

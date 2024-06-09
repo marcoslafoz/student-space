@@ -3,6 +3,7 @@ import { UserContext } from '../../../common/context'
 import { TasksView } from '../../components/tasks'
 import { useTaskGetListByUserLazyQuery } from '../../../common/api/apollo/graphql/task'
 import { CourseProvider } from '../../../common/context/course-context'
+import { Helmet } from 'react-helmet'
 
 export const TasksScene: React.FC = () => {
   const { userId } = React.useContext(UserContext)
@@ -15,11 +16,20 @@ export const TasksScene: React.FC = () => {
     }
   }, [userId, getTasks])
 
+  React.useEffect(() => {
+    return () => {
+      document.title = 'StudentSpace'
+    }
+  }, [])
+
   if (!data || loading || error) return <></>
 
   return (
-    <CourseProvider userId={userId || 0}>
-      <TasksView data={data.taskGetListByUser || []} refetch={refetch} />
-    </CourseProvider>
+    <>
+      <Helmet title='Tareas - StudentSpace' />
+      <CourseProvider userId={userId || 0}>
+        <TasksView data={data.taskGetListByUser || []} refetch={refetch} />
+      </CourseProvider>
+    </>
   )
 }

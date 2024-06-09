@@ -30,9 +30,7 @@ export const DocumentDetailScene: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{htmlTitle(data.documentRead.title)}</title>
-      </Helmet>
+      <Helmet title={htmlTitle(data.documentRead.title)} />
       <DocumentView data={data.documentRead} refetchDocument={refetch} />
     </>
   )

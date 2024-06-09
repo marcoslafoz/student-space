@@ -4,6 +4,9 @@ import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { CourseForm } from './course-form.vm'
 import { useLazyMutationCourseEdit } from '../../../../common/api/apollo/graphql/course'
+import Circle from '@uiw/react-color-circle'
+import { hexColors } from '../../../../common/constants/colors'
+
 
 interface CourseEditModalProps extends ModalForm {
   data: Course
@@ -11,6 +14,8 @@ interface CourseEditModalProps extends ModalForm {
 
 export const CourseEditModal: React.FC<CourseEditModalProps> = props => {
   const { isOpen, onClose, data, onRefetch: refetchCourse } = props
+
+  const [hexColor, setHexColor] = React.useState<string>(data.color || '#9095a0')
 
   const [courseEdit] = useLazyMutationCourseEdit()
 
@@ -26,6 +31,7 @@ export const CourseEditModal: React.FC<CourseEditModalProps> = props => {
         course: {
           name: values.name,
           id: data?.id || 0,
+          color: hexColor
         },
       },
     }).then(() => {
@@ -50,6 +56,9 @@ export const CourseEditModal: React.FC<CourseEditModalProps> = props => {
           <form onSubmit={handleSubmit(onSuccessEditCourse)}>
             <ModalBody>
               <Input {...register('name', { required: true })} isRequired placeholder='Nombre del curso' size='sm' />
+              <div className='mt-2'>
+                <Circle colors={hexColors} color={hexColor} onChange={color => setHexColor(color.hex)} />
+              </div>
             </ModalBody>
 
             <ModalFooter>

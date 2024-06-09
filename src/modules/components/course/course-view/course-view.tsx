@@ -39,11 +39,6 @@ export const CourseView: React.FC<CourseViewProps> = props => {
           </Tooltip>
           <span className='text-xl'>{name}</span>
           <CourseDropdownOptions {...props} />
-          {/* <Tooltip closeDelay={0} content='Editar'>
-            <button onClick={() => setShowCourseEditModal(true)}>
-              <img src={EditIcon} className='opacity-40 w-5' alt='Editar curso' />
-            </button>
-          </Tooltip> */}
         </div>
         <SubjectList data={subjects} courseId={id} refetch={refetchCourse} />
 

@@ -6,4 +6,4 @@ export * from './document-scene'
 export * from './course-scene'
 export * from './subject-scene'
 export * from './score-scene'
-
+export * from './event-scene'

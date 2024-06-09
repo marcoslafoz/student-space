@@ -10,6 +10,7 @@ import {
   ScoresScene,
   SubjectDetailScene,
   TasksScene,
+  EventsScene,
 } from '../../modules/scenes'
 import { authLoader, loginLoader } from './loaders'
 import { Layout } from '../../modules/components/layout'
@@ -67,6 +68,11 @@ export const router = createBrowserRouter([
       {
         path: 'scores',
         element: <ScoresScene />,
+        loader: authLoader,
+      },
+      {
+        path: 'events',
+        element: <EventsScene />,
         loader: authLoader,
       },
     ],

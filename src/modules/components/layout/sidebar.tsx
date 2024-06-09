@@ -3,8 +3,9 @@ import { MoonIcon } from '../../../common/constants/icons'
 import './layout.scss'
 import { useLocation, useNavigate } from 'react-router'
 import { clsx } from 'clsx'
-import { SidebarRoute, sidebarRoutes } from './layout.vm'
+import { SidebarPath } from './layout.vm'
 import { Logo } from '../base/logo'
+import { sidebarPaths } from '../../../common/constants/paths'
 
 export const Sidebar: React.FC = () => {
   const location = useLocation()
@@ -47,7 +48,7 @@ export const Sidebar: React.FC = () => {
             <span className='text-bold font-size-2'>StudentSpace</span>
           </span>
           <span className='space-y-3'>
-            {sidebarRoutes.map(s => (
+            {sidebarPaths.map(s => (
               <SidebarItem key={s.index} data={s} isActive={location.pathname === s.path} />
             ))}
             {/* <DarkMode /> */}
@@ -60,7 +61,7 @@ export const Sidebar: React.FC = () => {
 
 interface SidebarItemProps {
   isActive?: boolean
-  data: SidebarRoute
+  data: SidebarPath
 }
 
 const SidebarItem: React.FC<SidebarItemProps> = props => {

@@ -37,3 +37,9 @@ export const formatDate = (date?: string): DateValue | undefined | null => {
   const localDateString = formatLocalTimezoneToString(date)
   return parseDate(localDateString.split(' ')[0])
 }
+
+export const eventDate = (date: Date | null): string => {
+  if (date == null) return ''
+  console.log('AQUI DATE', moment.tz(date, moment.tz.guess()).format())
+  return moment.tz(date, moment.tz.guess()).format()
+}

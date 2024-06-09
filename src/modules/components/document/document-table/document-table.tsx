@@ -1,16 +1,7 @@
 import React from 'react'
 import { Document } from '../../../../common/types'
 import { DocumentCard } from './document-card'
-import {
-  Input,
-  Pagination,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from '@nextui-org/react'
+import { Input, Pagination, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react'
 import { SearchIcon } from '../../base/nextui-icons'
 
 interface DocumentTableProps {

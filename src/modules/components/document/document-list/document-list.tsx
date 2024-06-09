@@ -5,18 +5,15 @@ import { Tooltip } from '@nextui-org/react'
 import { PlusIcon } from '../../../../common/constants/icons'
 import { DocumentModalCreate } from '../document-form'
 
-
 interface DocumentListProps {
   data: Document[]
   refetchDocuments: () => void
 }
 
 export const DocumentList: React.FC<DocumentListProps> = props => {
-
   const { data, refetchDocuments } = props
 
   const [showCreateDocumentModal, setShowCreateDocumentModal] = React.useState(false)
-
 
   return (
     <>

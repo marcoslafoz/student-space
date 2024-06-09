@@ -1,3 +1,21 @@
+export const hexColors: string[] = [
+  '#F44E3B',
+  '#FE9200',
+  '#FCDC00',
+  '#CDDC39',
+  '#8BC34A',
+  '#4CAF50',
+  '#009688',
+  '#00BCD4',
+  '#03A9F4',
+  '#2196F3',
+  '#3F51B5',
+  '#673AB7',
+  '#9C27B0',
+  '#E91E63',
+  '#E98BAB',
+]
+
 export const colorClasses: { [key: string]: { bgLighter: string; text: string; bgDarker: string } } = {
   red: {
     bgLighter: 'bg-red-200',

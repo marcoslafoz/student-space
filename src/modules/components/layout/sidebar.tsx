@@ -6,6 +6,7 @@ import { clsx } from 'clsx'
 import { SidebarPath } from './layout.vm'
 import { Logo } from '../base/logo'
 import { sidebarPaths } from '../../../common/constants/paths'
+import { Link } from 'react-router-dom'
 
 export const Sidebar: React.FC = () => {
   const location = useLocation()
@@ -41,12 +42,14 @@ export const Sidebar: React.FC = () => {
         aria-label='Sidebar'
       >
         <div className='h-full px-3 py-4 overflow-y-auto bg-white dark:bg-gray-800'>
-          <span className='inline-flex gap-3 items-center sidebar-logo pl-3'>
-            <span className='w-8 h-8'>
-              <Logo />
+          <Link to={'dashboard'}>
+            <span className='inline-flex gap-3 items-center sidebar-logo pl-3'>
+              <span className='w-8 h-8'>
+                <Logo />
+              </span>
+              <span className='text-bold font-size-2'>StudentSpace</span>
             </span>
-            <span className='text-bold font-size-2'>StudentSpace</span>
-          </span>
+          </Link>
           <span className='space-y-3'>
             {sidebarPaths.map(s => (
               <SidebarItem key={s.index} data={s} isActive={location.pathname === s.path} />

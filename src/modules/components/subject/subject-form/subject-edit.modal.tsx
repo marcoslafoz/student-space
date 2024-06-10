@@ -30,7 +30,7 @@ export const SubjectEditModal: React.FC<SubjectEditModalProps> = props => {
         subject: {
           name: values.name,
           id: data?.id || 0,
-          color: hexColor
+          color: hexColor,
         },
       },
     })

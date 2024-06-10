@@ -26,7 +26,7 @@ export const SubjectAddModal: React.FC<SubjectAddModalProps> = props => {
         subject: {
           name: values.name,
           id: 0,
-          color: hexColor
+          color: hexColor,
         },
         courseId: courseId,
       },

@@ -29,7 +29,7 @@ export const CourseAddModal: React.FC<CourseAddModalProps> = props => {
         course: {
           name: values.name,
           id: 0,
-          color: hexColor
+          color: hexColor,
         },
         userId: userId || 0,
       },

@@ -16,7 +16,7 @@ export const EventsScene: React.FC = () => {
 
   return (
     <>
-      <Helmet title='Eventos - StudentSpace'/>
+      <Helmet title='Eventos - StudentSpace' />
       <EventProvider userId={userId}>
         <EventView />
       </EventProvider>

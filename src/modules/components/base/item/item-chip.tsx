@@ -22,8 +22,8 @@ export const ItemChip: React.FC<ChipItemProps> = props => {
       {showChip && (
         <Chip
           style={{
-            backgroundColor: color+'30' || '#9095a0',
-            color: color || '#9095a0'
+            backgroundColor: color + '30' || '#9095a0',
+            color: color || '#9095a0',
           }}
           size='sm'
           onClose={onClose && handleClose}

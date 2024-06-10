@@ -14,7 +14,9 @@ interface LoginFindUsernameVars {
   username: string
 }
 
-export const useLoginFindUsernameLazyQuery = (options?: LazyQueryHookOptions<LoginFindUsernameData, LoginFindUsernameVars>) => {
+export const useLoginFindUsernameLazyQuery = (
+  options?: LazyQueryHookOptions<LoginFindUsernameData, LoginFindUsernameVars>
+) => {
   return useLazyQuery<LoginFindUsernameData, LoginFindUsernameVars>(LOGIN_FIND_USERNAME, {
     errorPolicy: 'all',
     fetchPolicy: 'no-cache',

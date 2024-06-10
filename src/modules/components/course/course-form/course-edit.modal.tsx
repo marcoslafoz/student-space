@@ -7,7 +7,6 @@ import { useLazyMutationCourseEdit } from '../../../../common/api/apollo/graphql
 import Circle from '@uiw/react-color-circle'
 import { hexColors } from '../../../../common/constants/colors'
 
-
 interface CourseEditModalProps extends ModalForm {
   data: Course
 }
@@ -31,7 +30,7 @@ export const CourseEditModal: React.FC<CourseEditModalProps> = props => {
         course: {
           name: values.name,
           id: data?.id || 0,
-          color: hexColor
+          color: hexColor,
         },
       },
     }).then(() => {

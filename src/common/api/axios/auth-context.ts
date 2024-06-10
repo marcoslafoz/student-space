@@ -17,3 +17,11 @@ export const isAuthenticated = async (): Promise<boolean> => {
     return false
   }
 }
+
+export const destroyJwtToken = (): void => {
+  try {
+    localStorage.removeItem('jwttoken')
+  } finally {
+    window.location.reload()
+  }
+}

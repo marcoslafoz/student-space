@@ -78,6 +78,7 @@ const SidebarItem: React.FC<SidebarItemProps> = props => {
       role='button'
       tabIndex={data.index}
       aria-label={data.title}
+      data-test-id={`sidebar${data.path}`}
       className={clsx(
         'sidebar-item flex p-3 rounded-lg dark:hover:bg-gray-700 hover:bg-gray-100 group',
         isActive && 'bg-gray-100 dark:bg-gray-700'

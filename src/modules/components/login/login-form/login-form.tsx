@@ -5,6 +5,7 @@ import { Button, Input } from '@nextui-org/react'
 import { useLoginFindUsernameLazyQuery, useLoginLazyQuery } from '../../../../common/api/apollo/graphql/login'
 import { isAuthenticated } from '../../../../common/api/axios'
 import { EyeFilledIcon, EyeSlashFilledIcon } from '../../base/nextui-icons'
+import clsx from 'clsx'
 
 export const LoginFormUsername: React.FC = () => {
   const { handleSubmit, register } = useForm<LoginForm>()
@@ -42,12 +43,13 @@ export const LoginFormUsername: React.FC = () => {
               isRequired
               placeholder='Nombre de usuario'
               size='md'
-              className='min-w-72'
+              className={clsx('min-w-72', usernameError && 'username-input-error')}
               isInvalid={usernameError}
               onChange={() => setUsernameError(false)}
               errorMessage="Nombre de usuario inválido"
+              data-test-id='login-username-input'
             />
-            <Button isIconOnly type='submit' size='md' style={{ backgroundColor: '#191c1f' }}>
+            <Button isIconOnly type='submit' size='md' style={{ backgroundColor: '#191c1f' }} data-test-id='login-username-btn'  >
               <svg
                 className='size-3.5'
                 width='23'
@@ -117,7 +119,7 @@ const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
           <Input
             placeholder='Contraseña'
             {...register('password', { required: true })}
-            className='min-w-72'
+            className={clsx('min-w-72', passwordError && 'password-input-error')}
             onChange={() => setPasswordError(false)}
             endContent={
               <button className='focus:outline-none' type='button' onClick={toggleVisibility}>
@@ -131,8 +133,9 @@ const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
             type={isVisible ? 'text' : 'password'}
             isInvalid={passwordError}
             errorMessage="Contraseña inválida"
+            data-test-id='login-password-input'
           />
-          <Button isIconOnly type='submit' size='md' style={{ backgroundColor: '#191c1f' }}>
+          <Button isIconOnly type='submit' size='md' style={{ backgroundColor: '#191c1f' }} data-test-id='login-password-btn' >
             <svg
               className='size-5'
               width='31'

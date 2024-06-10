@@ -9,22 +9,28 @@ import { EyeFilledIcon, EyeSlashFilledIcon } from '../../base/nextui-icons'
 export const LoginFormUsername: React.FC = () => {
   const { handleSubmit, register } = useForm<LoginForm>()
 
-  const [loginFindUsername, { loading, data }] = useLoginFindUsernameLazyQuery()
+  const [loginFindUsername, { data, error }] = useLoginFindUsernameLazyQuery()
 
   const [isUsernameValid, setIsUsernameValid] = React.useState<boolean>(false)
   const [validUsername, setValidUsername] = React.useState<string>()
+  const [usernameError, setUsernameError] = React.useState<boolean>(false)
 
   React.useEffect(() => {
-    if (data?.loginFindUsername) setIsUsernameValid(true)
-  }, [data])
+    if (data?.loginFindUsername) {
+      setIsUsernameValid(true)
+      setUsernameError(false)
+    } else if (error || (data && !data.loginFindUsername)) {
+      setUsernameError(true)
+    }
+  }, [data, error])
 
   const onUsernameSuccess: SubmitHandler<LoginForm> = values => {
     loginFindUsername({ variables: { username: values.username } }).then(() => {
       setValidUsername(values.username)
+    }).catch(() => {
+      setUsernameError(true)
     })
   }
-
-  if (loading) return <></>
 
   return (
     <>
@@ -37,6 +43,9 @@ export const LoginFormUsername: React.FC = () => {
               placeholder='Nombre de usuario'
               size='md'
               className='min-w-72'
+              isInvalid={usernameError}
+              onChange={() => setUsernameError(false)}
+              errorMessage="Nombre de usuario inválido"
             />
             <Button isIconOnly type='submit' size='md' style={{ backgroundColor: '#191c1f' }}>
               <svg
@@ -71,8 +80,9 @@ interface LoginPasswordFormProps {
 const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
   const { username } = props
   const { handleSubmit, register } = useForm<LoginForm>()
-  const [login, { data, loading }] = useLoginLazyQuery()
+  const [login, { data, error }] = useLoginLazyQuery()
   const [isVisible, setIsVisible] = React.useState(false)
+  const [passwordError, setPasswordError] = React.useState<boolean>(false)
   const toggleVisibility = () => setIsVisible(!isVisible)
 
   React.useEffect(() => {
@@ -80,14 +90,13 @@ const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
       if (data?.login) {
         localStorage.setItem('jwttoken', data.login)
         const authenticated = await isAuthenticated()
-        if (authenticated) {
-          window.location.reload()
-        }
+        if (authenticated) window.location.reload() 
+      } else if (error || (data && !data.login)) {
+        setPasswordError(true)
       }
     }
-
     handleLoginSuccess()
-  }, [data])
+  }, [data, error])
 
   const onPasswordSuccess: SubmitHandler<LoginForm> = values => {
     login({
@@ -96,11 +105,10 @@ const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
         password: values.password,
       },
     }).catch(() => {
+      setPasswordError(true)
       localStorage.removeItem('jwttoken')
     })
   }
-
-  if (loading) return <></>
 
   return (
     <>
@@ -110,6 +118,7 @@ const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
             placeholder='Contraseña'
             {...register('password', { required: true })}
             className='min-w-72'
+            onChange={() => setPasswordError(false)}
             endContent={
               <button className='focus:outline-none' type='button' onClick={toggleVisibility}>
                 {isVisible ? (
@@ -120,6 +129,8 @@ const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
               </button>
             }
             type={isVisible ? 'text' : 'password'}
+            isInvalid={passwordError}
+            errorMessage="Contraseña inválida"
           />
           <Button isIconOnly type='submit' size='md' style={{ backgroundColor: '#191c1f' }}>
             <svg

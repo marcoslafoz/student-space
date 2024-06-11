@@ -1,17 +1,6 @@
 import React from 'react'
-import {
-  Button,
-  Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  Select,
-  SelectItem,
-  Textarea,
-} from '@nextui-org/react'
-import { CourseContext, UserContext } from '../../../../common/context'
+import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Textarea } from '@nextui-org/react'
+import { UserContext } from '../../../../common/context'
 import Circle from '@uiw/react-color-circle'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ModalForm } from '../../../../common/types'
@@ -28,16 +17,15 @@ interface EventQuickCreateModalCreateProps extends ModalForm {
 }
 
 export const EventQuickCreateFormModal: React.FC<EventQuickCreateModalCreateProps> = props => {
-  const { isOpen, onClose, lockCourseId, data, calendarApi } = props
+  const { isOpen, onClose, data, calendarApi } = props
 
   const { userId } = React.useContext(UserContext)
-  const { courseList } = React.useContext(CourseContext)
 
   const [hexColor, setHexColor] = React.useState<string>()
 
   const [eventAdd] = useLazyMutationEventAdd()
 
-  const { handleSubmit, register, setValue, reset } = useForm<EventForm>({
+  const { handleSubmit, register, reset } = useForm<EventForm>({
     defaultValues: {},
   })
 
@@ -92,18 +80,12 @@ export const EventQuickCreateFormModal: React.FC<EventQuickCreateModalCreateProp
             <div className='flex flex-row gap-3'>
               <Input {...register('title', { required: true })} isRequired placeholder='Título' />
             </div>
-            <Textarea
-              {...register('description')}
-              label='Description'
-              placeholder='Enter your description'
-              className=''
-              size='sm'
-            />
+            <Textarea {...register('description')} placeholder='Descripción' className='' size='sm' />
 
             <div className='grid grid-cols-2 gap-3'>
               {/* <DatePicker onChange={e => setValue('start', e ? e.toString() : '')} size='sm' label='Fecha' /> */}
             </div>
-            <div className='grid grid-cols-2 gap-3'>
+            {/* <div className='grid grid-cols-2 gap-3'>
               <Select
                 label='Curso'
                 size='sm'
@@ -117,7 +99,7 @@ export const EventQuickCreateFormModal: React.FC<EventQuickCreateModalCreateProp
                   </SelectItem>
                 ))}
               </Select>
-            </div>
+            </div> */}
             <div className='mt-2'>
               <Circle colors={hexColors} color={hexColor} onChange={color => setHexColor(color.hex)} />
             </div>

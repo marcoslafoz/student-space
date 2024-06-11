@@ -15,6 +15,7 @@ import { mapEventsToEventInputs } from '../../../../common/types'
 import { EventQuickCreateFormModal } from '../event-form'
 import { useLazyMutationEventChange } from '../../../../common/api/apollo/graphql/event'
 import { eventDate } from '../../../../common/utils'
+import { EventCalendarPreview } from '../event-form/event-preview-form.modal'
 
 export const EventCalendar: React.FC = () => {
   const { eventList, loading, refetchEvents } = React.useContext(EventContext)
@@ -24,11 +25,13 @@ export const EventCalendar: React.FC = () => {
     () => localStorage.getItem('calendarView') || 'dayGridMonth'
   )
   const [showQuickCreateModal, setShowQuickCreateModal] = React.useState<boolean>(false)
+  const [showPreviewModal, setShowPreviewModal] = React.useState<boolean>(false)
 
   const calendarRef = React.useRef<FullCalendar>(null)
   const [title, setTitle] = React.useState<string | undefined>(undefined)
 
   const [selectedInfo, setSelectedInfo] = React.useState<DateSelectArg>()
+  const [selectedPreview, setSelectedPreviw] = React.useState<EventClickArg>()
   const [selectedApi, setSelectedApi] = React.useState<CalendarApi>()
 
   React.useEffect(() => {
@@ -58,6 +61,11 @@ export const EventCalendar: React.FC = () => {
     setShowQuickCreateModal(true)
   }
 
+  const handleEventClick = (clickInfo: EventClickArg) => {
+    clickInfo && setSelectedPreviw(clickInfo)
+    setShowPreviewModal(true)
+  }
+
   const handleEventChange = (selectInfo: EventChangeArg) => {
     eventChange({
       variables: {
@@ -72,11 +80,7 @@ export const EventCalendar: React.FC = () => {
     })
   }
 
-  const handleEventClick = (clickInfo: EventClickArg) => {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove()
-    }
-  }
+  selectedApi?.getEventById('1')?.title
 
   if (loading) return <></>
 
@@ -176,6 +180,12 @@ export const EventCalendar: React.FC = () => {
         isOpen={showQuickCreateModal}
         onRefetch={refetchEvents}
         onClose={() => setShowQuickCreateModal(false)}
+      />
+
+      <EventCalendarPreview
+        eventClick={selectedPreview}
+        isOpen={showPreviewModal}
+        onClose={() => setShowPreviewModal(false)}
       />
     </>
   )

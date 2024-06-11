@@ -40,6 +40,5 @@ export const formatDate = (date?: string): DateValue | undefined | null => {
 
 export const eventDate = (date: Date | null): string => {
   if (date == null) return ''
-  console.log('AQUI DATE', moment.tz(date, moment.tz.guess()).format())
   return moment.tz(date, moment.tz.guess()).format()
 }

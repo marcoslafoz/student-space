@@ -21,16 +21,20 @@ export const LoginFormUsername: React.FC = () => {
       setIsUsernameValid(true)
       setUsernameError(false)
     } else if (error || (data && !data.loginFindUsername)) {
+      localStorage.removeItem('jwttoken')
       setUsernameError(true)
     }
   }, [data, error])
 
   const onUsernameSuccess: SubmitHandler<LoginForm> = values => {
-    loginFindUsername({ variables: { username: values.username } }).then(() => {
-      setValidUsername(values.username)
-    }).catch(() => {
-      setUsernameError(true)
-    })
+    loginFindUsername({ variables: { username: values.username } })
+      .then(() => {
+        setValidUsername(values.username)
+      })
+      .catch(() => {
+        localStorage.removeItem('jwttoken')
+        setUsernameError(true)
+      })
   }
 
   return (
@@ -46,10 +50,16 @@ export const LoginFormUsername: React.FC = () => {
               className={clsx('min-w-72', usernameError && 'username-input-error')}
               isInvalid={usernameError}
               onChange={() => setUsernameError(false)}
-              errorMessage="Nombre de usuario inválido"
+              errorMessage='Nombre de usuario inválido'
               data-test-id='login-username-input'
             />
-            <Button isIconOnly type='submit' size='md' style={{ backgroundColor: '#191c1f' }} data-test-id='login-username-btn'  >
+            <Button
+              isIconOnly
+              type='submit'
+              size='md'
+              style={{ backgroundColor: '#191c1f' }}
+              data-test-id='login-username-btn'
+            >
               <svg
                 className='size-3.5'
                 width='23'
@@ -92,9 +102,10 @@ const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
       if (data?.login) {
         localStorage.setItem('jwttoken', data.login)
         const authenticated = await isAuthenticated()
-        if (authenticated) window.location.reload() 
+        if (authenticated) window.location.reload()
       } else if (error || (data && !data.login)) {
         setPasswordError(true)
+        localStorage.removeItem('jwttoken')
       }
     }
     handleLoginSuccess()
@@ -132,10 +143,16 @@ const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
             }
             type={isVisible ? 'text' : 'password'}
             isInvalid={passwordError}
-            errorMessage="Contraseña inválida"
+            errorMessage='Contraseña inválida'
             data-test-id='login-password-input'
           />
-          <Button isIconOnly type='submit' size='md' style={{ backgroundColor: '#191c1f' }} data-test-id='login-password-btn' >
+          <Button
+            isIconOnly
+            type='submit'
+            size='md'
+            style={{ backgroundColor: '#191c1f' }}
+            data-test-id='login-password-btn'
+          >
             <svg
               className='size-5'
               width='31'

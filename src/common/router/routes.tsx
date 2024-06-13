@@ -11,6 +11,7 @@ import {
   SubjectDetailScene,
   TasksScene,
   EventsScene,
+  RegisterScene
 } from '../../modules/scenes'
 import { authLoader, loginLoader } from './loaders'
 import { Layout } from '../../modules/components/layout'
@@ -25,6 +26,11 @@ export const router = createBrowserRouter([
   {
     path: 'login',
     element: <LoginScene />,
+    loader: loginLoader,
+  },
+  {
+    path: 'register',
+    element: <RegisterScene />,
     loader: loginLoader,
   },
   {

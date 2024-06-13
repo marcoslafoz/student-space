@@ -23,7 +23,7 @@ export const ErrorScene: React.FC = () => {
           className='size-12 m-7  bg-no-repeat bg-center bg-cover'
         />
       </div>
-      <div className="flex flex-col items-center justify-center h-screen gap-4 bg-gray-100 text-gray-800">
+      <div className="flex flex-col items-center justify-center h-screen gap-4  text-gray-800">
         <h1 className="text-7xl text-bold">Oops</h1>
         <div className='flex flex-col gap-2'>
           <span className="text-lg">Página no encontrada</span>

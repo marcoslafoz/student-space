@@ -95,7 +95,6 @@ const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
   const [login, { data, error }] = useLoginLazyQuery()
   const [isVisible, setIsVisible] = React.useState(false)
   const [passwordError, setPasswordError] = React.useState<boolean>(false)
-  const toggleVisibility = () => setIsVisible(!isVisible)
 
   React.useEffect(() => {
     const handleLoginSuccess = async () => {
@@ -133,7 +132,7 @@ const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
             className={clsx('min-w-72', passwordError && 'password-input-error')}
             onChange={() => setPasswordError(false)}
             endContent={
-              <button className='focus:outline-none' type='button' onClick={toggleVisibility}>
+              <button className='focus:outline-none' type='button' onClick={() => setIsVisible(!isVisible)}>
                 {isVisible ? (
                   <EyeSlashFilledIcon className='text-2xl text-default-400 pointer-events-none' />
                 ) : (

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import {
   Button,
   DatePicker,
@@ -22,9 +22,9 @@ interface ScoreCreateProps extends ModalForm {}
 
 export const ScoreCreateFormModal: React.FC<ScoreCreateProps> = props => {
   const { isOpen, onClose, onRefetch: refetchScores, lockCourseId, lockSubjectId } = props
-  const { userId } = useContext(UserContext)
+  const { userId } = React.useContext(UserContext)
 
-  const { courseList } = useContext(CourseContext)
+  const { courseList } = React.useContext(CourseContext)
   const [scoreAdd] = useLazyMutationScoreAdd()
 
   const { handleSubmit, register, setValue, reset } = useForm<ScoreForm>({})

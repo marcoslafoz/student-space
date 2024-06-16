@@ -3,7 +3,6 @@ import { LoginFormUsername } from '../login-form'
 import { StudentSpaceIcon } from '../../../../common/constants/icons'
 import { Link } from 'react-router-dom'
 
-
 export const LoginView: React.FC = () => {
   return (
     <>
@@ -17,8 +16,13 @@ export const LoginView: React.FC = () => {
       <div className='flex items-center justify-center min-h-screen gap-40 m-6'>
         <div className='flex flex-col gap-8'>
           <div className='flex flex-col gap-3'>
-            <p className='font-color-primary text-3xl text-bold max-w-sm'>Nos alegramos de <br/>volver a verte</p>
-            <p className='text-gray-400 max-w-xs text-sm'>Introduce el nombre de usuario o email asociado a tu cuenta.</p>
+            <p className='font-color-primary text-3xl text-bold max-w-sm'>
+              Nos alegramos de <br />
+              volver a verte
+            </p>
+            <p className='text-gray-400 max-w-xs text-sm'>
+              Introduce el nombre de usuario o email asociado a tu cuenta.
+            </p>
           </div>
           <LoginFormUsername />
           <div className='flex flex-col justify-center gap-5'>

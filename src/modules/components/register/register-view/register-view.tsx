@@ -17,7 +17,7 @@ export const RegisterView: React.FC = () => {
       <div className='flex items-center justify-center min-h-screen gap-40 m-6'>
         <div className='flex flex-col gap-6'>
           <RegisterForm />
-          <div className='flex flex-col gap-6 mt-3' >
+          <div className='flex flex-col gap-6 mt-3'>
             <div className='flex flex-row justify-center items-center gap-2'>
               <hr className='border-gray-200 px-16  w-10' style={{ borderWidth: 'gray 0.1px' }} />
               <span className='text-gray-300 text-xs'>o</span>
@@ -32,8 +32,6 @@ export const RegisterView: React.FC = () => {
           className='fixed bottom-0 right-40 w-60 h-2/4 bg-no-repeat bg-center bg-cover hidden lg:block transform scale-x-[-1] object-contain'
           style={{ backgroundImage: `url(${StudentGirl})` }}
         ></div>
-
-
       </div>
 
       <div className='fixed  bottom-0 left-0 m-4'>

@@ -8,5 +8,5 @@ export const sidebarPaths: SidebarPath[] = [
   { title: 'Documentos', icon: DocumentsIcon, path: '/documents', index: 3 },
   { title: 'Notas', icon: AwardIcon, path: '/scores', index: 4 },
   { title: 'Eventos', icon: EventsIcon, path: '/events', index: 5 },
-  { title: 'Ajustes', icon: SettingsIcon, path: '/', index: 6 },
+  { title: 'Ajustes', icon: SettingsIcon, path: '/settings', index: 6 },
 ]

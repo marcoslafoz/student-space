@@ -52,8 +52,8 @@ export const EventCalendarPreview: React.FC<EventCalendarPreviewProps> = props =
           title: title,
           description: description,
           allDay: false,
-          start:''
-        }
+          start: '',
+        },
       },
     }).finally(() => {
       eventClick.event.setProp('title', title)
@@ -88,7 +88,7 @@ export const EventCalendarPreview: React.FC<EventCalendarPreviewProps> = props =
 
         <ModalBody>
           <div className='grid grid-cols-1 gap-2'>
-            <span>{formatEventDate(eventClick.event)}</span>
+            <span>{formatEventDate(eventClick.event.start, eventClick.event.end, eventClick.event.allDay)}</span>
             <Textarea value={description} onChange={e => setDescription(e.target.value)} placeholder='Descripción' />
           </div>
         </ModalBody>

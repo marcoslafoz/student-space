@@ -1,6 +1,6 @@
-@import url("./variables.scss");
-@import url("./fonts.scss");
-@import url("./fix.scss");
+@import url('./variables.scss');
+@import url('./fonts.scss');
+@import url('./fix.scss');
 
 @tailwind base;
 @tailwind components;
@@ -43,4 +43,14 @@ body {
 
 .font-color-primary {
   color: var(--color-primary);
+}
+
+/*========================== Scroll bar ==========================*/
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

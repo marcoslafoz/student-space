@@ -15,6 +15,7 @@ export const LoginFormUsername: React.FC = () => {
   const [isUsernameValid, setIsUsernameValid] = React.useState<boolean>(false)
   const [validUsername, setValidUsername] = React.useState<string>()
   const [usernameError, setUsernameError] = React.useState<boolean>(false)
+  const [username, setUsername] = React.useState<string | undefined>()
 
   React.useEffect(() => {
     if (data?.loginFindUsername) {
@@ -45,16 +46,18 @@ export const LoginFormUsername: React.FC = () => {
             <Input
               {...register('username', { required: true })}
               isRequired
-              placeholder='Nombre de usuario'
+              placeholder='Nombre de usuario o email'
               size='md'
               className={clsx('min-w-72', usernameError && 'username-input-error')}
               isInvalid={usernameError}
+              onValueChange={e => setUsername(e)}
               onChange={() => setUsernameError(false)}
               errorMessage='Nombre de usuario inválido'
               data-test-id='login-username-input'
             />
             <Button
               isIconOnly
+              isDisabled={username?.trim() === undefined || username?.trim() === ''}
               type='submit'
               size='md'
               style={{ backgroundColor: '#191c1f' }}
@@ -95,6 +98,7 @@ const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
   const [login, { data, error }] = useLoginLazyQuery()
   const [isVisible, setIsVisible] = React.useState(false)
   const [passwordError, setPasswordError] = React.useState<boolean>(false)
+  const [password, setPassword] = React.useState<string | undefined>()
 
   React.useEffect(() => {
     const handleLoginSuccess = async () => {
@@ -131,6 +135,7 @@ const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
             {...register('password', { required: true })}
             className={clsx('min-w-72', passwordError && 'password-input-error')}
             onChange={() => setPasswordError(false)}
+            onValueChange={e => setPassword(e)}
             endContent={
               <button className='focus:outline-none' type='button' onClick={() => setIsVisible(!isVisible)}>
                 {isVisible ? (
@@ -150,6 +155,7 @@ const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
             type='submit'
             size='md'
             style={{ backgroundColor: '#191c1f' }}
+            isDisabled={password?.trim() === undefined || password?.trim() === ''}
             data-test-id='login-password-btn'
           >
             <svg

@@ -17,6 +17,4 @@ const Story: StoryFn = args => {
 }
 
 export const ErrorSceneStory = Story.bind({})
-ErrorSceneStory.args = {
- 
-}
+ErrorSceneStory.args = {}

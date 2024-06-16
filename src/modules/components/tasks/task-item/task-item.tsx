@@ -18,11 +18,13 @@ export interface TaskItemProps {
   data: Task
   /** Refetch query */
   refetch: () => void
+  /** Display description @default true */
+  enableDescription?: boolean
 }
 
 /** Task item component */
 export const TaskItem: React.FC<TaskItemProps> = props => {
-  const { data, refetch } = props
+  const { data, refetch, enableDescription = true } = props
 
   const { title, checked: defaultChecked, description, date, id } = data
 
@@ -83,7 +85,7 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
           </div>
         </div>
 
-        {description && (
+        {enableDescription && description && (
           <div className='flex items-center text-xs text-slate-500 pl-11 w-full break-words whitespace-normal'>
             {description}
           </div>

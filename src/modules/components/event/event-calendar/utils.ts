@@ -1,16 +1,15 @@
 import moment from 'moment-timezone'
-import { EventImpl } from '@fullcalendar/core/internal'
 
-export function formatEventDate(event: EventImpl) {
-  if (!event.start || !event.end) {
+export function formatEventDate(start: Date | null, end: Date | null, allDay: boolean) {
+  if (!start || !end) {
     return ''
   }
 
-  const startDate = moment(event.start, moment.tz.guess())
-  const endDate = moment(event.end, moment.tz.guess())
-  const endDateAllDay = moment(event.end, moment.tz.guess())
+  const startDate = moment(start, moment.tz.guess())
+  const endDate = moment(end, moment.tz.guess())
+  const endDateAllDay = moment(end, moment.tz.guess())
 
-  if (event.allDay) {
+  if (allDay) {
     const startDateString = startDate.format('D')
     const endDateString = endDate.format('D')
     const startMonth = startDate.format('MMMM')

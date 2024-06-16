@@ -6,5 +6,11 @@ export const USER_READ_FIELDS = gql`
     username
     surname
     email
+    birthday
+    avatar {
+      id
+      title
+      url
+    }
   }
 `

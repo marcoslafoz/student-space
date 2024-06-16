@@ -51,6 +51,8 @@ export const DocumentTable: React.FC<DocumentTableProps> = props => {
   }, [page, filteredItems, defaultRowsPerPage])
 
   const topContent = React.useMemo(() => {
+    if (items.length <= 0) return <></>
+
     return (
       <>
         <div className='flex'>
@@ -69,7 +71,7 @@ export const DocumentTable: React.FC<DocumentTableProps> = props => {
         </div>
       </>
     )
-  }, [filterValue, onSearchChange, onClear])
+  }, [items.length, filterValue, onSearchChange, onClear])
 
   const bottomContent = (
     <div className='flex w-full justify-center'>

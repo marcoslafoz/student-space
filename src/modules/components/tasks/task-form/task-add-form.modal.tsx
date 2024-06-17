@@ -8,12 +8,10 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Select,
-  SelectItem,
   Textarea,
   TimeInput,
 } from '@nextui-org/react'
-import { CourseContext, UserContext } from '../../../../common/context'
+import { UserContext } from '../../../../common/context'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { formatStringToLocalTimezone } from '../../../../common/utils'
 import { TaskForm } from './task-form.vm'
@@ -21,16 +19,18 @@ import { useLazyMutationTaskAdd } from '../../../../common/api/apollo/graphql/ta
 import { getLocalTimeZone, today } from '@internationalized/date'
 import { ClockCircleLinearIcon } from '../../base/nextui-icons'
 import { ModalForm } from '../../../../common/types'
+import { CourseSelector } from '../../base/form'
 
 interface TaskModalProps extends ModalForm {}
 
 export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
-  const { isOpen, onClose, onRefetch: refetchTasks, lockCourseId } = props
+  const { isOpen, onClose, onRefetch: refetchTasks } = props
   const { userId } = useContext(UserContext)
 
-  const { courseList } = useContext(CourseContext)
-
   const [addTaskMutation] = useLazyMutationTaskAdd()
+
+  const [selectedCourseId, setSelectedCourseId] = React.useState<number | undefined>()
+  const [selectedSubjectId, setSelectedSubjectId] = React.useState<number | undefined>()
 
   const { handleSubmit, register, setValue, reset } = useForm<TaskForm>()
 
@@ -42,11 +42,12 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
         userId: userId,
         task: {
           title: values.title,
-          date: formatStringToLocalTimezone(values.date, values.time || '23:59:59'),
+          date: formatStringToLocalTimezone(values.date, values.time),
           description: values.description,
           id: 0,
           checked: false,
-          course: { id: lockCourseId == undefined ? Number(values.courseId) : lockCourseId, name: '' },
+          course: { id: selectedCourseId || 0, name: '' },
+          subject: { id: selectedSubjectId || 0, name: '' },
         },
       },
     })
@@ -102,21 +103,7 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
               size='sm'
             />
 
-            <div className='grid grid-cols-2 gap-3'>
-              <Select
-                label='Curso'
-                size='sm'
-                onChange={e => setValue('courseId', e.target.value)}
-                defaultSelectedKeys={[lockCourseId || 0]}
-                isDisabled={lockCourseId != undefined && true}
-              >
-                {courseList.map(a => (
-                  <SelectItem key={a.id} value={a.id}>
-                    {a.name}
-                  </SelectItem>
-                ))}
-              </Select>
-            </div>
+            <CourseSelector onCourseChange={setSelectedCourseId} onSubjectChange={setSelectedSubjectId} />
           </ModalBody>
 
           <ModalFooter>

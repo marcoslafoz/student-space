@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import {
   Button,
   DatePicker,
@@ -11,23 +11,25 @@ import {
   Select,
   SelectItem,
 } from '@nextui-org/react'
-import { CourseContext } from '../../../../common/context'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ScoreForm } from './score-form.vm'
 import { ModalForm, Score, scoreSelectOptions } from '../../../../common/types'
 import { useLazyMutationScoreEdit } from '../../../../common/api/apollo/graphql/score'
 import { formatDate, formatLocalTimezoneToString, formatStringToLocalTimezone } from '../../../../common/utils'
 import moment from 'moment'
+import { CourseSelector } from '../../base/form'
 
 interface ScoreEditProps extends ModalForm {
   data: Score
 }
 
 export const ScoreEditFormModal: React.FC<ScoreEditProps> = props => {
-  const { isOpen, onClose, onRefetch: refetchScores, lockCourseId, data } = props
+  const { isOpen, onClose, onRefetch: refetchScores, data } = props
 
-  const { courseList } = useContext(CourseContext)
   const [scoreEdit] = useLazyMutationScoreEdit()
+
+  const [selectedCourseId, setSelectedCourseId] = React.useState<number | undefined>(data?.course?.id)
+  const [selectedSubjectId, setSelectedSubjectId] = React.useState<number | undefined>(data?.subject?.id)
 
   const { handleSubmit, register, setValue, reset } = useForm<ScoreForm>({
     defaultValues: {
@@ -38,8 +40,6 @@ export const ScoreEditFormModal: React.FC<ScoreEditProps> = props => {
   })
 
   const onSuccessScoreCreate: SubmitHandler<ScoreForm> = values => {
-    console.log('AQUI VALUES', values)
-
     scoreEdit({
       variables: {
         score: {
@@ -48,8 +48,8 @@ export const ScoreEditFormModal: React.FC<ScoreEditProps> = props => {
           id: data.id,
           score: Number(values.score),
           status: values.status ? Number(values.status) : undefined,
-          course: { id: lockCourseId == undefined ? Number(values.courseId) : lockCourseId, name: '' },
-          subject: { id: 7, name: '' },
+          course: { id: selectedCourseId || 0, name: '' },
+          subject: { id: selectedSubjectId || 0, name: '' },
         },
       },
     })
@@ -104,21 +104,12 @@ export const ScoreEditFormModal: React.FC<ScoreEditProps> = props => {
                 defaultValue={formatDate(data?.date)}
               />
             </div>
-            <div className='grid grid-cols-2 gap-3'>
-              <Select
-                label='Curso'
-                size='sm'
-                onChange={e => setValue('courseId', e.target.value)}
-                defaultSelectedKeys={[data.course?.id || '']}
-                isDisabled={lockCourseId != undefined && true}
-              >
-                {courseList.map(a => (
-                  <SelectItem key={a.id} value={a.id}>
-                    {a.name}
-                  </SelectItem>
-                ))}
-              </Select>
-            </div>
+            <CourseSelector
+              defaultCourseId={data.course?.id}
+              defaultSubjectId={data.subject?.id}
+              onCourseChange={setSelectedCourseId}
+              onSubjectChange={setSelectedSubjectId}
+            />
           </ModalBody>
 
           <ModalFooter>

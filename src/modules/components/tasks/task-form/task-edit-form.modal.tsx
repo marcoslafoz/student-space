@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import {
   Button,
   DatePicker,
@@ -8,8 +8,6 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Select,
-  SelectItem,
   Textarea,
   TimeInput,
 } from '@nextui-org/react'
@@ -24,8 +22,8 @@ import {
 import moment from 'moment'
 import { TaskForm } from './task-form.vm'
 import { useLazyMutationTaskDelete, useLazyMutationTaskEdit } from '../../../../common/api/apollo/graphql/task'
-import { CourseContext } from '../../../../common/context'
 import { ClockCircleLinearIcon } from '../../base/nextui-icons'
+import { CourseSelector } from '../../base/form/course-selector'
 
 interface TaskModalProps extends ModalForm {
   data: Task
@@ -34,15 +32,16 @@ interface TaskModalProps extends ModalForm {
 export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
   const { isOpen, onClose, onRefetch: refetchTasks, data } = props
 
+  const [selectedCourseId, setSelectedCourseId] = React.useState<number | undefined>(data?.course?.id)
+  const [selectedSubjectId, setSelectedSubjectId] = React.useState<number | undefined>(data?.subject?.id)
+
   const [editTaskMutation] = useLazyMutationTaskEdit()
   const [removeTaskMutation] = useLazyMutationTaskDelete()
 
-  const { courseList } = useContext(CourseContext)
-
   const { handleSubmit, register, setValue, reset } = useForm<TaskForm>({
     defaultValues: {
-      title: data?.title || '',
-      description: data?.description || '',
+      title: data?.title,
+      description: data?.description,
     },
   })
 
@@ -60,10 +59,11 @@ export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
         task: {
           id: data?.id || 0,
           title: values.title,
-          date: formatStringToLocalTimezone(values.date, values.time || '23:59:59'),
+          date: formatStringToLocalTimezone(values.date, values.time),
           description: values.description,
           checked: false,
-          course: { id: Number(values.courseId), name: '' },
+          course: { id: selectedCourseId || 0, name: '' },
+          subject: { id: selectedSubjectId || 0, name: '' },
         },
       },
     })
@@ -71,19 +71,6 @@ export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
       .catch(() => reset())
       .finally(() => onClose())
   }
-
-  // const [subjects, setSubjects] = React.useState<Subject[] | undefined>(courseList.find(c => c.id === defaultSelectedCourseId)?.subjects)
-
-  // const defaultSelectedCourseId = Number(watch('courseId')) || data?.course?.id
-
-  // useEffect(() => {
-  //   const selectedCourse = courseList.find(c => c.id === defaultSelectedCourseId)
-  //   console.log('AQUI BEFORE', defaultSelectedCourseId)
-
-  //   setSubjects(selectedCourse?.subjects)
-  // }, [courseList, defaultSelectedCourseId])
-
-  // console.log('aqui',subjects)
 
   data && data.date && setValue('time', moment(formatLocalTimezoneToString(data.date)).format('HH:mm:ss'))
   data && data.date && setValue('date', moment(formatLocalTimezoneToString(data.date)).format('YYYY-MM-DD'))
@@ -134,34 +121,12 @@ export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
               size='sm'
             />
 
-            <div className='grid grid-cols-2 gap-3'>
-              <Select
-                label='Curso'
-                size='sm'
-                onChange={e => setValue('courseId', e.target.value)}
-                defaultSelectedKeys={data && data.course && [data.course.id]}
-              >
-                {courseList.map(a => (
-                  <SelectItem key={a.id} value={a.id}>
-                    {a.name}
-                  </SelectItem>
-                ))}
-              </Select>
-
-              {/* <Select
-                label='Asignatura'
-                size='sm'
-                onChange={e => setValue('subjectId', e.target.value)}
-                defaultSelectedKeys={[data?.subject?.id || 0]}
-                isDisabled={defaultSelectedCourseId == undefined || defaultSelectedCourseId == null}
-              >
-                {(subjects || []).map(s => (
-                  <SelectItem key={s.id} value={s.id}>
-                    {s.name}
-                  </SelectItem>
-                ))}
-              </Select> */}
-            </div>
+            <CourseSelector
+              defaultCourseId={data.course?.id}
+              defaultSubjectId={data.subject?.id}
+              onCourseChange={setSelectedCourseId}
+              onSubjectChange={setSelectedSubjectId}
+            />
           </ModalBody>
 
           <ModalFooter>

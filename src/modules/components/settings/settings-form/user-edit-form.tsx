@@ -27,7 +27,6 @@ export const UserEditForm: React.FC<UserEditFormProps> = props => {
   })
 
   const onSuccessUserEdit: SubmitHandler<UserSettingFormType> = values => {
-    console.log('AQUI', values)
     if (!userId) return
     userEdit({
       variables: {

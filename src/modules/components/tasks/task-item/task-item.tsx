@@ -12,6 +12,7 @@ import {
   useLazyMutationTaskSetCheckedData,
 } from '../../../../common/api/apollo/graphql/task'
 import { DeleteIcon, EditIcon } from '../../base/nextui-icons'
+import { ItemChip } from '../../base'
 
 export interface TaskItemProps {
   /** Task data */
@@ -26,7 +27,7 @@ export interface TaskItemProps {
 export const TaskItem: React.FC<TaskItemProps> = props => {
   const { data, refetch, enableDescription = true } = props
 
-  const { title, checked: defaultChecked, description, date, id } = data
+  const { title, checked: defaultChecked, description, date, id, course, subject } = data
 
   const [checked, setChecked] = React.useState<boolean>(defaultChecked)
   const [showEditTaskModal, setShowEditTaskModal] = React.useState<boolean>(false)
@@ -65,6 +66,8 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
               {title}
             </span>
 
+            {course && <ItemChip data={course} />}
+            {subject && <ItemChip data={subject} />}
             <TaskDate date={date} />
           </div>
           <div className='flex flex-row flex-wrap gap-3'>

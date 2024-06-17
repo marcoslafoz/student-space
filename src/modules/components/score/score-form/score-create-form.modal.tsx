@@ -11,23 +11,26 @@ import {
   Select,
   SelectItem,
 } from '@nextui-org/react'
-import { CourseContext, UserContext } from '../../../../common/context'
+import { UserContext } from '../../../../common/context'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ScoreForm } from './score-form.vm'
 import { ModalForm, scoreSelectOptions } from '../../../../common/types'
 import { useLazyMutationScoreAdd } from '../../../../common/api/apollo/graphql/score'
 import { formatStringToLocalTimezone } from '../../../../common/utils'
+import { CourseSelector } from '../../base/form'
 
 interface ScoreCreateProps extends ModalForm {}
 
 export const ScoreCreateFormModal: React.FC<ScoreCreateProps> = props => {
-  const { isOpen, onClose, onRefetch: refetchScores, lockCourseId, lockSubjectId } = props
+  const { isOpen, onClose, onRefetch: refetchScores } = props
   const { userId } = React.useContext(UserContext)
 
-  const { courseList } = React.useContext(CourseContext)
   const [scoreAdd] = useLazyMutationScoreAdd()
 
   const { handleSubmit, register, setValue, reset } = useForm<ScoreForm>({})
+
+  const [selectedCourseId, setSelectedCourseId] = React.useState<number | undefined>()
+  const [selectedSubjectId, setSelectedSubjectId] = React.useState<number | undefined>()
 
   const onSuccessScoreCreate: SubmitHandler<ScoreForm> = values => {
     if (!userId) return
@@ -41,8 +44,8 @@ export const ScoreCreateFormModal: React.FC<ScoreCreateProps> = props => {
           id: 0,
           score: Number(values.score),
           status: values.status ? Number(values.status) : undefined,
-          course: { id: lockCourseId == undefined ? Number(values.courseId) : lockCourseId, name: '' },
-          subject: { id: lockSubjectId == undefined ? Number(values.subjectId) : lockSubjectId, name: '' },
+          course: { id: selectedCourseId || 0, name: '' },
+          subject: { id: selectedSubjectId || 0, name: '' },
         },
       },
     })
@@ -87,21 +90,7 @@ export const ScoreCreateFormModal: React.FC<ScoreCreateProps> = props => {
               </Select>
               <DatePicker onChange={e => setValue('date', e ? e.toString() : '')} size='sm' label='Fecha' />
             </div>
-            <div className='grid grid-cols-2 gap-3'>
-              <Select
-                label='Curso'
-                size='sm'
-                onChange={e => setValue('courseId', e.target.value)}
-                defaultSelectedKeys={[lockCourseId?.toString() || '']}
-                isDisabled={lockCourseId != undefined && true}
-              >
-                {courseList.map(a => (
-                  <SelectItem key={a.id} value={a.id}>
-                    {a.name}
-                  </SelectItem>
-                ))}
-              </Select>
-            </div>
+            <CourseSelector onCourseChange={setSelectedCourseId} onSubjectChange={setSelectedSubjectId} />
           </ModalBody>
 
           <ModalFooter>

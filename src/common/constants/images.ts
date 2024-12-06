@@ -1,12 +1,12 @@
 // Dashboard images
-import CoursesImage from '../../assets/images/webp/courses.webp'
-import DocumentsImage from '../../assets/images/webp/documents.webp'
-import ExamImage from '../../assets/images/webp/exam.webp'
-import BlackBoardImage from '../../assets/images/webp/blackboard.webp'
+const CoursesImage = '/assets/images/webp/courses.webp'
+const DocumentsImage = '/assets/images/webp/documents.webp'
+const ExamImage = '/assets/images/webp/exam.webp'
+const BlackBoardImage = '/assets/images/webp/blackboard.webp'
 
 export { CoursesImage, DocumentsImage, ExamImage, BlackBoardImage }
 
 // Others
-import StudentGirlImage from '../../assets/images/webp/girl-student.webp'
+const StudentGirlImage = '/assets/images/webp/girl-student.webp'
 
 export { StudentGirlImage }

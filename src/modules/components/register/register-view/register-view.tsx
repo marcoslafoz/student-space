@@ -1,7 +1,7 @@
 import React from 'react'
 import { RegisterForm } from '../register-form'
 import { StudentSpaceIcon } from '../../../../common/constants/icons'
-import StudentGirl from '../../../../assets/images/webp/girl-student.webp'
+import StudentGirl from '/assets/images/webp/girl-student.webp'
 import { Link } from 'react-router-dom'
 
 export const RegisterView: React.FC = () => {

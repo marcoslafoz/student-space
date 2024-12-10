@@ -14,6 +14,7 @@ export const isAuthenticated = async (): Promise<boolean> => {
     })
     return response.data.authenticated
   } catch (error) {
+    localStorage.removeItem('jwttoken')
     return false
   }
 }

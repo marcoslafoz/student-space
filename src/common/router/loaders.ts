@@ -5,7 +5,7 @@ export async function loginLoader() {
   const authenticated = await isAuthenticated()
 
   if (authenticated) {
-    return redirect('/')
+    return redirect('/dashboard')
   }
 
   return null

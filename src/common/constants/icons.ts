@@ -35,12 +35,4 @@ const EditIcon = '/assets/images/svg/edit.svg'
 const TrashIcon = '/assets/images/svg/trash.svg'
 const DocumentIcon = '/assets/images/svg/document.svg'
 
-export {
-  CloudSuccessIcon,
-  CloudErrorIcon,
-  ArrowLeftIcon,
-  PlusIcon,
-  EditIcon,
-  TrashIcon,
-  DocumentIcon,
-}
+export { CloudSuccessIcon, CloudErrorIcon, ArrowLeftIcon, PlusIcon, EditIcon, TrashIcon, DocumentIcon }

@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 import {
   CourseDetailScene,
   CoursesScene,
@@ -13,6 +13,7 @@ import {
   EventsScene,
   RegisterScene,
   SettingsScene,
+  LandingScene,
 } from '../../modules/scenes'
 import { authLoader, loginLoader } from './loaders'
 import { Layout } from '../../modules/components/layout'
@@ -20,9 +21,9 @@ import { Layout } from '../../modules/components/layout'
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to='/dashboard' />,
+    element: <LandingScene />,
     errorElement: <ErrorScene />,
-    loader: authLoader,
+    loader: loginLoader,
   },
   {
     path: 'login',

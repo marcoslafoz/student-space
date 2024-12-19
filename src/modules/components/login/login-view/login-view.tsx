@@ -6,12 +6,14 @@ import { Link } from 'react-router-dom'
 export const LoginView: React.FC = () => {
   return (
     <>
-      <div className='absolute'>
-        <div
-          style={{ backgroundImage: `url(${StudentSpaceIcon})` }}
-          className='size-12 mx-7  bg-no-repeat bg-center bg-cover'
-        />
-      </div>
+      <Link to={'/'}>
+        <div className='absolute'>
+          <div
+            style={{ backgroundImage: `url(${StudentSpaceIcon})` }}
+            className='size-12 mx-7  bg-no-repeat bg-center bg-cover'
+          />
+        </div>
+      </Link>
 
       <div className='flex items-center justify-center min-h-screen gap-40 m-6'>
         <div className='flex flex-col gap-8'>

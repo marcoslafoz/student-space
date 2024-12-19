@@ -18,7 +18,9 @@ export const UpcomingEventsWidget: React.FC = () => {
   return (
     <>
       <div className='flex flex-col gap-1.5'>
-        {data?.eventGetUpcomingEventListByUser.map(e => <EventCard data={e} key={e.id} />)}
+        {data?.eventGetUpcomingEventListByUser.map(e => (
+          <EventCard data={e} key={e.id} />
+        ))}
         <div className='py-6'></div>
       </div>
     </>

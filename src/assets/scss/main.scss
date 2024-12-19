@@ -45,6 +45,12 @@ body {
   color: var(--color-primary);
 }
 
+/*========================== Font color ==========================*/
+
+.bg-color-primary {
+  background-color: var(--color-primary);
+}
+
 /*========================== Scroll bar ==========================*/
 
 .no-scrollbar::-webkit-scrollbar {

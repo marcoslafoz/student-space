@@ -18,7 +18,7 @@ export const LoginView: React.FC = () => {
       <div className='flex items-center justify-center min-h-screen gap-40 m-6'>
         <div className='flex flex-col gap-8'>
           <div className='flex flex-col gap-3'>
-            <p className='font-color-primary text-3xl text-bold max-w-sm'>
+            <p className='custom-color-primary text-3xl custom-font-bold max-w-sm'>
               Nos alegramos de <br />
               volver a verte
             </p>

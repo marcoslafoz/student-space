@@ -86,7 +86,7 @@ export const RegisterForm: React.FC = () => {
           <div className='flex flex-col gap-3 mb-8 '>
             {step === RegisterStepsEnum.NAME && (
               <>
-                <p className='font-color-primary text-3xl text-bold max-w-sm'>
+                <p className='custom-color-primary text-3xl custom-font-bold max-w-sm'>
                   ¿Eres nuevo aquí? <br />
                   Crea tu cuenta ahora
                 </p>
@@ -98,13 +98,13 @@ export const RegisterForm: React.FC = () => {
             {step !== RegisterStepsEnum.NAME && (
               <>
                 {name?.trim() != undefined && (
-                  <p className='font-color-primary text-3xl text-bold max-w-sm'>
+                  <p className='custom-color-primary text-3xl custom-font-bold max-w-sm'>
                     <span className='text-orange-500'>{name}</span>, ayudanos a <br />
                     conocerte mejor
                   </p>
                 )}
                 {name?.trim() == undefined && (
-                  <p className='font-color-primary text-3xl text-bold max-w-md'>Ayudanos a conocerte mejor</p>
+                  <p className='custom-color-primary text-3xl custom-font-bold max-w-md'>Ayudanos a conocerte mejor</p>
                 )}
                 <p className='text-gray-400 max-w-sm text-sm'>Rellena tus datos para unirte a Student Space.</p>
               </>

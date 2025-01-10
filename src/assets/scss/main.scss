@@ -11,43 +11,28 @@
 body {
   color: var(--color-primary);
   font-family: var(--font-regular);
-  font-size: var(--font-size-regular);
   min-height: 100vh;
 }
 
 /*========================== Font style ==========================*/
 
-.text-bold {
+.custom-font-bold {
   font-family: var(--font-bold);
 }
 
-.text-medium {
-  font-family: var(--font-medium);
+.montserrat-font-extrabold {
+  font-family: var(--montserrat-extrabold);
 }
 
-/*========================== Font size ==========================*/
+/*========================== Color ==========================*/
 
-.font-size-1 {
-  font-size: var(--font-size-1);
-}
-
-.font-size-2 {
-  font-size: var(--font-size-2);
-}
-
-.font-size-3 {
-  font-size: var(--font-size-3);
-}
-
-/*========================== Font color ==========================*/
-
-.font-color-primary {
+.custom-color-primary {
   color: var(--color-primary);
 }
 
-/*========================== Font color ==========================*/
+/*========================== Background color ==========================*/
 
-.bg-color-primary {
+.custom-bg-color-primary {
   background-color: var(--color-primary);
 }
 

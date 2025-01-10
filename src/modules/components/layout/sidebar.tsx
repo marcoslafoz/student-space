@@ -47,7 +47,8 @@ export const Sidebar: React.FC = () => {
               <span className='w-8 h-8'>
                 <Logo />
               </span>
-              <span className='text-bold font-size-2'>StudentSpace</span>
+              {/* TODO: Cambiar por svg */}
+              <span className='custom-font-bold text-2xl'>StudentSpace</span>
             </span>
           </Link>
           <span className='space-y-3'>

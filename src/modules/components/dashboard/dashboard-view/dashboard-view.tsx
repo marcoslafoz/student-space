@@ -21,7 +21,7 @@ export const DashboardView: React.FC = () => {
   return (
     <div className='flex flex-col gap-5'>
       <div className='text-2xl'>
-        Bienvenido de nuevo <span className='text-bold '>{userData?.name}</span>
+        Bienvenido de nuevo <span className='custom-font-bold '>{userData?.name}</span>
       </div>
 
       <div className='max-w-[900px] gap-3 grid grid-cols-12 grid-rows-2 auto-rows-auto'>

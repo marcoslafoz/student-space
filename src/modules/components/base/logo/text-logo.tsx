@@ -5,7 +5,6 @@ import { Logo } from './logo'
  * Text Logo Component
  * This component represents the application imagotype.
  */
-
 export const TextLogo: React.FC = () => {
   return (
     <div className='inline-flex gap-3 items-center '>

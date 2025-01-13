@@ -2,15 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './landing-home.scss'
 import StudentGirl from '/assets/images/webp/girl-student.webp'
+import { ScrollDownArrow } from '../../base/scroll-down-arrow'
 
 export const LandingHome: React.FC = () => {
   return (
     <>
-      <div className='landing-home w-full bg-white flex flex-col flex-nowrap '>
+      <div className='landing-home w-full flex flex-col flex-nowrap '>
         {/* Content */}
-        <div className=' flex flex-row h-full bg-green-200X justify-center lg:gap-10'>
-          <div className='items-center justify-end h-full flex bg-red-400X '>
-            <div className=' break-keep flex flex-col flex-nowrap gap-9 p-10 bg-blue-300X max-w-2xl '>
+        <div className=' flex flex-row h-full  justify-center lg:gap-10'>
+          <div className='items-center justify-end h-full flex  '>
+            <div className=' break-keep flex flex-col flex-nowrap gap-9 p-10  max-w-2xl '>
               <div className='text-5xl montserrat-font-extrabold font-extrabold tracking-tight	'>
                 ORGANIZA TU VIDA,
                 <br /> SIMPLIFICA TU ESTUDIO
@@ -27,12 +28,16 @@ export const LandingHome: React.FC = () => {
             </div>
           </div>
 
-          <div className='items-end flex bg-red-600X'>
+          <div className='items-end flex'>
             <div
               className='w-80 h-5/6 bg-no-repeat bg-center bg-cover hidden  lg:block transform scale-x-[-1] object-contain'
               style={{ backgroundImage: `url(${StudentGirl})` }}
             ></div>
           </div>
+        </div>
+        <div className='flex items-center justify-center'>
+          {/* Flecha */}
+          <ScrollDownArrow/>
         </div>
       </div>
     </>

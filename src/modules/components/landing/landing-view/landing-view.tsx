@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { LandingHome } from '../landing-home'
-import { LandingDemo } from '../landing-demo'
 import { TextLogo } from '../../base'
 import { Link } from 'react-router-dom'
 import { LandingFooter } from '../landing-footer'

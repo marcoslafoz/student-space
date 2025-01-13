@@ -34,15 +34,6 @@ export const LandingHome: React.FC = () => {
             ></div>
           </div>
         </div>
-
-        <div className='flex items-center justify-center'>
-          <div className='landing-home-arrow-lg hidden lg:block sm:hidden'>
-            <ScrollDownArrow />
-          </div>
-          <div className='landing-home-arrow-sm block sm:block lg:hidden'>
-            <ScrollDownArrow />
-          </div>
-        </div>
       </div>
     </>
   )

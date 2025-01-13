@@ -8,7 +8,6 @@ export const LandingHome: React.FC = () => {
   return (
     <>
       <div className='landing-home w-full flex flex-col flex-nowrap '>
-        {/* Content */}
         <div className=' flex flex-row h-full  justify-center lg:gap-10'>
           <div className='items-center justify-end h-full flex  '>
             <div className=' break-keep flex flex-col flex-nowrap gap-9 p-10  max-w-2xl '>
@@ -35,9 +34,14 @@ export const LandingHome: React.FC = () => {
             ></div>
           </div>
         </div>
+
         <div className='flex items-center justify-center'>
-          {/* Flecha */}
-          <ScrollDownArrow/>
+          <div className='landing-home-arrow-lg hidden lg:block sm:hidden'>
+            <ScrollDownArrow />
+          </div>
+          <div className='landing-home-arrow-sm block sm:block lg:hidden'>
+            <ScrollDownArrow />
+          </div>
         </div>
       </div>
     </>

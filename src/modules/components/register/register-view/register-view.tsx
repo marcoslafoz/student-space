@@ -3,18 +3,17 @@ import { RegisterForm } from '../register-form'
 import { StudentSpaceIcon } from '../../../../common/constants/icons'
 import StudentGirl from '/assets/images/webp/girl-student.webp'
 import { Link } from 'react-router-dom'
+import { TextLogo } from '../../base'
 
 export const RegisterView: React.FC = () => {
   return (
     <>
       <Link to={'/'}>
-        <div className='absolute'>
-          <div
-            style={{ backgroundImage: `url(${StudentSpaceIcon})` }}
-            className='size-12 mx-7  bg-no-repeat bg-center bg-cover'
-          />
+        <div className='px-7 pt-5'>
+          <TextLogo />
         </div>
       </Link>
+
 
       <div className='flex items-center justify-center min-h-screen gap-40 m-6'>
         <div className='flex flex-col gap-6'>

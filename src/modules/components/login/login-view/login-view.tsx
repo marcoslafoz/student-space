@@ -2,16 +2,14 @@ import React from 'react'
 import { LoginFormUsername } from '../login-form'
 import { StudentSpaceIcon } from '../../../../common/constants/icons'
 import { Link } from 'react-router-dom'
+import { TextLogo } from '../../base'
 
 export const LoginView: React.FC = () => {
   return (
     <>
       <Link to={'/'}>
-        <div className='absolute'>
-          <div
-            style={{ backgroundImage: `url(${StudentSpaceIcon})` }}
-            className='size-12 mx-7  bg-no-repeat bg-center bg-cover'
-          />
+        <div className='px-7 pt-5'>
+          <TextLogo />
         </div>
       </Link>
 

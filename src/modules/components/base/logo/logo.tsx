@@ -1,5 +1,10 @@
 import React from 'react'
 
+/**
+ * Logo Component
+ * This component represents the application isotype.
+ */
+
 export const Logo: React.FC = () => {
   return (
     <svg className='dark:fill-slate-300 fill-gray-800' viewBox='0.00 0.00 1000.00 1000.00'>

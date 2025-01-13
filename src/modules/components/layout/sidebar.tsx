@@ -4,7 +4,7 @@ import './layout.scss'
 import { useLocation, useNavigate } from 'react-router'
 import { clsx } from 'clsx'
 import { SidebarPath } from './layout.vm'
-import { Logo } from '../base/logo'
+import { Logo, TextLogo } from '../base/logo'
 import { sidebarPaths } from '../../../common/constants/paths'
 import { Link } from 'react-router-dom'
 
@@ -43,19 +43,14 @@ export const Sidebar: React.FC = () => {
       >
         <div className='h-full px-3 py-4 overflow-y-auto bg-white dark:bg-gray-800'>
           <Link to={'dashboard'}>
-            <span className='inline-flex gap-3 items-center sidebar-logo pl-3'>
-              <span className='w-8 h-8'>
-                <Logo />
-              </span>
-              {/* TODO: Cambiar por svg */}
-              <span className='custom-font-bold text-2xl'>StudentSpace</span>
-            </span>
+            <div className='m-2 ml-3 mb-12' >
+              <TextLogo />
+            </div>
           </Link>
           <span className='space-y-3'>
             {sidebarPaths.map(s => (
               <SidebarItem key={s.index} data={s} isActive={location.pathname === s.path} />
             ))}
-            {/* <DarkMode /> */}
           </span>
         </div>
       </aside>

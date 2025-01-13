@@ -1,6 +1,4 @@
 import React from 'react'
-import { Logo } from '../../base/logo'
-import { Link } from 'react-router-dom'
 import './landing-demo.scss'
 
 export const LandingDemo: React.FC = () => {

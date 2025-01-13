@@ -4,7 +4,7 @@ import './layout.scss'
 import { useLocation, useNavigate } from 'react-router'
 import { clsx } from 'clsx'
 import { SidebarPath } from './layout.vm'
-import { Logo, TextLogo } from '../base/logo'
+import { TextLogo } from '../base/logo'
 import { sidebarPaths } from '../../../common/constants/paths'
 import { Link } from 'react-router-dom'
 

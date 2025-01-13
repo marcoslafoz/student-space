@@ -43,7 +43,7 @@ export const Sidebar: React.FC = () => {
       >
         <div className='h-full px-3 py-4 overflow-y-auto bg-white dark:bg-gray-800'>
           <Link to={'dashboard'}>
-            <div className='m-2 ml-3 mb-12' >
+            <div className='m-2 ml-3 mb-12'>
               <TextLogo />
             </div>
           </Link>

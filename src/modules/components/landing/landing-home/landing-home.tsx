@@ -1,5 +1,4 @@
 import React from 'react'
-import { Logo } from '../../base/logo'
 import { Link } from 'react-router-dom'
 import './landing-home.scss'
 import StudentGirl from '/assets/images/webp/girl-student.webp'
@@ -8,12 +7,10 @@ export const LandingHome: React.FC = () => {
   return (
     <>
       <div className='landing-home w-full bg-white flex flex-col flex-nowrap '>
-        
-
         {/* Content */}
-        <div className=' flex flex-row h-full bg-green-200X justify-center lg:gap-56'>
+        <div className=' flex flex-row h-full bg-green-200X justify-center lg:gap-10'>
           <div className='items-center justify-end h-full flex bg-red-400X '>
-            <div className=' break-keep flex flex-col flex-nowrap gap-9 p-10 bg-blue-300X max-w-3xl '>
+            <div className=' break-keep flex flex-col flex-nowrap gap-9 p-10 bg-blue-300X max-w-2xl '>
               <div className='text-5xl montserrat-font-extrabold font-extrabold tracking-tight	'>
                 ORGANIZA TU VIDA,
                 <br /> SIMPLIFICA TU ESTUDIO

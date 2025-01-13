@@ -8,11 +8,8 @@ import { Link } from 'react-router-dom'
 export const LandingView: React.FC = () => {
   return (
     <div className='w-full flex flex-nowrap flex-col '>
-
       <div className='flex flex-row flex-wrap justify-between items-center w-full px-7 pb-4 pt-5 gap-5 '>
         <TextLogo />
-
-        {/* Login & register */}
         <div className='inline-flex gap-9 items-center justify-between'>
           <Link to={'/login'}>
             <div className='font-bold'>Iniciar sesion</div>

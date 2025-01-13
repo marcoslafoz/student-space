@@ -8,7 +8,7 @@ export const LoginView: React.FC = () => {
   return (
     <>
       <Link to={'/'}>
-        <div className='px-7 pt-5'>
+        <div className='mx-7 mt-7'>
           <TextLogo />
         </div>
       </Link>

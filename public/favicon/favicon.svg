@@ -1,5 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="1000" height="1000"><rect width="1000" height="1000" rx="500" ry="500" fill="#ffffff"></rect><g transform="matrix(0.8,0,0,0.8,100.03067884445187,100.06800258159637)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="1000" height="1000"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0.00 0.00 1000.00 1000.00" width="1000.00" height="1000.00">
-<path fill="#101619" d="
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1000" height="1000"><g clip-path="url(#SvgjsClipPath1150)"><rect width="1000" height="1000" fill="#ffffff"></rect><g transform="matrix(0.8,0,0,0.8,100,100)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1000" height="1000"><svg xmlns="http://www.w3.org/2000/svg" class="dark:fill-slate-300 fill-gray-800" viewBox="0.00 0.00 1000.00 1000.00"><path d="
   M 342.19 357.31
   Q 377.78 318.43 424.97 300.75
   Q 472.35 283.00 523.18 288.39
@@ -42,8 +41,7 @@
   Q 479.87 427.29 471.50 426.28
   C 420.88 420.14 377.02 395.63 342.20 358.71
   Q 341.55 358.01 342.19 357.31
-  Z"></path>
-<path fill="#101619" d="
+  Z"></path><path d="
   M 150.98 571.58
   Q 150.99 573.54 151.48 575.38
   C 154.08 585.13 156.44 595.03 159.48 604.64
@@ -85,5 +83,4 @@
   Q 228.09 571.09 162.32 571.02
   C 158.75 571.01 155.12 570.68 151.65 570.87
   A 0.71 0.71 0.0 0 0 150.98 571.58
-  Z"></path>
-</svg></svg></g></svg>
+  Z"></path></svg></svg></g></g><defs><clipPath id="SvgjsClipPath1150"><rect width="1000" height="1000" x="0" y="0" rx="400" ry="400"></rect></clipPath></defs></svg>

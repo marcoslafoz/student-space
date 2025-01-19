@@ -8,7 +8,7 @@ export const LandingHome: React.FC = () => {
   return (
     <>
       <div className='landing-home w-full flex flex-col flex-nowrap '>
-        <div className=' flex flex-row h-full  justify-center lg:gap-10'>
+        <div className=' flex flex-row h-full  justify-center md:gap-10'>
           <div className='items-center justify-end h-full flex  '>
             <div className=' break-keep flex flex-col flex-nowrap gap-9 p-10  max-w-2xl '>
               <div className='text-5xl montserrat-font-extrabold font-extrabold tracking-tight	'>
@@ -29,17 +29,17 @@ export const LandingHome: React.FC = () => {
 
           <div className='items-end flex'>
             <div
-              className='w-80 h-5/6 bg-no-repeat bg-center bg-cover hidden  lg:block transform scale-x-[-1] object-contain'
+              className='w-80 h-5/6 bg-no-repeat bg-center bg-cover hidden  md:block transform scale-x-[-1] object-contain'
               style={{ backgroundImage: `url(${StudentGirl})` }}
             ></div>
           </div>
         </div>
 
         <div className='flex items-center justify-center'>
-          <div className='landing-home-arrow-lg hidden lg:block sm:hidden'>
+          <div className='landing-home-arrow-lg hidden md:block sm:hidden'>
             <ScrollDownArrow />
           </div>
-          <div className='landing-home-arrow-sm block sm:block lg:hidden'>
+          <div className='landing-home-arrow-sm block sm:block md:hidden'>
             <ScrollDownArrow />
           </div>
         </div>

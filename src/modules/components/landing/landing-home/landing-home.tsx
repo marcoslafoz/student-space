@@ -36,10 +36,10 @@ export const LandingHome: React.FC = () => {
         </div>
 
         <div className='flex items-center justify-center'>
-          <div className='landing-home-arrow-lg hidden lg:block sm:hidden'>
+          <div className='landing-home-arrow-lg hidden md:block sm:hidden'>
             <ScrollDownArrow />
           </div>
-          <div className='landing-home-arrow-sm block sm:block lg:hidden'>
+          <div className='landing-home-arrow-sm block sm:block md:hidden'>
             <ScrollDownArrow />
           </div>
         </div>

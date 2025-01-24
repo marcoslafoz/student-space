@@ -4,28 +4,32 @@ import { LandingHome } from '../landing-home'
 import { LandingDemo } from '../landing-demo'
 import { TextLogo } from '../../base'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 export const LandingView: React.FC = () => {
   return (
-    <div className='w-full flex flex-nowrap flex-col '>
-      <div className='flex flex-row flex-wrap justify-between items-center w-full px-7 pb-4 pt-5 gap-5 '>
-        <TextLogo />
-        <div className='inline-flex gap-9 items-center justify-between'>
-          <Link to={'/login'}>
-            <div className='font-bold'>Iniciar sesion</div>
-          </Link>
+    <>
+      <Helmet title={'StudentSpace - Organiza tu vida y simplifica tu estudio'} />
+      <div className='w-full flex flex-nowrap flex-col '>
+        <div className='flex flex-row flex-wrap justify-between items-center w-full px-7 pb-4 pt-5 gap-5'>
+          <TextLogo />
+          <div className='inline-flex gap-9 items-center justify-between'>
+            <Link to={'/login'}>
+              <div className='font-bold hover:opacity-60'>Iniciar sesion</div>
+            </Link>
 
-          <Link to={'/register'}>
-            <div className='font-bold rounded-full w-auto px-6 py-3 custom-bg-color-primary text-white '>
-              Registrarse
-            </div>
-          </Link>
+            <Link to={'/register'}>
+              <div className='font-bold rounded-full w-auto px-6 py-3 custom-bg-color-primary text-white hover:opacity-90'>
+                Registrarse
+              </div>
+            </Link>
+          </div>
         </div>
-      </div>
 
-      <LandingHome />
-      <LandingDemo />
-      {/* <LandingFooter /> */}
-    </div>
+        <LandingHome />
+        <LandingDemo />
+        {/* <LandingFooter /> */}
+      </div>
+    </>
   )
 }

@@ -3,10 +3,13 @@ import { LoginFormUsername } from '../login-form'
 import { StudentSpaceIcon } from '../../../../common/constants/icons'
 import { Link } from 'react-router-dom'
 import { TextLogo } from '../../base'
+import { Helmet } from 'react-helmet'
 
 export const LoginView: React.FC = () => {
   return (
     <>
+      <Helmet title={'StudentSpace - Iniciar sesión'} />
+
       <Link to={'/'}>
         <div className='mx-7 mt-7'>
           <TextLogo />

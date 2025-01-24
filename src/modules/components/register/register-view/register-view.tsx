@@ -3,10 +3,13 @@ import { RegisterForm } from '../register-form'
 import StudentGirl from '/assets/images/webp/girl-student.webp'
 import { Link } from 'react-router-dom'
 import { TextLogo } from '../../base'
+import { Helmet } from 'react-helmet'
 
 export const RegisterView: React.FC = () => {
   return (
     <>
+      <Helmet title={'StudentSpace - Registrarse'} />
+
       <Link to={'/'}>
         <div className='mx-7 mt-7'>
           <TextLogo />

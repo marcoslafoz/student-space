@@ -1,7 +1,7 @@
 {
-  "name": "Student Space",
+  "name": "StudentSpace",
   "short_name": "StudentSpace",
-  "description": "StudentSpace for all devices!",
+  "description": "Digitaliza tu agenda. Lleva tu estudio al siguiente nivel con StudentSpace.",
   "icons": [
     {
       "src": "/favicon/web-app-manifest-144x144.png",
@@ -29,14 +29,14 @@
   "start_url": "/",
   "screenshots": [
     {
-      "src": "/favicon/screenshot.webp",
+      "src": "/assets/images/webp/student-space-preview.webp",
       "sizes": "800x447",
       "type": "image/webp",
       "label": "Student Space Dashboard"
     },
     {
       "form_factor": "wide",
-      "src": "/favicon/screenshot.webp",
+      "src": "/assets/images/webp/student-space-preview.webp",
       "sizes": "800x447",
       "type": "image/webp",
       "label": "Student Space Dashboard"

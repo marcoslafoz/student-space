@@ -7,6 +7,7 @@ import { EyeFilledIcon, EyeSlashFilledIcon, MailIcon } from '../../base/nextui-i
 import clsx from 'clsx'
 import { isAuthenticated } from '../../../../common/api/axios'
 import { useLazyMutationUserCreate } from '../../../../common/api/apollo/graphql/user'
+import { validatePasswordRegex } from '../../../../common/utils'
 
 export const RegisterForm: React.FC = () => {
   const { handleSubmit, register, setValue } = useForm<RegisterFormType>()
@@ -19,6 +20,7 @@ export const RegisterForm: React.FC = () => {
   const [username, setUsername] = React.useState<string | undefined>()
   const [password, setPassword] = React.useState<string | undefined>()
   const [repeatPassword, setRepeatPassword] = React.useState<string | undefined>()
+  const [errors, setErrors] = React.useState<string[]>([])
 
   const [userCreate] = useLazyMutationUserCreate()
 
@@ -29,9 +31,35 @@ export const RegisterForm: React.FC = () => {
     }
   }
 
+  const validatePassword = (password: string) => {
+    const newErrors: string[] = []
+    
+    if (password.length < 8) newErrors.push('La contraseña debe tener al menos 8 caracteres.')
+    if ((password.match(/[A-Z]/g) || []).length < 1) newErrors.push('La contraseña debe incluir al menos 1 letra mayúscula.')
+    if ((password.match(/[a-z]/g) || []).length < 1) newErrors.push('La contraseña debe incluir al menos 1 letra minúscula.')
+    if ((password.match(/\d/g) || []).length < 1) newErrors.push('La contraseña debe incluir al menos 1 número.')
+    if ((password.match(/[^A-Za-z0-9]/g) || []).length < 1) newErrors.push('La contraseña debe incluir al menos 1 carácter especial.')
+    
+    setErrors(newErrors)
+  }
+
+  const handlePasswordChange = (value: string) => {
+    setPassword(value)
+    validatePassword(value)
+  }
+
   const onRegisterSuccess: SubmitHandler<RegisterFormType> = async values => {
-    if (values.password != values.repeatPassword) {
+    if (values.password !== values.repeatPassword) {
       setErrorMessage('Las contraseñas no coinciden')
+      return
+    }
+
+    if (
+      values.password 
+      && values.password === values.repeatPassword
+      && !validatePasswordRegex(values.password)
+    ) {
+      setErrorMessage('La contraseña no cumple los requisitos')
       return
     }
 
@@ -151,16 +179,25 @@ export const RegisterForm: React.FC = () => {
               {step === RegisterStepsEnum.PASSWORD && (
                 <div className='flex flex-col w-full gap-3'>
                   <Input
-                    placeholder='Contraseña'
+                    errorMessage={() => <ul> {errors.map((error, i) => <li key={i}>{error}</li> )}</ul>}
+                    labelPlacement="outside"
+                    placeholder="Contraseña"
                     {...register('password', { required: true })}
-                    onValueChange={e => setPassword(e)}
+                    onValueChange={handlePasswordChange}
                     className={clsx('min-w-72')}
+                    isRequired
+                    value={password}
+                    isInvalid={errors.length > 0}
                     endContent={
-                      <button className='focus:outline-none' type='button' onClick={() => setIsVisible(!isVisible)}>
+                      <button
+                        className="focus:outline-none"
+                        type="button"
+                        onClick={() => setIsVisible(!isVisible)}
+                      >
                         {isVisible ? (
-                          <EyeSlashFilledIcon className='text-2xl text-default-400 pointer-events-none' />
+                          <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
                         ) : (
-                          <EyeFilledIcon className='text-2xl text-default-400 pointer-events-none' />
+                          <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
                         )}
                       </button>
                     }
@@ -171,6 +208,7 @@ export const RegisterForm: React.FC = () => {
                     {...register('repeatPassword', { required: true })}
                     onValueChange={e => setRepeatPassword(e)}
                     className={clsx('min-w-72')}
+                    isRequired
                     endContent={
                       <button className='focus:outline-none' type='button' onClick={() => setIsVisible(!isVisible)}>
                         {isVisible ? (

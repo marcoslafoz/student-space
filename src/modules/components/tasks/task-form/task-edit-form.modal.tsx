@@ -10,7 +10,7 @@ import {
   ModalHeader,
   Textarea,
   TimeInput,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ModalForm, Task } from '../../../../common/types'
 import {
@@ -93,7 +93,7 @@ export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
 
             <div className='grid grid-cols-2 gap-3'>
               <DatePicker
-                onChange={e => setValue('date', e ? e.toString() : '')}
+                onChange={(e: Date | null) => setValue('date', e ? e.toString() : '')}
                 size='sm'
                 label='Fecha'
                 defaultValue={formatDate(data?.date)}
@@ -130,7 +130,7 @@ export const TaskEditFormModal: React.FC<TaskModalProps> = props => {
           </ModalBody>
 
           <ModalFooter>
-            <Button color='danger' size='sm' onClick={handleRemoveTask}>
+            <Button color='danger' size='sm' onPress={handleRemoveTask}>
               Eliminar
             </Button>
             <Button color='primary' size='sm' type='submit'>

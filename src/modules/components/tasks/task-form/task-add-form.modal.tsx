@@ -10,13 +10,12 @@ import {
   ModalHeader,
   Textarea,
   TimeInput,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { UserContext } from '../../../../common/context'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { formatStringToLocalTimezone } from '../../../../common/utils'
 import { TaskForm } from './task-form.vm'
 import { useLazyMutationTaskAdd } from '../../../../common/api/apollo/graphql/task'
-import { getLocalTimeZone, today } from '@internationalized/date'
 import { ClockCircleLinearIcon } from '../../base/nextui-icons'
 import { ModalForm } from '../../../../common/types'
 import { CourseSelector } from '../../base/form'
@@ -76,10 +75,9 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
 
             <div className='grid grid-cols-2 gap-3'>
               <DatePicker
-                onChange={e => setValue('date', e.toString())}
+                onChange={(e: Date | null) => setValue('date', e ? e.toString() : '')}
                 size='sm'
                 label='Fecha'
-                minValue={today(getLocalTimeZone())}
               />
 
               <TimeInput
@@ -111,7 +109,7 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
               color='danger'
               className='bg-transparent border border-red-500 text-red-500'
               size='sm'
-              onClick={() => {
+              onPress={() => {
                 onClose()
                 reset()
               }}

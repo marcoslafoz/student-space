@@ -17,7 +17,7 @@ import {
   Pagination,
   Selection,
   SortDescriptor,
-} from '@nextui-org/react'
+} from '@heroui/react'
 
 import { columns, capitalize, DEFAULT_INITIAL_VISIBLE_COLUMNS, statusColorMap } from './score-table-utils'
 import {

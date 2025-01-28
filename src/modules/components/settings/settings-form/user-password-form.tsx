@@ -1,8 +1,8 @@
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { UserSettingForm as UserSettingFormType } from './user-settings.vm'
-import { Button, Input } from '@nextui-org/react'
-import { EyeFilledIcon, EyeSlashFilledIcon } from '@nextui-org/shared-icons'
+import { Button, Input } from '@heroui/react'
+import { EyeFilledIcon, EyeSlashFilledIcon } from '@heroui/shared-icons'
 import { useLazyMutationUserChangePassword } from '../../../../common/api/apollo/graphql/user/mutation/user-change-password'
 import { UserContext } from '../../../../common/context'
 

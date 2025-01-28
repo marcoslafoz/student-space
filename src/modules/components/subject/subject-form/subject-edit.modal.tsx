@@ -1,6 +1,6 @@
 import React from 'react'
 import { ModalForm, Subject } from '../../../../common/types'
-import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { SubjectForm } from './subject-form.vm'
 import { useLazyMutationSubjectEdit } from '../../../../common/api/apollo/graphql/subject/mutation'
@@ -68,7 +68,7 @@ export const SubjectEditModal: React.FC<SubjectEditModalProps> = props => {
                 variant='bordered'
                 className='border-1'
                 size='sm'
-                onClick={() => {
+                onPress={() => {
                   onClose()
                   reset()
                 }}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { LoginForm } from './login-form.vm'
-import { Button, Input } from '@nextui-org/react'
+import { Button, Input } from '@heroui/react'
 import { useLoginFindUsernameLazyQuery, useLoginLazyQuery } from '../../../../common/api/apollo/graphql/login'
 import { isAuthenticated } from '../../../../common/api/axios'
 import { EyeFilledIcon, EyeSlashFilledIcon } from '../../base/nextui-icons'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ModalForm, Subject } from '../../../../common/types'
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
 import { useLazyMutationSubjectDelete } from '../../../../common/api/apollo/graphql/subject/mutation'
 import { useNavigate } from 'react-router'
 
@@ -43,11 +43,11 @@ export const SubjectModalDelete: React.FC<SubjectModalDeleteProps> = props => {
               variant='bordered'
               className='bg-transparent border border-red-500 text-red-500'
               size='sm'
-              onClick={() => onClose()}
+              onPress={() => onClose()}
             >
               Cancelar
             </Button>
-            <Button color='danger' size='sm' onClick={handleRemoveSubject}>
+            <Button color='danger' size='sm' onPress={handleRemoveSubject}>
               Eliminar
             </Button>
           </ModalFooter>

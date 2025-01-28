@@ -1,4 +1,4 @@
-import { Button, Card, CardFooter, Image } from '@nextui-org/react'
+import { Button, Card, CardFooter, Image } from '@heroui/react'
 import { useUserReadQuery } from '../../../../common/api/apollo/graphql/user'
 import { User } from '../../../../common/types'
 import { useNavigate } from 'react-router-dom'
@@ -34,7 +34,7 @@ export const DashboardView: React.FC = () => {
                 <p className='text-tiny text-white/80'>Cursos académicos</p>
               </div>
             </div>
-            <Button radius='full' size='sm' onClick={() => navigate('/courses')}>
+            <Button radius='full' size='sm' onPress={() => navigate('/courses')}>
               Abrir
             </Button>
           </CardFooter>
@@ -52,7 +52,7 @@ export const DashboardView: React.FC = () => {
                 <p className='text-tiny text-black/60'>Consulta tus proximos eventos.</p>
               </div>
             </div>
-            <Button radius='full' color='primary' size='sm' onClick={() => navigate('/events')}>
+            <Button radius='full' color='primary' size='sm' onPress={() => navigate('/events')}>
               Abrir
             </Button>
           </CardFooter>
@@ -68,7 +68,7 @@ export const DashboardView: React.FC = () => {
                 <p className='text-tiny text-white/60'>Consulta tu historial de notas.</p>
               </div>
             </div>
-            <Button radius='full' size='sm' onClick={() => navigate('/scores')}>
+            <Button radius='full' size='sm' onPress={() => navigate('/scores')}>
               Abrir
             </Button>
           </CardFooter>
@@ -85,7 +85,7 @@ export const DashboardView: React.FC = () => {
                 <p className='text-tiny text-black/90'>Tareas pendientes</p>
               </div>
             </div>
-            <Button radius='full' color='primary' size='sm' onClick={() => navigate('/tasks')}>
+            <Button radius='full' color='primary' size='sm' onPress={() => navigate('/tasks')}>
               Abrir
             </Button>
           </CardFooter>
@@ -101,7 +101,7 @@ export const DashboardView: React.FC = () => {
                 <p className='text-tiny text-white/60'>Crea documentos de texto.</p>
               </div>
             </div>
-            <Button radius='full' size='sm' onClick={() => navigate('/documents')}>
+            <Button radius='full' size='sm' onPress={() => navigate('/documents')}>
               Abrir
             </Button>
           </CardFooter>

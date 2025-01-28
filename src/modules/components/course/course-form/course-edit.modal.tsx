@@ -1,6 +1,6 @@
 import React from 'react'
 import { Course, ModalForm } from '../../../../common/types'
-import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { CourseForm } from './course-form.vm'
 import { useLazyMutationCourseEdit } from '../../../../common/api/apollo/graphql/course'
@@ -66,7 +66,7 @@ export const CourseEditModal: React.FC<CourseEditModalProps> = props => {
                 variant='bordered'
                 className='border-1'
                 size='sm'
-                onClick={() => {
+                onPress={() => {
                   onClose()
                   reset()
                 }}

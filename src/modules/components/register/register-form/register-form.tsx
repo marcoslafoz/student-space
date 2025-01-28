@@ -1,6 +1,6 @@
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Button, DatePicker, Input } from '@nextui-org/react'
+import { Button, DatePicker, Input } from '@heroui/react'
 // import { useLoginFindUsernameLazyQuery } from '../../../../common/api/apollo/graphql/login'
 import { RegisterForm as RegisterFormType, RegisterStepsEnum } from './register-form.vm'
 import { EyeFilledIcon, EyeSlashFilledIcon, MailIcon } from '../../base/nextui-icons'
@@ -142,7 +142,7 @@ export const RegisterForm: React.FC = () => {
                     endContent={<MailIcon className='text-lg text-default-400 pointer-events-none flex-shrink-0' />}
                   />
                   <DatePicker
-                    onChange={e => setValue('birthday', e && e.toString())}
+                    onChange={(e: Date | null) => setValue('birthday', e ? e.toString() : undefined)}
                     size='sm'
                     label='Fecha de nacimiento'
                   />
@@ -187,7 +187,7 @@ export const RegisterForm: React.FC = () => {
               {step == RegisterStepsEnum.NAME && (
                 <Button
                   isIconOnly
-                  onClick={() => handleSetStep(+1)}
+                  onPress={() => handleSetStep(+1)}
                   isDisabled={name?.trim() === undefined || name?.trim() === ''}
                   size='md'
                   className='z-10'
@@ -215,7 +215,7 @@ export const RegisterForm: React.FC = () => {
               {step == RegisterStepsEnum.USERNAME_EMAIL_BIRTHDAY && (
                 <Button
                   isIconOnly
-                  onClick={() => handleSetStep(+1)}
+                  onPress={() => handleSetStep(+1)}
                   isDisabled={
                     username?.trim() === undefined ||
                     email?.trim() === undefined ||

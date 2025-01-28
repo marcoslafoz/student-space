@@ -4,11 +4,11 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { ArrowLeftIcon } from '@nextui-org/shared-icons'
+import { ArrowLeftIcon } from '@heroui/shared-icons'
 import './event-calendar.style.scss'
 
 import esLocale from '@fullcalendar/core/locales/es'
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tab, Tabs } from '@nextui-org/react'
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tab, Tabs } from '@heroui/react'
 import { VerticalDotsIcon } from '../../base/nextui-icons'
 import { EventContext } from '../../../../common/context'
 import { mapEventsToEventInputs } from '../../../../common/types'
@@ -131,6 +131,7 @@ export const EventCalendar: React.FC = () => {
                 <DropdownItem
                   description={<span> {weekendsVisible ? 'Ocultar ' : 'Mostrar '} las columnas de fin de semana</span>}
                   onPress={() => setWeekendsVisible(!weekendsVisible)}
+                  key={''}
                 >
                   {weekendsVisible ? 'Ocultar fin de semana' : 'Mostrar fin de semana'}
                 </DropdownItem>

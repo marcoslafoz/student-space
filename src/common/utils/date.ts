@@ -1,4 +1,4 @@
-import { TimeInputValue } from '@nextui-org/react'
+import { TimeInputValue } from '@heroui/react'
 import moment from 'moment-timezone'
 import { Time, DateValue, parseDate } from '@internationalized/date'
 
@@ -25,7 +25,8 @@ export const formatLocalTimezoneToString = (date: string): string => {
 }
 
 // Convierte una cadena en formato ISO a un objeto TimeInputValue.
-export const formatTime = (isoString?: string): TimeInputValue | undefined | null => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const formatTime = (isoString?: string): TimeInputValue | undefined | null | any => {
   if (isoString == null || isoString == undefined) return
   const date = new Date(isoString)
   return new Time(date.getHours(), date.getMinutes(), date.getSeconds())

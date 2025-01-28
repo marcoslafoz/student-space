@@ -1,4 +1,4 @@
-import { Chip, Tooltip } from '@nextui-org/react'
+import { Chip, Tooltip } from '@heroui/react'
 import React from 'react'
 import { PlusIcon } from '../../../../common/constants/icons'
 import { TaskList } from '../task-list'

@@ -2,10 +2,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { EventClickArg } from '@fullcalendar/core'
 import React, { useEffect, useState } from 'react'
-import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Textarea } from '@nextui-org/react'
+import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Textarea } from '@heroui/react'
 import { useLazyMutationEventDelete, useLazyMutationEventEdit } from '../../../../common/api/apollo/graphql/event'
 import { formatEventDate } from '../event-calendar/utils'
-import { EditIcon } from '@nextui-org/shared-icons'
+import { EditIcon } from '@heroui/shared-icons'
 
 interface EventCalendarPreviewProps {
   eventClick: EventClickArg | undefined
@@ -94,10 +94,10 @@ export const EventCalendarPreview: React.FC<EventCalendarPreviewProps> = props =
         </ModalBody>
 
         <ModalFooter>
-          <Button color='danger' size='sm' onClick={handleEventDelete}>
+          <Button color='danger' size='sm' onPress={handleEventDelete}>
             Eliminar
           </Button>
-          <Button color='primary' size='sm' onClick={handleEventRename}>
+          <Button color='primary' size='sm' onPress={handleEventRename}>
             Guardar
           </Button>
         </ModalFooter>

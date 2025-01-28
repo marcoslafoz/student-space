@@ -1,6 +1,6 @@
 import React from 'react'
 import { Subject } from '../../../../common/types'
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tooltip } from '@nextui-org/react'
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tooltip } from '@heroui/react'
 import { Link } from 'react-router-dom'
 import { ArrowLeftIcon, PlusIcon } from '../../../../common/constants/icons'
 import { SubjectEditModal, SubjectModalDelete } from '../subject-form'

@@ -18,7 +18,6 @@ export const LoginView: React.FC = () => {
 
       <div className='flex items-center justify-center h-screen'>
         <div className='flex items-center justify-center gap-40'>
-
           <div className='flex flex-col gap-9'>
             <div className='flex flex-col gap-4'>
               <p className='custom-color-primary text-3xl custom-font-bold max-w-sm'>
@@ -44,7 +43,10 @@ export const LoginView: React.FC = () => {
             </div>
           </div>
 
-          <div className='hidden lg:block w-48 h-48 bg-no-repeat bg-center bg-cover' style={{ backgroundImage: `url(${StudentSpaceIcon})` }} />
+          <div
+            className='hidden lg:block w-48 h-48 bg-no-repeat bg-center bg-cover'
+            style={{ backgroundImage: `url(${StudentSpaceIcon})` }}
+          />
         </div>
       </div>
     </>

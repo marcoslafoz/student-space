@@ -1,6 +1,6 @@
 import React from 'react'
 import { ModalForm } from '../../../../common/types'
-import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { SubjectForm } from './subject-form.vm'
 import { useLazyMutationSubjectAdd } from '../../../../common/api/apollo/graphql/subject/mutation'
@@ -64,7 +64,7 @@ export const SubjectAddModal: React.FC<SubjectAddModalProps> = props => {
                 color='danger'
                 className='bg-transparent border border-red-500 text-red-500'
                 size='sm'
-                onClick={() => {
+                onPress={() => {
                   onClose()
                   reset()
                 }}

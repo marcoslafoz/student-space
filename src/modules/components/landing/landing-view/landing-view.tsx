@@ -13,7 +13,9 @@ export const LandingView: React.FC = () => {
       <Helmet title={'StudentSpace - Organiza tu vida y simplifica tu estudio'} />
       <div className='w-full flex flex-nowrap flex-col '>
         <div className='flex flex-row flex-wrap justify-between items-center w-full px-7 pb-4 pt-5 gap-5'>
-          <Link to={'/'}><TextLogo /></Link>
+          <Link to={'/'}>
+            <TextLogo />
+          </Link>
           <div className='inline-flex gap-9 items-center justify-between'>
             <Link to={'/login'}>
               <div className='font-bold hover:opacity-60'>Iniciar sesion</div>

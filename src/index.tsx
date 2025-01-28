@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import { NextUIProvider } from '@nextui-org/react'
+import { HeroUIProvider } from '@heroui/react'
 import '../src/assets/scss/main.scss'
 import { UserProvider } from './common/context/user-context.tsx'
 import { ApolloProvider } from '@apollo/client'
@@ -10,9 +10,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
   <UserProvider>
     <ApolloProvider client={client}>
-      <NextUIProvider>
+      <HeroUIProvider>
         <App />
-      </NextUIProvider>
+      </HeroUIProvider>
     </ApolloProvider>
   </UserProvider>
   // </React.StrictMode>

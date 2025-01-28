@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { CourseForm } from './course-form.vm'
 import { useLazyMutationCourseAdd } from '../../../../common/api/apollo/graphql/course'
@@ -67,7 +67,7 @@ export const CourseAddModal: React.FC<CourseAddModalProps> = props => {
                 color='danger'
                 className='bg-transparent border border-red-500 text-red-500'
                 size='sm'
-                onClick={() => {
+                onPress={() => {
                   onClose()
                   reset()
                 }}

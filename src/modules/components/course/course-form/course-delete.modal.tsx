@@ -1,6 +1,6 @@
 import React from 'react'
 import { Course } from '../../../../common/types'
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
 import { useLazyMutationCourseDelete } from '../../../../common/api/apollo/graphql/course/mutation'
 
 interface CourseModalDeleteProps {
@@ -42,11 +42,11 @@ export const CourseModalDelete: React.FC<CourseModalDeleteProps> = props => {
               variant='bordered'
               className='bg-transparent border border-red-500 text-red-500'
               size='sm'
-              onClick={() => onClose()}
+              onPress={() => onClose()}
             >
               Cancelar
             </Button>
-            <Button color='danger' size='sm' onClick={handleRemoveCourse}>
+            <Button color='danger' size='sm' onPress={handleRemoveCourse}>
               Eliminar
             </Button>
           </ModalFooter>

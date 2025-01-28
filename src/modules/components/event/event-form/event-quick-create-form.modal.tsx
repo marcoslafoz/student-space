@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Textarea } from '@nextui-org/react'
+import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Textarea } from '@heroui/react'
 import { UserContext } from '../../../../common/context'
 import Circle from '@uiw/react-color-circle'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -110,7 +110,7 @@ export const EventQuickCreateFormModal: React.FC<EventQuickCreateModalCreateProp
               color='danger'
               className='bg-transparent border border-red-500 text-red-500'
               size='sm'
-              onClick={() => {
+              onPress={() => {
                 onClose()
                 reset()
               }}

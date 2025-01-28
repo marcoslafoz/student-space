@@ -1,6 +1,6 @@
 import React from 'react'
 import { User } from '../../../../common/types'
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User as UserComponent } from '@nextui-org/react'
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User as UserComponent } from '@heroui/react'
 import { useAvatarGetListQuery, useLazyMutationUserChangeAvatar } from '../../../../common/api/apollo/graphql/user'
 import { UserContext } from '../../../../common/context'
 

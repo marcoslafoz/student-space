@@ -2,7 +2,7 @@ import React from 'react'
 import { User } from '../../../../common/types'
 import { UserAvatar } from '../user-avatar'
 import { UserPasswordForm, UserEditForm } from '../settings-form'
-import { Button } from '@nextui-org/react'
+import { Button } from '@heroui/react'
 import { destroyJwtToken } from '../../../../common/api/axios'
 
 interface SettingsViewProps {
@@ -27,7 +27,7 @@ export const SettingsView: React.FC<SettingsViewProps> = props => {
           <UserEditForm data={data} refetchUser={refetchUser} />
           <hr className='my-6' />
           <UserPasswordForm />
-          <Button className='w-36 mt-12' color='danger' variant='flat' onClick={destroyJwtToken}>
+          <Button className='w-36 mt-12' color='danger' variant='flat' onPress={destroyJwtToken}>
             Cerrar sesión
           </Button>
         </div>

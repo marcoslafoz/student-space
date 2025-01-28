@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useLazyMutationDocumentCreate } from '../../../../common/api/apollo/graphql/document'
 import { UserContext } from '../../../../common/context'
@@ -64,7 +64,7 @@ export const DocumentModalCreate: React.FC<DocumentCreateRenameProps> = props =>
                 color='danger'
                 className='bg-transparent border border-red-500 text-red-500'
                 size='sm'
-                onClick={() => {
+                onPress={() => {
                   onClose()
                   reset()
                 }}

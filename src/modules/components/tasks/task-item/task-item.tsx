@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react'
-import { Checkbox, Tooltip } from '@nextui-org/react'
+import { Checkbox, Tooltip } from '@heroui/react'
 import { Task } from '../../../../common/types'
 import clsx from 'clsx'
 import 'moment'

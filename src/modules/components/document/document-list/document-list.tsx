@@ -1,7 +1,7 @@
 import React from 'react'
 import { DocumentTable } from '../document-table'
 import { Document } from '../../../../common/types'
-import { Tooltip } from '@nextui-org/react'
+import { Tooltip } from '@heroui/react'
 import { PlusIcon } from '../../../../common/constants/icons'
 import { DocumentModalCreate } from '../document-form'
 

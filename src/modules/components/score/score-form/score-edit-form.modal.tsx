@@ -10,7 +10,7 @@ import {
   ModalHeader,
   Select,
   SelectItem,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ScoreForm } from './score-form.vm'
 import { ModalForm, Score, scoreSelectOptions } from '../../../../common/types'
@@ -98,7 +98,7 @@ export const ScoreEditFormModal: React.FC<ScoreEditProps> = props => {
                 ))}
               </Select>
               <DatePicker
-                onChange={e => setValue('date', e ? e.toString() : '')}
+                onChange={(e: Date | null) => setValue('date', e ? e.toString() : '')}
                 size='sm'
                 label='Fecha'
                 defaultValue={formatDate(data?.date)}
@@ -117,7 +117,7 @@ export const ScoreEditFormModal: React.FC<ScoreEditProps> = props => {
               color='danger'
               className='bg-transparent border border-red-500 text-red-500'
               size='sm'
-              onClick={() => {
+              onPress={() => {
                 onClose()
                 reset()
               }}

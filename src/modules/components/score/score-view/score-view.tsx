@@ -1,4 +1,4 @@
-import { Tooltip } from '@nextui-org/react'
+import { Tooltip } from '@heroui/react'
 import React from 'react'
 import { PlusIcon } from '../../../../common/constants/icons'
 import { ScoreTable } from '../score-table'

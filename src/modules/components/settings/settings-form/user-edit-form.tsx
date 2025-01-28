@@ -2,7 +2,7 @@ import React from 'react'
 import { User } from '../../../../common/types'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { UserSettingForm as UserSettingFormType } from './user-settings.vm'
-import { Button, DatePicker, Input } from '@nextui-org/react'
+import { Button, DatePicker, Input } from '@heroui/react'
 import { MailIcon } from '../../base/nextui-icons'
 import { useLazyMutationUserEdit } from '../../../../common/api/apollo/graphql/user'
 import { UserContext } from '../../../../common/context'
@@ -55,7 +55,7 @@ export const UserEditForm: React.FC<UserEditFormProps> = props => {
             size='sm'
             label='Fecha de nacimiento'
             defaultValue={formatDate(data?.birthday)}
-            onChange={e => setValue('birthday', e ? e.toString() : '')}
+            onChange={(e: Date | null) => setValue('birthday', e ? e.toString() : '')}
           />
           <Input {...register('username', { required: true })} isDisabled isRequired placeholder='Nombre de usuario' />
           <div className='flex flex-row gap-3 items-center'>

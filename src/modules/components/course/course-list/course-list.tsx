@@ -2,7 +2,7 @@ import React from 'react'
 import { CourseContext } from '../../../../common/context'
 import { Link } from 'react-router-dom'
 import { ItemCard } from '../../base/item'
-import { Tooltip } from '@nextui-org/react'
+import { Tooltip } from '@heroui/react'
 import { PlusIcon } from '../../../../common/constants/icons'
 import { CourseAddModal } from '../course-form'
 

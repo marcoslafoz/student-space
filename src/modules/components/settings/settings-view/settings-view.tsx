@@ -1,7 +1,7 @@
 import React from 'react'
 import { User } from '../../../../common/types'
 import { UserAvatar } from '../user-avatar'
-import { UserPasswordForm, UserEditForm } from '../settings-form'
+import { UserEditForm } from '../settings-form'
 import { Button } from '@heroui/react'
 import { destroyJwtToken } from '../../../../common/api/axios'
 
@@ -26,7 +26,7 @@ export const SettingsView: React.FC<SettingsViewProps> = props => {
           </div>
           <UserEditForm data={data} refetchUser={refetchUser} />
           <hr className='my-6' />
-          <UserPasswordForm />
+          {/* TODO: Aqui hacer esto con envion de correo para cambiar password <UserPasswordForm /> */}
           <Button className='w-36 mt-12' color='danger' variant='flat' onPress={destroyJwtToken}>
             Cerrar sesión
           </Button>

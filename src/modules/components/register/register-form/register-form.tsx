@@ -7,7 +7,7 @@ import { EyeFilledIcon, EyeSlashFilledIcon, MailIcon } from '../../base/nextui-i
 import clsx from 'clsx'
 import { isAuthenticated } from '../../../../common/api/axios'
 import { useLazyMutationUserCreate } from '../../../../common/api/apollo/graphql/user'
-import { validatePasswordRegex } from '../../../../common/utils'
+import { validatePasswordRegex, validateUsernameRegex } from '../../../../common/utils'
 
 export const RegisterForm: React.FC = () => {
   const { handleSubmit, register, setValue } = useForm<RegisterFormType>()
@@ -20,7 +20,8 @@ export const RegisterForm: React.FC = () => {
   const [username, setUsername] = React.useState<string | undefined>()
   const [password, setPassword] = React.useState<string | undefined>()
   const [repeatPassword, setRepeatPassword] = React.useState<string | undefined>()
-  const [errors, setErrors] = React.useState<string[]>([])
+  const [passwordErrors, setPasswordErrors] = React.useState<string[]>([])
+  const [usernameErrors, setUsernameErrors] = React.useState<string[]>([])
 
   const [userCreate] = useLazyMutationUserCreate()
 
@@ -34,26 +35,45 @@ export const RegisterForm: React.FC = () => {
   const validatePassword = (password: string) => {
     const newErrors: string[] = []
     
-    if (password.length < 8) newErrors.push('La contraseña debe tener al menos 8 caracteres.')
-    if ((password.match(/[A-Z]/g) || []).length < 1) newErrors.push('La contraseña debe incluir al menos 1 letra mayúscula.')
-    if ((password.match(/[a-z]/g) || []).length < 1) newErrors.push('La contraseña debe incluir al menos 1 letra minúscula.')
-    if ((password.match(/\d/g) || []).length < 1) newErrors.push('La contraseña debe incluir al menos 1 número.')
-    if ((password.match(/[^A-Za-z0-9]/g) || []).length < 1) newErrors.push('La contraseña debe incluir al menos 1 carácter especial.')
+    if (password.length < 8) newErrors.push('Incluye al menos 8 caracteres.')
+    if ((password.match(/[A-Z]/g) || []).length < 1) newErrors.push('Incluye al menos 1 letra mayúscula.')
+    if ((password.match(/[a-z]/g) || []).length < 1) newErrors.push('Incluye al menos 1 letra minúscula.')
+    if ((password.match(/\d/g) || []).length < 1) newErrors.push('Incluye al menos 1 número.')
+    if ((password.match(/[^A-Za-z0-9]/g) || []).length < 1) newErrors.push('Incluye al menos 1 carácter especial.')
     
-    setErrors(newErrors)
+    setPasswordErrors(newErrors)
   }
+
+  const validateUsername = (username: string) => {
+    const newErrors: string[] = []
+
+    if (username.length < 1 || username.length > 30) newErrors.push('Debe tener entre 1 y 30 caracteres.')
+    if (!/^[a-zA-Z0-9._]+$/.test(username)) newErrors.push('Solo puede contener letras, números, puntos y guiones bajos.')
+    if (/^\./.test(username) || /\.$/.test(username)) newErrors.push('No puede empezar ni terminar con un punto.')
+    if (/\.\./.test(username)) newErrors.push('No puede contener dos puntos seguidos.')
+
+    setUsernameErrors(newErrors)
+  }
+
 
   const handlePasswordChange = (value: string) => {
     setPassword(value)
     validatePassword(value)
   }
 
+  const handleUsernameChange = (value : string) => {
+    setUsername(value)
+    validateUsername(value)
+  } 
+
   const onRegisterSuccess: SubmitHandler<RegisterFormType> = async values => {
+    if (values.username.trim() == '' || values.email.trim() == '') return
+    
     if (values.password !== values.repeatPassword) {
       setErrorMessage('Las contraseñas no coinciden')
       return
     }
-
+    
     if (
       values.password 
       && values.password === values.repeatPassword
@@ -63,14 +83,18 @@ export const RegisterForm: React.FC = () => {
       return
     }
 
+    if (values.username && !validateUsernameRegex(values.username)) {
+      setErrorMessage('El nombre de usuario no cumple los requisitos')
+    }
+
     const result = await userCreate({
       variables: {
         user: {
-          email: values.email,
-          name: values.name,
-          username: values.username,
-          password: values.password,
+          name: values.name.trim(),
+          username: values.username.trim(),
+          email: values.email.trim(),
           birthday: values.birthday,
+          password: values.password.trim(),
         },
       },
     })
@@ -154,10 +178,14 @@ export const RegisterForm: React.FC = () => {
                 <div className='flex flex-col w-full gap-3'>
                   <Input
                     {...register('username', { required: true })}
+                    onValueChange={handleUsernameChange}
+                    errorMessage={() => <ul> {usernameErrors.map((error, i) => <li key={i}>{error}</li>)}</ul>}
+                    labelPlacement="outside"
+                    value={username}
+                    isInvalid={usernameErrors.length > 0}
                     isRequired
                     placeholder='Nombre de usuario'
                     size='md'
-                    onValueChange={e => setUsername(e)}
                   />
                   <Input
                     {...register('email', { required: true })}
@@ -179,15 +207,15 @@ export const RegisterForm: React.FC = () => {
               {step === RegisterStepsEnum.PASSWORD && (
                 <div className='flex flex-col w-full gap-3'>
                   <Input
-                    errorMessage={() => <ul> {errors.map((error, i) => <li key={i}>{error}</li> )}</ul>}
-                    labelPlacement="outside"
-                    placeholder="Contraseña"
                     {...register('password', { required: true })}
                     onValueChange={handlePasswordChange}
+                    errorMessage={() => <ul> {passwordErrors.map((error, i) => <li key={i}>{error}</li> )}</ul>}
+                    labelPlacement="outside"
+                    placeholder="Contraseña"
                     className={clsx('min-w-72')}
                     isRequired
                     value={password}
-                    isInvalid={errors.length > 0}
+                    isInvalid={passwordErrors.length > 0}
                     endContent={
                       <button
                         className="focus:outline-none"
@@ -258,7 +286,9 @@ export const RegisterForm: React.FC = () => {
                     username?.trim() === undefined ||
                     email?.trim() === undefined ||
                     username?.trim() === '' ||
-                    email?.trim() === ''
+                    email?.trim() === '' ||
+                    !validateUsernameRegex(username)
+
                   }
                   size='md'
                   className='z-10'
@@ -291,7 +321,8 @@ export const RegisterForm: React.FC = () => {
                     password?.trim() === undefined ||
                     password?.trim() === '' ||
                     repeatPassword?.trim() === undefined ||
-                    repeatPassword?.trim() === ''
+                    repeatPassword?.trim() === '' ||
+                    !validatePasswordRegex(password)
                   }
                   className='z-10'
                   type='submit'

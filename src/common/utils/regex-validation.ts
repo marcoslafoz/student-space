@@ -23,5 +23,20 @@ export const validatePasswordRegex = (password: string): boolean => {
  * @returns true if valid
  */
 export const validateUsernameRegex = (username: string): boolean => {
-  return /^(?!.*\.\.)(?!^\.)[a-zA-Z0-9._]{1,30}(?<!\.)$/.test(username)
+  return /^(?!.*\.\.)(?!^\.)[a-zA-Z0-9._]{3,30}(?<!\.)$/.test(username)
+}
+
+/**
+ * **Email regex validation**
+ * - Must follow the standard email format.
+ * - Allows letters, numbers, dots, hyphens, and underscores before @.
+ * - Must contain exactly one "@" symbol.
+ * - Domain must have at least one dot and valid characters.
+ * - No spaces allowed.
+ *
+ * @param email
+ * @returns true if valid
+ */
+export const validateEmailRegex = (email: string): boolean => {
+  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
 }

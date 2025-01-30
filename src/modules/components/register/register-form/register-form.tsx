@@ -7,7 +7,7 @@ import { EyeFilledIcon, EyeSlashFilledIcon, MailIcon } from '../../base/heroui-i
 import clsx from 'clsx'
 import { isAuthenticated } from '../../../../common/api/axios'
 import { useLazyMutationUserCreate } from '../../../../common/api/apollo/graphql/user'
-import { validatePasswordRegex, validateUsernameRegex } from '../../../../common/utils'
+import { validateEmailRegex, validatePasswordRegex, validateUsernameRegex } from '../../../../common/utils'
 
 export const RegisterForm: React.FC = () => {
   const { handleSubmit, register, setValue } = useForm<RegisterFormType>()
@@ -40,6 +40,7 @@ export const RegisterForm: React.FC = () => {
     if ((password.match(/[a-z]/g) || []).length < 1) newErrors.push('Incluye al menos 1 letra minúscula.')
     if ((password.match(/\d/g) || []).length < 1) newErrors.push('Incluye al menos 1 número.')
     if ((password.match(/[^A-Za-z0-9]/g) || []).length < 1) newErrors.push('Incluye al menos 1 carácter especial.')
+    if (/\s/.test(password)) newErrors.push('No se permiten espacios.')
 
     setPasswordErrors(newErrors)
   }
@@ -47,23 +48,24 @@ export const RegisterForm: React.FC = () => {
   const validateUsername = (username: string) => {
     const newErrors: string[] = []
 
-    if (username.length < 1 || username.length > 30) newErrors.push('Debe tener entre 1 y 30 caracteres.')
+    if (username.length < 3 || username.length > 30) newErrors.push('Debe tener entre 3 y 30 caracteres.')
     if (!/^[a-zA-Z0-9._]+$/.test(username))
       newErrors.push('Solo puede contener letras, números, puntos y guiones bajos.')
     if (/^\./.test(username) || /\.$/.test(username)) newErrors.push('No puede empezar ni terminar con un punto.')
     if (/\.\./.test(username)) newErrors.push('No puede contener dos puntos seguidos.')
+    if (/\s/.test(username)) newErrors.push('No se permiten espacios.')
 
     setUsernameErrors(newErrors)
-  }
-
-  const handlePasswordChange = (value: string) => {
-    setPassword(value)
-    validatePassword(value)
   }
 
   const handleUsernameChange = (value: string) => {
     setUsername(value)
     validateUsername(value)
+  }
+
+  const handlePasswordChange = (value: string) => {
+    setPassword(value)
+    validatePassword(value)
   }
 
   const onRegisterSuccess: SubmitHandler<RegisterFormType> = async values => {
@@ -147,7 +149,7 @@ export const RegisterForm: React.FC = () => {
               <>
                 {name?.trim() != undefined && (
                   <p className='custom-color-primary text-3xl custom-font-bold max-w-sm'>
-                    <span className='text-orange-500'>{name}</span>, ayudanos a <br />
+                    <span className='text-orange-500'>{name.trim()}</span>, ayudanos a <br />
                     conocerte mejor
                   </p>
                 )}
@@ -167,6 +169,7 @@ export const RegisterForm: React.FC = () => {
                   isRequired
                   placeholder='¿Cúal es tu nombre?'
                   size='md'
+                  className='max-w-80'
                   onValueChange={e => setName(e)}
                 />
               )}
@@ -175,6 +178,7 @@ export const RegisterForm: React.FC = () => {
                   <Input
                     {...register('username', { required: true })}
                     onValueChange={handleUsernameChange}
+                    className='max-w-80'
                     errorMessage={() => (
                       <ul>
                         {' '}
@@ -195,7 +199,7 @@ export const RegisterForm: React.FC = () => {
                     isRequired
                     onValueChange={e => setEmail(e)}
                     type='email'
-                    className='max-w-82'
+                    className='max-w-80'
                     placeholder='Correo electrónico'
                     size='md'
                     endContent={<MailIcon className='text-lg text-default-400 pointer-events-none flex-shrink-0' />}
@@ -203,6 +207,7 @@ export const RegisterForm: React.FC = () => {
                   <DatePicker
                     onChange={(e: Date | null) => setValue('birthday', e ? e.toString() : undefined)}
                     size='sm'
+                    className='max-w-80'
                     label='Fecha de nacimiento'
                   />
                 </div>
@@ -222,7 +227,7 @@ export const RegisterForm: React.FC = () => {
                     )}
                     labelPlacement='outside'
                     placeholder='Contraseña'
-                    className={clsx('min-w-72')}
+                    className={clsx('max-w-80')}
                     isRequired
                     value={password}
                     isInvalid={passwordErrors.length > 0}
@@ -241,7 +246,7 @@ export const RegisterForm: React.FC = () => {
                     placeholder='Confirma la contraseña'
                     {...register('repeatPassword', { required: true })}
                     onValueChange={e => setRepeatPassword(e)}
-                    className={clsx('min-w-72')}
+                    className={clsx('max-w-80')}
                     isRequired
                     endContent={
                       <button className='focus:outline-none' type='button' onClick={() => setIsVisible(!isVisible)}>
@@ -289,11 +294,11 @@ export const RegisterForm: React.FC = () => {
                   isIconOnly
                   onPress={() => handleSetStep(+1)}
                   isDisabled={
-                    username?.trim() === undefined ||
-                    email?.trim() === undefined ||
-                    username?.trim() === '' ||
-                    email?.trim() === '' ||
-                    !validateUsernameRegex(username)
+                    username?.trim() == undefined ||
+                    email?.trim() == undefined ||
+                    !validateUsernameRegex(username) ||
+                    !validateEmailRegex(email) ||
+                    usernameErrors.length != 0
                   }
                   size='md'
                   className='z-10'
@@ -323,11 +328,10 @@ export const RegisterForm: React.FC = () => {
                   isIconOnly
                   size='md'
                   isDisabled={
-                    password?.trim() === undefined ||
-                    password?.trim() === '' ||
-                    repeatPassword?.trim() === undefined ||
-                    repeatPassword?.trim() === '' ||
-                    !validatePasswordRegex(password)
+                    password?.trim() == undefined ||
+                    repeatPassword?.trim() == undefined ||
+                    !validatePasswordRegex(password) ||
+                    passwordErrors.length != 0
                   }
                   className='z-10'
                   type='submit'

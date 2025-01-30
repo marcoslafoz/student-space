@@ -28,7 +28,7 @@ export const LoginFormUsername: React.FC = () => {
   }, [data, error])
 
   const onUsernameSuccess: SubmitHandler<LoginForm> = values => {
-    loginFindUsername({ variables: { username: values.username } })
+    loginFindUsername({ variables: { username: values.username.trim() } })
       .then(() => {
         setValidUsername(values.username)
       })
@@ -48,7 +48,7 @@ export const LoginFormUsername: React.FC = () => {
               isRequired
               placeholder='Nombre de usuario o email'
               size='md'
-              className={clsx('min-w-72', usernameError && 'username-input-error')}
+              className={clsx('min-w-72 max-w-80', usernameError && 'username-input-error')}
               isInvalid={usernameError}
               onValueChange={e => setUsername(e)}
               onChange={() => setUsernameError(false)}
@@ -117,8 +117,8 @@ const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
   const onPasswordSuccess: SubmitHandler<LoginForm> = values => {
     login({
       variables: {
-        username,
-        password: values.password,
+        username: username.trim(),
+        password: values.password.trim(),
       },
     }).catch(() => {
       setPasswordError(true)
@@ -133,7 +133,7 @@ const LoginPasswordForm: React.FC<LoginPasswordFormProps> = props => {
           <Input
             placeholder='Contraseña'
             {...register('password', { required: true })}
-            className={clsx('min-w-72', passwordError && 'password-input-error')}
+            className={clsx('min-w-72 max-w-80', passwordError && 'password-input-error')}
             onChange={() => setPasswordError(false)}
             onValueChange={e => setPassword(e)}
             endContent={

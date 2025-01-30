@@ -25,9 +25,9 @@ export const SettingsView: React.FC<SettingsViewProps> = props => {
             <UserAvatar data={data} refetchUser={refetchUser} />
           </div>
           <UserEditForm data={data} refetchUser={refetchUser} />
-          <hr className='my-6' />
+          {/* <hr className='my-6' /> */}
           {/* TODO: Aqui hacer esto con envion de correo para cambiar password <UserPasswordForm /> */}
-          <Button className='w-36 mt-12' color='danger' variant='flat' onPress={destroyJwtToken}>
+          <Button className='w-36 mt-6' color='danger' variant='flat' onPress={destroyJwtToken}>
             Cerrar sesión
           </Button>
         </div>

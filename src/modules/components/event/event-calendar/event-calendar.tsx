@@ -9,7 +9,7 @@ import './event-calendar.style.scss'
 
 import esLocale from '@fullcalendar/core/locales/es'
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tab, Tabs } from '@heroui/react'
-import { VerticalDotsIcon } from '../../base/nextui-icons'
+import { VerticalDotsIcon } from '../../base/heroui-icons'
 import { EventContext } from '../../../../common/context'
 import { mapEventsToEventInputs } from '../../../../common/types'
 import { EventQuickCreateFormModal } from '../event-form'

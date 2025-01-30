@@ -26,7 +26,7 @@ import {
   EditDocumentIcon,
   SearchIcon,
   VerticalDotsIcon,
-} from '../../base/nextui-icons'
+} from '../../base/heroui-icons'
 import { Course, Score, Subject } from '../../../../common/types'
 import moment from 'moment'
 import { formatLocalTimezoneToString, scoreStatusCodeToString } from '../../../../common/utils'

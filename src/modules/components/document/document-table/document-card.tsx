@@ -3,7 +3,7 @@ import { Document } from '../../../../common/types'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import { Tooltip } from '@heroui/react'
-import { DeleteIcon, EditIcon } from '../../base/nextui-icons'
+import { DeleteIcon, EditIcon } from '../../base/heroui-icons'
 import { DocumentIcon } from '../../../../common/constants/icons'
 import { DocumentModalDelete, DocumentModalRename } from '../document-form'
 

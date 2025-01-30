@@ -4,7 +4,7 @@ import { LoginForm } from './login-form.vm'
 import { Button, Input } from '@heroui/react'
 import { useLoginFindUsernameLazyQuery, useLoginLazyQuery } from '../../../../common/api/apollo/graphql/login'
 import { isAuthenticated } from '../../../../common/api/axios'
-import { EyeFilledIcon, EyeSlashFilledIcon } from '../../base/nextui-icons'
+import { EyeFilledIcon, EyeSlashFilledIcon } from '../../base/heroui-icons'
 import clsx from 'clsx'
 
 export const LoginFormUsername: React.FC = () => {

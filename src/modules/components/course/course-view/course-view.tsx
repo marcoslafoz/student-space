@@ -8,7 +8,7 @@ import { SubjectList } from '../../subject'
 import { useTaskGetListByCourseLazyQuery } from '../../../../common/api/apollo/graphql/task'
 import { TaskList } from '../../tasks'
 import { TaskAddFormModal } from '../../tasks/task-form'
-import { DeleteDocumentIcon, EditDocumentIcon, VerticalDotsIcon } from '../../base/nextui-icons'
+import { DeleteDocumentIcon, EditDocumentIcon, VerticalDotsIcon } from '../../base/heroui-icons'
 
 interface CourseViewProps {
   data: Course

@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, DatePicker, Input } from '@heroui/react'
 // import { useLoginFindUsernameLazyQuery } from '../../../../common/api/apollo/graphql/login'
 import { RegisterForm as RegisterFormType, RegisterStepsEnum } from './register-form.vm'
-import { EyeFilledIcon, EyeSlashFilledIcon, MailIcon } from '../../base/nextui-icons'
+import { EyeFilledIcon, EyeSlashFilledIcon, MailIcon } from '../../base/heroui-icons'
 import clsx from 'clsx'
 import { isAuthenticated } from '../../../../common/api/axios'
 import { useLazyMutationUserCreate } from '../../../../common/api/apollo/graphql/user'
@@ -34,13 +34,13 @@ export const RegisterForm: React.FC = () => {
 
   const validatePassword = (password: string) => {
     const newErrors: string[] = []
-    
+
     if (password.length < 8) newErrors.push('Incluye al menos 8 caracteres.')
     if ((password.match(/[A-Z]/g) || []).length < 1) newErrors.push('Incluye al menos 1 letra mayúscula.')
     if ((password.match(/[a-z]/g) || []).length < 1) newErrors.push('Incluye al menos 1 letra minúscula.')
     if ((password.match(/\d/g) || []).length < 1) newErrors.push('Incluye al menos 1 número.')
     if ((password.match(/[^A-Za-z0-9]/g) || []).length < 1) newErrors.push('Incluye al menos 1 carácter especial.')
-    
+
     setPasswordErrors(newErrors)
   }
 
@@ -48,37 +48,33 @@ export const RegisterForm: React.FC = () => {
     const newErrors: string[] = []
 
     if (username.length < 1 || username.length > 30) newErrors.push('Debe tener entre 1 y 30 caracteres.')
-    if (!/^[a-zA-Z0-9._]+$/.test(username)) newErrors.push('Solo puede contener letras, números, puntos y guiones bajos.')
+    if (!/^[a-zA-Z0-9._]+$/.test(username))
+      newErrors.push('Solo puede contener letras, números, puntos y guiones bajos.')
     if (/^\./.test(username) || /\.$/.test(username)) newErrors.push('No puede empezar ni terminar con un punto.')
     if (/\.\./.test(username)) newErrors.push('No puede contener dos puntos seguidos.')
 
     setUsernameErrors(newErrors)
   }
 
-
   const handlePasswordChange = (value: string) => {
     setPassword(value)
     validatePassword(value)
   }
 
-  const handleUsernameChange = (value : string) => {
+  const handleUsernameChange = (value: string) => {
     setUsername(value)
     validateUsername(value)
-  } 
+  }
 
   const onRegisterSuccess: SubmitHandler<RegisterFormType> = async values => {
     if (values.username.trim() == '' || values.email.trim() == '') return
-    
+
     if (values.password !== values.repeatPassword) {
       setErrorMessage('Las contraseñas no coinciden')
       return
     }
-    
-    if (
-      values.password 
-      && values.password === values.repeatPassword
-      && !validatePasswordRegex(values.password)
-    ) {
+
+    if (values.password && values.password === values.repeatPassword && !validatePasswordRegex(values.password)) {
       setErrorMessage('La contraseña no cumple los requisitos')
       return
     }
@@ -179,8 +175,15 @@ export const RegisterForm: React.FC = () => {
                   <Input
                     {...register('username', { required: true })}
                     onValueChange={handleUsernameChange}
-                    errorMessage={() => <ul> {usernameErrors.map((error, i) => <li key={i}>{error}</li>)}</ul>}
-                    labelPlacement="outside"
+                    errorMessage={() => (
+                      <ul>
+                        {' '}
+                        {usernameErrors.map((error, i) => (
+                          <li key={i}>{error}</li>
+                        ))}
+                      </ul>
+                    )}
+                    labelPlacement='outside'
                     value={username}
                     isInvalid={usernameErrors.length > 0}
                     isRequired
@@ -209,23 +212,26 @@ export const RegisterForm: React.FC = () => {
                   <Input
                     {...register('password', { required: true })}
                     onValueChange={handlePasswordChange}
-                    errorMessage={() => <ul> {passwordErrors.map((error, i) => <li key={i}>{error}</li> )}</ul>}
-                    labelPlacement="outside"
-                    placeholder="Contraseña"
+                    errorMessage={() => (
+                      <ul>
+                        {' '}
+                        {passwordErrors.map((error, i) => (
+                          <li key={i}>{error}</li>
+                        ))}
+                      </ul>
+                    )}
+                    labelPlacement='outside'
+                    placeholder='Contraseña'
                     className={clsx('min-w-72')}
                     isRequired
                     value={password}
                     isInvalid={passwordErrors.length > 0}
                     endContent={
-                      <button
-                        className="focus:outline-none"
-                        type="button"
-                        onClick={() => setIsVisible(!isVisible)}
-                      >
+                      <button className='focus:outline-none' type='button' onClick={() => setIsVisible(!isVisible)}>
                         {isVisible ? (
-                          <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                          <EyeSlashFilledIcon className='text-2xl text-default-400 pointer-events-none' />
                         ) : (
-                          <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                          <EyeFilledIcon className='text-2xl text-default-400 pointer-events-none' />
                         )}
                       </button>
                     }
@@ -288,7 +294,6 @@ export const RegisterForm: React.FC = () => {
                     username?.trim() === '' ||
                     email?.trim() === '' ||
                     !validateUsernameRegex(username)
-
                   }
                   size='md'
                   className='z-10'

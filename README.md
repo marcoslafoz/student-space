@@ -1,13 +1,13 @@
 # Student Space
 
-**Student Space** is the frontend application for the **Student Space** system, built to provide a seamless user experience for managing academic data and student information. This project is developed using **React** with **TypeScript**, along with a modern and efficient tech stack including **Vite**, **GraphQL**, and **NextUI**.
+**Student Space** is the frontend application for the **Student Space** system, built to provide a seamless user experience for managing academic data and student information. This project is developed using **React** with **TypeScript**, along with a modern and efficient tech stack including **Vite**, **GraphQL**, and **HeroUI**.
 
 ## Technologies Used
 
 - **React with TypeScript**: For building a robust, type-safe frontend application.
 - **Vite**: A fast build tool and development server for modern web projects.
 - **GraphQL**: For efficient API data fetching.
-- **NextUI**: A stylish and customizable UI library.
+- **HeroUI**: A stylish and customizable UI library.
 - **React Router v6**: For client-side routing.
 - **React Hook Form**: For form validation and management.
 - **Storybook**: For developing and testing UI components in isolation.

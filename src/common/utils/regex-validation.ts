@@ -4,11 +4,11 @@
  * - At least one lowercase letter.
  * - At least one number.
  * - At least one special character.
- * 
- * @param password 
+ *
+ * @param password
  * @returns true if is valid
  */
-export const validatePasswordRegex = (password : string) : boolean => {
+export const validatePasswordRegex = (password: string): boolean => {
   return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)
 }
 
@@ -19,7 +19,7 @@ export const validatePasswordRegex = (password : string) : boolean => {
  * - Cannot start or end with a dot.
  * - Cannot contain consecutive dots.
  *
- * @param username 
+ * @param username
  * @returns true if valid
  */
 export const validateUsernameRegex = (username: string): boolean => {

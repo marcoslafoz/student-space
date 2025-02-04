@@ -11,7 +11,7 @@ import {
   useLazyMutationTaskDelete,
   useLazyMutationTaskSetCheckedData,
 } from '../../../../common/api/apollo/graphql/task'
-import { DeleteIcon, EditIcon } from '../../base/heroui-icons'
+import { DeleteIcon, EditIcon } from '../../base/icons'
 import { ItemChip } from '../../base'
 
 export interface TaskItemProps {

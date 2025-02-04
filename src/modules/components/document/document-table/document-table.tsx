@@ -2,7 +2,7 @@ import React from 'react'
 import { Document } from '../../../../common/types'
 import { DocumentCard } from './document-card'
 import { Input, Pagination, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react'
-import { SearchIcon } from '../../base/heroui-icons'
+import { SearchIcon } from '../../base/icons'
 
 interface DocumentTableProps {
   data: Document[]

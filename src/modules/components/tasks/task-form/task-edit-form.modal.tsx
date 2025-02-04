@@ -22,7 +22,7 @@ import {
 import moment from 'moment'
 import { TaskForm } from './task-form.vm'
 import { useLazyMutationTaskDelete, useLazyMutationTaskEdit } from '../../../../common/api/apollo/graphql/task'
-import { ClockCircleLinearIcon } from '../../base/heroui-icons'
+import { ClockCircleLinearIcon } from '../../base/icons'
 import { CourseSelector } from '../../base/form/course-selector'
 
 interface TaskModalProps extends ModalForm {

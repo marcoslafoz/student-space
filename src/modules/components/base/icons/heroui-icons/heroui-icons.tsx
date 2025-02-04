@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconSvgProps } from './icon.vm'
+import { IconSvgProps } from '../icon.vm'
 
 export const PlusIcon: React.FC = ({ size = 24, width, height, ...props }: IconSvgProps) => (
   <svg

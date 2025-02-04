@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tooltip } from '@heroui/react'
 import { Link } from 'react-router-dom'
 import { useLazyMutationDocumentEditBody } from '../../../../common/api/apollo/graphql/document'
-import { DeleteDocumentIcon, EditDocumentIcon, VerticalDotsIcon } from '../../base/heroui-icons'
+import { DeleteDocumentIcon, EditDocumentIcon, VerticalDotsIcon } from '../../base/icons'
 import { DocumentModalDelete, DocumentModalRename } from '../document-form'
 
 interface DocumentViewProps {

@@ -16,7 +16,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { formatStringToLocalTimezone } from '../../../../common/utils'
 import { TaskForm } from './task-form.vm'
 import { useLazyMutationTaskAdd } from '../../../../common/api/apollo/graphql/task'
-import { ClockCircleLinearIcon } from '../../base/heroui-icons'
+import { ClockCircleLinearIcon } from '../../base/icons'
 import { ModalForm } from '../../../../common/types'
 import { CourseSelector } from '../../base/form'
 

@@ -6,7 +6,7 @@ import { ArrowLeftIcon, PlusIcon } from '../../../../common/constants/icons'
 import { SubjectEditModal, SubjectModalDelete } from '../subject-form'
 import { ScoreTable } from '../../score'
 import { useScoreGetListBySubjectLazyQuery } from '../../../../common/api/apollo/graphql/score'
-import { EditDocumentIcon, VerticalDotsIcon, DeleteDocumentIcon } from '../../base/heroui-icons'
+import { EditDocumentIcon, VerticalDotsIcon, DeleteDocumentIcon } from '../../base/icons'
 import { ScoreCreateFormModal } from '../../score'
 
 interface SubjectViewProps {

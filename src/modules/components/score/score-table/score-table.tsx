@@ -20,13 +20,7 @@ import {
 } from '@heroui/react'
 
 import { columns, capitalize, DEFAULT_INITIAL_VISIBLE_COLUMNS, statusColorMap } from './score-table-utils'
-import {
-  ChevronDownIcon,
-  DeleteDocumentIcon,
-  EditDocumentIcon,
-  SearchIcon,
-  VerticalDotsIcon,
-} from '../../base/heroui-icons'
+import { ChevronDownIcon, DeleteDocumentIcon, EditDocumentIcon, SearchIcon, VerticalDotsIcon } from '../../base/icons'
 import { Course, Score, Subject } from '../../../../common/types'
 import moment from 'moment'
 import { formatLocalTimezoneToString, scoreStatusCodeToString } from '../../../../common/utils'

@@ -125,7 +125,10 @@ export const DemoSlider: React.FC = () => {
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {demoData.map((item, index) => (
-              <div key={index} className='flex-shrink-0 w-full flex flex-col items-center pointer-events-none'>
+              <div
+                key={index}
+                className='flex-shrink-0 w-full flex flex-col items-center pointer-events-none select-none '
+              >
                 <div className='w-full flex justify-center pointer-events-none '>
                   <img
                     src={item.image}

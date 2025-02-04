@@ -15,7 +15,7 @@ export const LandingHome: React.FC = () => {
                 ORGANIZA TU VIDA,
                 <br /> SIMPLIFICA TU ESTUDIO
               </h1>
-              <p className='text-gray-500'>
+              <p className='custom-color-secondary'>
                 Digitaliza tu agenda y gestiona tareas, eventos, notas y documentos en un solo lugar. Regístrate gratis
                 y lleva tu estudio al siguiente nivel.
               </p>

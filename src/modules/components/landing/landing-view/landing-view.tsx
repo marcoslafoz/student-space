@@ -10,7 +10,7 @@ import { LandingFooter } from '../landing-footer'
 export const LandingView: React.FC = () => {
   return (
     <>
-      <Helmet title={'StudentSpace - Organiza tu vida y simplifica tu estudio'} />
+      <Helmet title={'StudentSpace - Agenda Digital para Estudiantes | Gestión de Tareas, Notas y mucho más.'} />
       <div className='w-full flex flex-nowrap flex-col '>
         <div className='flex flex-row flex-wrap justify-between items-center w-full px-7 pb-4 pt-5 gap-5'>
           <Link to={'/'}>

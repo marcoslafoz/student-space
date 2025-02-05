@@ -27,7 +27,11 @@ export const ErrorScene: React.FC = () => {
         <h1 className='text-7xl studentspace-bold'>Oops</h1>
         <div className='flex flex-col gap-3'>
           <span className='text-lg'>Página no encontrada</span>
-          <Link to={'dashboard'}><div className='text-indigo-600 hover:text-indigo-400 text-xs text-center'>Volver a la página principal</div></Link>
+          <Link to={'dashboard'}>
+            <div className='text-indigo-600 hover:text-indigo-400 text-xs text-center'>
+              Volver a la página principal
+            </div>
+          </Link>
         </div>
       </div>
     </>

@@ -42,12 +42,3 @@ To execute Cypress for end-to-end testing:
 ```bash
 npm run cypress:e2e
 ```
-
-
-
-## Development Workflow
-
-1. **Install Dependencies**: Ensure all packages are installed using `npm install`.
-2. **Start Developing**: Use `npm run dev` to run the development server.
-3. **UI Development**: Use `npm run storybook` to develop and test UI components in isolation.
-4. **Testing**: Use `npm run cypress:e2e` for comprehensive end-to-end testing.

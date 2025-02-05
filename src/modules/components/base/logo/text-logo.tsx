@@ -13,7 +13,7 @@ export const TextLogo: React.FC = () => {
         <Logo />
       </span>
 
-      <span className='custom-font-bold text-3xl'>StudentSpace</span>
+      <span className='studentspace-bold text-3xl'>StudentSpace</span>
 
       <span className='text-[10px] opacity-80 uppercase font-semibold px-1.5 rounded-md text-white bg-beta'>Beta</span>
     </div>

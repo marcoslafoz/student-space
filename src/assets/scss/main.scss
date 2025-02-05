@@ -10,14 +10,22 @@
 
 body {
   color: var(--color-primary);
-  font-family: var(--custom-font-regular);
+  font-family: var(--studentspace-regular);
   min-height: 100vh;
 }
 
 /*========================== Font style ==========================*/
 
-.custom-font-bold {
-  font-family: var(--custom-font-bold);
+.studentspace-regular {
+  font-family: var(--studentspace-regular);
+}
+
+.studentspace-medium {
+  font-family: var(--studentspace-medium);
+}
+
+.studentspace-bold {
+  font-family: var(--studentspace-bold);
 }
 
 .montserrat-extrabold {

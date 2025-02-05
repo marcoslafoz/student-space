@@ -142,7 +142,7 @@ export const DemoSlider: React.FC = () => {
           {/* Imagen fija superpuesta */}
           <div className='absolute top-0 left-0 w-full h-full flex justify-center items-center pointer-events-none'>
             <img
-              src='/assets/images/webp/landing-demo/laptop.webp'
+              src='/assets/landing/laptop.webp'
               alt='Imagen fija'
               className='w-full max-w-4xl h-auto object-cover '
             />

@@ -12,7 +12,7 @@ export const LandingFooter: React.FC = () => {
               <div className='hover:text-[#747474]'>StudentSpace</div>
             </a>
             <div className='flex flex-row gap-2 justify-between items-center hover:text-[#747474]'>
-              <img src='assets/images/webp/ES.webp' alt='Spain flag' className='h-4 object-contain' />
+              <img src='assets/icons/ES.webp' alt='Spain flag' className='h-4 object-contain' />
               <span>Español</span>
             </div>
             <div className='hover:text-[#747474]'>Terminos del sitio web</div>

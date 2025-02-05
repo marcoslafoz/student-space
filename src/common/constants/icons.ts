@@ -1,38 +1,18 @@
-// Logo
-const StudentSpaceIcon = '/assets/images/svg/studentspace.svg'
-
-export { StudentSpaceIcon }
-
 // Sidebar
-const DashboardIcon = '/assets/images/svg/dashboard.svg'
-const CourseIcon = '/assets/images/svg/teacher.svg'
-const SubjectIcon = '/assets/images/svg/book.svg'
-const TaskIcon = '/assets/images/svg/task-square.svg'
-const DocumentsIcon = '/assets/images/svg/folder-open.svg'
-const EventsIcon = '/assets/images/svg/calendar.svg'
-const SettingsIcon = '/assets/images/svg/settings.svg'
-const MoonIcon = '/assets/images/svg/moon.svg'
-const AwardIcon = '/assets/images/svg/award.svg'
-
-export {
-  DashboardIcon,
-  CourseIcon,
-  SubjectIcon,
-  TaskIcon,
-  DocumentsIcon,
-  EventsIcon,
-  SettingsIcon,
-  MoonIcon,
-  AwardIcon,
-}
+export const DashboardIcon = '/assets/icons/dashboard.svg'
+export const CourseIcon = '/assets/icons/teacher.svg'
+export const SubjectIcon = '/assets/icons/book.svg'
+export const TaskIcon = '/assets/icons/task-square.svg'
+export const DocumentsIcon = '/assets/icons/folder-open.svg'
+export const EventsIcon = '/assets/icons/calendar.svg'
+export const SettingsIcon = '/assets/icons/settings.svg'
+export const AwardIcon = '/assets/icons/award.svg'
 
 // Others
-const CloudSuccessIcon = '/assets/images/svg/cloud-success.svg'
-const CloudErrorIcon = '/assets/images/svg/cloud-error.svg'
-const ArrowLeftIcon = '/assets/images/svg/arrow-left.svg'
-const PlusIcon = '/assets/images/svg/add-circle.svg'
-const EditIcon = '/assets/images/svg/edit.svg'
-const TrashIcon = '/assets/images/svg/trash.svg'
-const DocumentIcon = '/assets/images/svg/document.svg'
-
-export { CloudSuccessIcon, CloudErrorIcon, ArrowLeftIcon, PlusIcon, EditIcon, TrashIcon, DocumentIcon }
+export const CloudSuccessIcon = '/assets/icons/cloud-success.svg'
+export const CloudErrorIcon = '/assets/icons/cloud-error.svg'
+export const ArrowLeftIcon = '/assets/icons/arrow-left.svg'
+export const PlusIcon = '/assets/icons/add-circle.svg'
+export const EditIcon = '/assets/icons/edit.svg'
+export const TrashIcon = '/assets/icons/trash.svg'
+export const DocumentIcon = '/assets/icons/document.svg'

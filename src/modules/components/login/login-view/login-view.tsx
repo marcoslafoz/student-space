@@ -1,6 +1,5 @@
 import React from 'react'
 import { LoginFormUsername } from '../login-form'
-import { StudentSpaceIcon } from '../../../../common/constants/icons'
 import { Link } from 'react-router-dom'
 import { TextLogo } from '../../base'
 import { Helmet } from 'react-helmet'
@@ -45,7 +44,7 @@ export const LoginView: React.FC = () => {
 
           <div
             className='hidden lg:block w-48 h-48 bg-no-repeat bg-center bg-cover'
-            style={{ backgroundImage: `url(${StudentSpaceIcon})` }}
+            style={{ backgroundImage: "url('/assets/icons/studentspace.svg')" }}
           />
         </div>
       </div>

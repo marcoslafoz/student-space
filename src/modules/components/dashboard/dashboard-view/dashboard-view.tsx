@@ -4,7 +4,6 @@ import { User } from '../../../../common/types'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../../../common/context'
 import { useContext } from 'react'
-import { BlackBoardImage, CoursesImage, DocumentsImage } from '../../../../common/constants/images'
 import { PendingTasksWidget, UpcomingEventsWidget } from '../dashboard-widget'
 import './dashboard-view.scss'
 
@@ -28,7 +27,12 @@ export const DashboardView: React.FC = () => {
       <div className='max-w-[900px] gap-3 grid grid-cols-12 grid-rows-2 auto-rows-auto'>
         {/* Academic courses */}
         <Card isFooterBlurred className='w-full h-[275px] col-span-12 sm:col-span-5'>
-          <Image removeWrapper alt='Card background' className='z-0 w-full h-full object-cover' src={CoursesImage} />
+          <Image
+            removeWrapper
+            alt='Card background'
+            className='z-0 w-full h-full object-cover'
+            src={'/assets/dashboard/courses.webp'}
+          />
           <CardFooter className='absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100'>
             <div className='flex flex-grow gap-2 items-center'>
               <div className='flex flex-col'>
@@ -61,7 +65,12 @@ export const DashboardView: React.FC = () => {
 
         {/* Scores */}
         <Card className='col-span-12 sm:col-span-4 h-[275px]'>
-          <Image removeWrapper alt='Card background' className='z-0 w-full h-full object-cover' src={BlackBoardImage} />
+          <Image
+            removeWrapper
+            alt='Card background'
+            className='z-0 w-full h-full object-cover'
+            src={'/assets/dashboard/blackboard.webp'}
+          />
           <CardFooter className='absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100'>
             <div className='flex flex-grow gap-2 items-center'>
               <div className='flex flex-col'>
@@ -94,7 +103,12 @@ export const DashboardView: React.FC = () => {
 
         {/* Documents */}
         <Card className='col-span-12 sm:col-span-4 h-[275px]'>
-          <Image removeWrapper alt='Card background' className='z-0 w-full h-full object-cover' src={DocumentsImage} />
+          <Image
+            removeWrapper
+            alt='Card background'
+            className='z-0 w-full h-full object-cover'
+            src={'/assets/dashboard/documents.webp'}
+          />
           <CardFooter className='absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100'>
             <div className='flex flex-grow gap-2 items-center'>
               <div className='flex flex-col'>

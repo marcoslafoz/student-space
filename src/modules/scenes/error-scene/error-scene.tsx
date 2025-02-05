@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { StudentSpaceIcon } from '../../../common/constants/icons'
 import { useRouteError } from 'react-router'
 import { Helmet } from 'react-helmet'
 
@@ -19,7 +18,7 @@ export const ErrorScene: React.FC = () => {
       <Helmet title='Error - StudentSpace' />
       <div className='fixed'>
         <div
-          style={{ backgroundImage: `url(${StudentSpaceIcon})` }}
+          style={{ backgroundImage: "url('/assets/icons/studentspace.svg')" }}
           className='size-12 m-7  bg-no-repeat bg-center bg-cover'
         />
       </div>

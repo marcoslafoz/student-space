@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './landing-home.scss'
-import StudentGirl from '/assets/images/webp/girl-student.webp'
+import StudentGirl from '/assets/landing/girl-student.webp'
 import { ScrollDownArrow } from '../../base/scroll-down-arrow'
 
 export const LandingHome: React.FC = () => {

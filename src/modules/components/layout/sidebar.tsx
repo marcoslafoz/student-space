@@ -1,5 +1,4 @@
 import React from 'react'
-import { MoonIcon } from '../../../common/constants/icons'
 import './layout.scss'
 import { useLocation, useNavigate } from 'react-router'
 import { clsx } from 'clsx'
@@ -83,26 +82,6 @@ const SidebarItem: React.FC<SidebarItemProps> = props => {
     >
       <img src={data.icon} alt={data.title} />
       <span className='flex-1 ms-4 whitespace-nowrap font-color-secondary'>{data.title}</span>
-    </span>
-  )
-}
-
-export const DarkMode: React.FC = () => {
-  const [dark, setDark] = React.useState(false)
-
-  const darkModeHandler = () => {
-    setDark(!dark)
-    document.body.classList.toggle('dark')
-  }
-
-  return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <span
-      className={clsx('sidebar-item flex p-3 rounded-lg dark:hover:bg-gray-700 hover:bg-gray-100 group')}
-      onClick={() => darkModeHandler()}
-    >
-      <img src={MoonIcon} alt={'Toggle Darkmode'} />
-      <span className='flex-1 ms-4 whitespace-nowrap font-color-secondary'>Darkmode</span>
     </span>
   )
 }

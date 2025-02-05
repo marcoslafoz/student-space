@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './layout.scss'
 import { useLocation, useNavigate } from 'react-router'
 import { clsx } from 'clsx'
@@ -9,6 +9,38 @@ import { Link } from 'react-router-dom'
 
 export const Sidebar: React.FC = () => {
   const location = useLocation()
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const sidebarRef = useRef<HTMLDivElement>(null)
+
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen)
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false)
+    const backdrop = document.querySelector('[drawer-backdrop]')
+    if (backdrop) {
+      backdrop.remove()
+    }
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isSidebarOpen && sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+        closeSidebar()
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [isSidebarOpen])
+
+  useEffect(() => {
+    const backdrop = document.querySelector('[drawer-backdrop]')
+    if (isSidebarOpen && !backdrop) {
+      const newBackdrop = document.createElement('div')
+      newBackdrop.setAttribute('drawer-backdrop', '')
+      newBackdrop.className = 'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-30'
+      document.body.appendChild(newBackdrop)
+    }
+  }, [isSidebarOpen])
 
   return (
     <>
@@ -18,6 +50,7 @@ export const Sidebar: React.FC = () => {
         aria-controls='logo-sidebar'
         type='button'
         className='inline-flex items-center p-2 mt-2 ms-3 text-sm rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200  dark:hover:bg-gray-700 dark:focus:ring-gray-600'
+        onClick={toggleSidebar}
       >
         <span className='sr-only'>Open sidebar</span>
         <svg
@@ -37,18 +70,26 @@ export const Sidebar: React.FC = () => {
 
       <aside
         id='logo-sidebar'
-        className='fixed top-0 left-0 z-40 h-screen transition-transform -translate-x-full sm:translate-x-0'
+        ref={sidebarRef}
+        className={clsx(
+          'fixed top-0 left-0 z-40 h-screen transition-transform',
+          {
+            'translate-x-0': isSidebarOpen,
+            '-translate-x-full': !isSidebarOpen,
+          },
+          'sm:translate-x-0'
+        )}
         aria-label='Sidebar'
       >
         <div className='h-full px-3 py-4 overflow-y-auto bg-white dark:bg-gray-800'>
-          <Link to={'dashboard'}>
+          <Link to={'dashboard'} onClick={closeSidebar}>
             <div className='m-2 ml-3 mb-12'>
               <TextLogo />
             </div>
           </Link>
           <span className='space-y-3'>
             {sidebarPaths.map(s => (
-              <SidebarItem key={s.index} data={s} isActive={location.pathname === s.path} />
+              <SidebarItem key={s.index} data={s} isActive={location.pathname === s.path} closeSidebar={closeSidebar} />
             ))}
           </span>
         </div>
@@ -60,15 +101,20 @@ export const Sidebar: React.FC = () => {
 interface SidebarItemProps {
   isActive?: boolean
   data: SidebarPath
+  closeSidebar: () => void
 }
 
 const SidebarItem: React.FC<SidebarItemProps> = props => {
-  const { isActive = false, data } = props
+  const { isActive = false, data, closeSidebar } = props
 
   const navigate = useNavigate()
 
+  const handleClick = () => {
+    navigate(data.path)
+    closeSidebar()
+  }
+
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <span
       role='button'
       tabIndex={data.index}
@@ -78,7 +124,12 @@ const SidebarItem: React.FC<SidebarItemProps> = props => {
         'sidebar-item flex p-3 rounded-lg dark:hover:bg-gray-700 hover:bg-gray-100 group',
         isActive && 'bg-gray-100 dark:bg-gray-700'
       )}
-      onClick={() => navigate(data.path)}
+      onClick={handleClick}
+      onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          handleClick()
+        }
+      }}
     >
       <img src={data.icon} alt={data.title} />
       <span className='flex-1 ms-4 whitespace-nowrap font-color-secondary'>{data.title}</span>

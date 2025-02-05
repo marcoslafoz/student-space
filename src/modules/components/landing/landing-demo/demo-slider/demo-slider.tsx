@@ -108,12 +108,12 @@ export const DemoSlider: React.FC = () => {
           {demoData.map((item, index) => (
             <div
               key={index}
-              className='flex-shrink-0 w-full flex flex-col items-center h-64 lg:h-56 md:h-56 justify-center text-center gap-5'
+              className='flex-shrink-0 w-full flex flex-col items-center h-[18rem] lg:h-56 md:h-56 justify-center text-center gap-5'
             >
-              <p className='text-white  montserrat-font-extrabold uppercase lg:text-5xl md:text-5xl text-3xl font-extrabold max-w-3xl mx-auto text-balance'>
+              <h2 className='text-white  montserrat-font-extrabold uppercase lg:text-5xl md:text-5xl text-3xl font-extrabold max-w-3xl mx-auto text-balance'>
                 {item.title}
-              </p>
-              <p className='custom-color-secondary max-w-2xl mx-auto text-balance'>{item.description}</p>
+              </h2>
+              <h3 className='custom-color-secondary max-w-2xl mx-auto text-balance'>{item.description}</h3>
             </div>
           ))}
         </div>

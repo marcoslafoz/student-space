@@ -118,7 +118,7 @@ export const DemoSlider: React.FC = () => {
           ))}
         </div>
 
-        <div className='relative w-full overflow-hidden'>
+        <div className='relative w-full overflow-hidden cursor-grab active:cursor-grabbing'>
           {/* Carrusel */}
           <div
             className='flex transition-transform duration-500 ease-in-out'

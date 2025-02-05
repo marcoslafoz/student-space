@@ -11,7 +11,7 @@ export const LandingHome: React.FC = () => {
         <div className='flex flex-row h-full justify-center lg:gap-10'>
           <div className='items-center justify-end h-full flex'>
             <div className='break-keep flex flex-col flex-nowrap gap-9 p-10 max-w-2xl'>
-              <h1 className='text-5xl montserrat-font-extrabold tracking-tight'>
+              <h1 className='text-5xl montserrat-extrabold tracking-tight'>
                 ORGANIZA TU VIDA,
                 <br /> SIMPLIFICA TU ESTUDIO
               </h1>

@@ -6,6 +6,7 @@ import { UserContext } from '../../../../common/context'
 import { useContext } from 'react'
 import { BlackBoardImage, CoursesImage, DocumentsImage } from '../../../../common/constants/images'
 import { PendingTasksWidget, UpcomingEventsWidget } from '../dashboard-widget'
+import './dashboard-view.scss'
 
 export const DashboardView: React.FC = () => {
   const { userId } = useContext(UserContext)

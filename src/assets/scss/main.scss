@@ -10,17 +10,17 @@
 
 body {
   color: var(--color-primary);
-  font-family: var(--font-regular);
+  font-family: var(--custom-font-regular);
   min-height: 100vh;
 }
 
 /*========================== Font style ==========================*/
 
 .custom-font-bold {
-  font-family: var(--font-bold);
+  font-family: var(--custom-font-bold);
 }
 
-.montserrat-font-extrabold {
+.montserrat-extrabold {
   font-family: var(--montserrat-extrabold);
 }
 
@@ -38,14 +38,4 @@ body {
 
 .custom-bg-color-primary {
   background-color: var(--color-primary);
-}
-
-/*========================== Scroll bar ==========================*/
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
 }

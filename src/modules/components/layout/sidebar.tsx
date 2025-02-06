@@ -49,7 +49,7 @@ export const Sidebar: React.FC = () => {
         data-drawer-toggle='logo-sidebar'
         aria-controls='logo-sidebar'
         type='button'
-        className='inline-flex items-center p-2 mt-2 ms-3 text-sm rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200  dark:hover:bg-gray-700 dark:focus:ring-gray-600'
+        className='inline-flex items-center p-2 mt-2 ms-3 text-sm rounded-lg custom-sm-display-none hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200  dark:hover:bg-gray-700 dark:focus:ring-gray-600'
         onClick={toggleSidebar}
       >
         <span className='sr-only'>Open sidebar</span>
@@ -77,7 +77,7 @@ export const Sidebar: React.FC = () => {
             'translate-x-0': isSidebarOpen,
             '-translate-x-full': !isSidebarOpen,
           },
-          'sm:translate-x-0'
+          'custom-sm-translate-x-0'
         )}
         aria-label='Sidebar'
       >

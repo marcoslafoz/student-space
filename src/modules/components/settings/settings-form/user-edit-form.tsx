@@ -32,7 +32,7 @@ export const UserEditForm: React.FC<UserEditFormProps> = props => {
       variables: {
         user: {
           name: values.name,
-          birthday: values.birthday || '',
+          birthday: values.birthday || undefined,
           surname: values.surname,
           username: '',
           email: '',

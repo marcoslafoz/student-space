@@ -22,15 +22,23 @@ import { CourseSelector } from '../../base/form'
 interface ScoreCreateProps extends ModalForm {}
 
 export const ScoreCreateFormModal: React.FC<ScoreCreateProps> = props => {
-  const { isOpen, onClose, onRefetch: refetchScores } = props
+  const {
+    isOpen,
+    onClose,
+    onRefetch: refetchScores,
+    defaultCourseId,
+    defaultSubjectId,
+    isCourseIdLocked,
+    isSubjectIdLocked,
+  } = props
   const { userId } = React.useContext(UserContext)
 
   const [scoreAdd] = useLazyMutationScoreAdd()
 
   const { handleSubmit, register, setValue, reset } = useForm<ScoreForm>({})
 
-  const [selectedCourseId, setSelectedCourseId] = React.useState<number | undefined>()
-  const [selectedSubjectId, setSelectedSubjectId] = React.useState<number | undefined>()
+  const [selectedCourseId, setSelectedCourseId] = React.useState<number | undefined>(defaultCourseId)
+  const [selectedSubjectId, setSelectedSubjectId] = React.useState<number | undefined>(defaultSubjectId)
 
   const onSuccessScoreCreate: SubmitHandler<ScoreForm> = values => {
     if (!userId) return
@@ -94,7 +102,14 @@ export const ScoreCreateFormModal: React.FC<ScoreCreateProps> = props => {
                 label='Fecha'
               />
             </div>
-            <CourseSelector onCourseChange={setSelectedCourseId} onSubjectChange={setSelectedSubjectId} />
+            <CourseSelector
+              onCourseChange={setSelectedCourseId}
+              onSubjectChange={setSelectedSubjectId}
+              defaultCourseId={defaultCourseId}
+              defaultSubjectId={defaultSubjectId}
+              isCourseIdLocked={isCourseIdLocked}
+              isSubjectIdLocked={isSubjectIdLocked}
+            />
           </ModalBody>
 
           <ModalFooter>

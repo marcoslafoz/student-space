@@ -13,6 +13,8 @@ export interface ModalForm {
   isOpen: boolean
   onClose: () => void
   onRefetch: () => void
-  lockCourseId?: number
-  lockSubjectId?: number
+  defaultCourseId?: number
+  defaultSubjectId?: number
+  isSubjectIdLocked?: boolean
+  isCourseIdLocked?: boolean
 }

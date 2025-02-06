@@ -66,7 +66,8 @@ export const CourseView: React.FC<CourseViewProps> = props => {
         isOpen={showAddTaskModal}
         onClose={() => setShowAddTaskModal(false)}
         onRefetch={refetchTasks}
-        lockCourseId={data.id}
+        defaultCourseId={data.id}
+        isCourseIdLocked={true}
       />
     </>
   )

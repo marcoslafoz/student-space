@@ -23,13 +23,21 @@ import { CourseSelector } from '../../base/form'
 interface TaskModalProps extends ModalForm {}
 
 export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
-  const { isOpen, onClose, onRefetch: refetchTasks } = props
+  const {
+    isOpen,
+    onClose,
+    onRefetch: refetchTasks,
+    defaultCourseId,
+    defaultSubjectId,
+    isCourseIdLocked = false,
+    isSubjectIdLocked = false,
+  } = props
   const { userId } = useContext(UserContext)
 
   const [addTaskMutation] = useLazyMutationTaskAdd()
 
-  const [selectedCourseId, setSelectedCourseId] = React.useState<number | undefined>()
-  const [selectedSubjectId, setSelectedSubjectId] = React.useState<number | undefined>()
+  const [selectedCourseId, setSelectedCourseId] = React.useState<number | undefined>(defaultCourseId)
+  const [selectedSubjectId, setSelectedSubjectId] = React.useState<number | undefined>(defaultSubjectId)
 
   const { handleSubmit, register, setValue, reset } = useForm<TaskForm>()
 
@@ -101,7 +109,14 @@ export const TaskAddFormModal: React.FC<TaskModalProps> = props => {
               size='sm'
             />
 
-            <CourseSelector onCourseChange={setSelectedCourseId} onSubjectChange={setSelectedSubjectId} />
+            <CourseSelector
+              onCourseChange={setSelectedCourseId}
+              onSubjectChange={setSelectedSubjectId}
+              defaultCourseId={defaultCourseId}
+              defaultSubjectId={defaultSubjectId}
+              isCourseIdLocked={isCourseIdLocked}
+              isSubjectIdLocked={isSubjectIdLocked}
+            />
           </ModalBody>
 
           <ModalFooter>

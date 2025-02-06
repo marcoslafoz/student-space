@@ -6,12 +6,21 @@ import { Subject } from '../../../../common/types'
 interface CourseSelectorProps {
   defaultSubjectId?: number
   defaultCourseId?: number
+  isSubjectIdLocked?: boolean
+  isCourseIdLocked?: boolean
   onCourseChange: (courseId: number) => void
   onSubjectChange: (subjectId: number) => void
 }
 
 export const CourseSelector: React.FC<CourseSelectorProps> = props => {
-  const { defaultCourseId = 0, defaultSubjectId = 0, onCourseChange, onSubjectChange } = props
+  const {
+    defaultCourseId,
+    defaultSubjectId,
+    onCourseChange,
+    onSubjectChange,
+    isCourseIdLocked = false,
+    isSubjectIdLocked = false,
+  } = props
 
   const { courseList, loading } = React.useContext(CourseContext)
 
@@ -29,12 +38,13 @@ export const CourseSelector: React.FC<CourseSelectorProps> = props => {
       <Select
         label='Curso'
         size='sm'
+        isDisabled={isCourseIdLocked}
         onChange={e => {
           const newCourseId = Number(e.target.value)
           setCourseState(newCourseId)
           onCourseChange(newCourseId)
         }}
-        defaultSelectedKeys={[defaultCourseId]}
+        defaultSelectedKeys={[defaultCourseId || 0]}
       >
         {courseList.map(a => (
           <SelectItem key={a.id} value={a.id}>
@@ -46,11 +56,12 @@ export const CourseSelector: React.FC<CourseSelectorProps> = props => {
       <Select
         label='Asignatura'
         size='sm'
+        isDisabled={isSubjectIdLocked}
         onChange={e => {
           const newSubjectId = Number(e.target.value)
           onSubjectChange(newSubjectId)
         }}
-        defaultSelectedKeys={[defaultSubjectId]}
+        defaultSelectedKeys={[defaultSubjectId || 0]}
       >
         {(subjectArray || []).map(s => (
           <SelectItem key={s.id} value={s.id}>

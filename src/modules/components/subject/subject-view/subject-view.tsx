@@ -65,8 +65,10 @@ export const SubjectView: React.FC<SubjectViewProps> = props => {
         isOpen={showScoreCreateModal}
         onClose={() => setShowScoreCreateModal(false)}
         onRefetch={refetchScores}
-        lockCourseId={courseId}
-        lockSubjectId={data.id}
+        defaultCourseId={courseId}
+        defaultSubjectId={data.id}
+        isCourseIdLocked
+        isSubjectIdLocked
       />
     </>
   )

@@ -15,16 +15,18 @@ export const LandingFooter: React.FC = () => {
               <img src='assets/icons/ES.webp' alt='Spain flag' className='h-4 object-contain' />
               <span>Español</span>
             </div>
+            <a href='https://www.github.com/marcoslafoz' target='_blank' rel='noreferrer noopener' className='hover:text-[#747474]'>
+              Created by Marcos Lafoz
+            </a>
             <div className='hover:text-[#747474]'>Terminos del sitio web</div>
-            <div className='hover:text-[#747474]'>Privacidad</div>
             <div className='hover:text-[#747474] flex flex-row justify-center items-center gap-4'>
-              <a href='https://www.x.com'>
+              <a href='https://x.com/appStudentSpace' target='_blank' rel='noreferrer noopener'>
                 <XIcon className='fill-[#545454] hover:fill-[#747474]' />
               </a>
-              <a href='https://www.instagram.com'>
+              <a href='https://www.instagram.com/studentspace.app' target='_blank' rel='noreferrer noopener'>
                 <InstagramIcon className='fill-[#545454] hover:fill-[#747474]' />
               </a>
-              <a href='https://www.tiktok.com'>
+              <a href='https://www.tiktok.com/@studentspace.app' target='_blank' rel='noreferrer noopener'>
                 <TiktokIcon className='fill-[#545454] hover:fill-[#747474]' />
               </a>
             </div>

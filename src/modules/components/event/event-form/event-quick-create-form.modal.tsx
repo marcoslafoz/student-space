@@ -34,7 +34,7 @@ export const EventQuickCreateFormModal: React.FC<EventQuickCreateModalCreateProp
 
     eventAdd({
       variables: {
-        userId: userId || 0,
+        userId: userId || -1,
         event: {
           allDay: data.allDay != undefined ? data.allDay : true,
           id: 0,

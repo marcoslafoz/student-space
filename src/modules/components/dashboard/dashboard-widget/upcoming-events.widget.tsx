@@ -8,7 +8,7 @@ export const UpcomingEventsWidget: React.FC = () => {
   const { userId } = useContext(UserContext)
 
   const { data, loading, error } = useEventGetUpcomingEventListByUserQuery({
-    variables: { userId: userId || 0, total: 10 },
+    variables: { userId: userId || -1, total: 10 },
   })
 
   if (!data || loading || error || data.eventGetUpcomingEventListByUser.length < 1) {

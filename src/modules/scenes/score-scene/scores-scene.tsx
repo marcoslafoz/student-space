@@ -10,7 +10,7 @@ export const ScoresScene: React.FC = () => {
   const [scoreGetListByUser, { data: scoreData, refetch: refetchScores }] = useScoreGetListByUserLazyQuery()
 
   React.useEffect(() => {
-    scoreGetListByUser({ variables: { userId: userId || 0 } })
+    scoreGetListByUser({ variables: { userId: userId || -1 } })
   }, [scoreGetListByUser, userId])
 
   React.useEffect(() => {
@@ -22,7 +22,7 @@ export const ScoresScene: React.FC = () => {
   return (
     <>
       <Helmet title='Notas - StudentSpace' />
-      <CourseProvider userId={userId || 0}>
+      <CourseProvider userId={userId || -1}>
         <ScoreView data={scoreData?.scoreGetListByUser || []} refetchScores={refetchScores} />
       </CourseProvider>
     </>

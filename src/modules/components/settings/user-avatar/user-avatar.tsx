@@ -42,7 +42,7 @@ export const UserAvatar: React.FC<UserAvatarProps> = props => {
             userChangeAvatar({
               variables: {
                 avatarId: Number(key),
-                userId: userId || 0,
+                userId: userId || -1,
               },
             }).then(() => refetchUser())
           }}

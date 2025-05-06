@@ -26,7 +26,7 @@ export const DocumentModalCreate: React.FC<DocumentCreateRenameProps> = props =>
         title: values.title,
         courseId: 0,
         subjectId: 0,
-        userId: userId || 0,
+        userId: userId || -1,
       },
     })
       .then(() => refetchDocuments())

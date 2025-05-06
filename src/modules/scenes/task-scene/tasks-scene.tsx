@@ -27,7 +27,7 @@ export const TasksScene: React.FC = () => {
   return (
     <>
       <Helmet title='Tareas - StudentSpace' />
-      <CourseProvider userId={userId || 0}>
+      <CourseProvider userId={userId || -1}>
         <TasksView data={data.taskGetListByUser || []} refetch={refetch} />
       </CourseProvider>
     </>

@@ -10,7 +10,7 @@ import './dashboard-view.scss'
 export const DashboardView: React.FC = () => {
   const { userId } = useContext(UserContext)
 
-  const { data, loading, error } = useUserReadQuery({ variables: { userId: userId || 0 } })
+  const { data, loading, error } = useUserReadQuery({ variables: { userId: userId || -1 } })
 
   const userData: User | undefined = data?.userRead
 

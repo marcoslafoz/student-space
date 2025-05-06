@@ -30,7 +30,7 @@ export const CourseDetailScene: React.FC = () => {
 
   return (
     <>
-      <CourseProvider userId={userId || 0}>
+      <CourseProvider userId={userId || -1}>
         <Helmet title={htmlTitle(data.courseRead.name)} />
         <CourseView data={data.courseRead} refetchCourse={refetch} />
       </CourseProvider>

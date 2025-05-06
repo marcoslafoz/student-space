@@ -15,7 +15,7 @@ export const CoursesScene: React.FC = () => {
   return (
     <>
       <Helmet title='Cursos - StudentSpace' />
-      <CourseProvider userId={userId || 0}>
+      <CourseProvider userId={userId || -1}>
         <CourseList />
       </CourseProvider>
     </>

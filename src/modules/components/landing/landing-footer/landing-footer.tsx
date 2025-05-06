@@ -15,7 +15,12 @@ export const LandingFooter: React.FC = () => {
               <img src='assets/icons/ES.webp' alt='Spain flag' className='h-4 object-contain' />
               <span>Español</span>
             </div>
-            <a href='https://www.github.com/marcoslafoz' target='_blank' rel='noreferrer noopener' className='hover:text-[#747474]'>
+            <a
+              href='https://www.github.com/marcoslafoz'
+              target='_blank'
+              rel='noreferrer noopener'
+              className='hover:text-[#747474]'
+            >
               Created by Marcos Lafoz
             </a>
             <div className='hover:text-[#747474]'>Terminos del sitio web</div>
